@@ -1,6 +1,7 @@
 import Text from "@/src/components/ui/Text";
 import { Colors } from "@/src/constants/colors";
 import { LinearGradient } from "expo-linear-gradient";
+import { router } from "expo-router";
 import { Image, Pressable, StyleSheet, View } from "react-native";
 
 export default function Index() {
@@ -19,9 +20,7 @@ export default function Index() {
             I Am a...
           </Text>
 
-          <Pressable
-            onPress={() => console.log("navigation to children section")}
-          >
+          <Pressable onPress={() => router.push("/(child)/auth/login")}>
             <View
               className="bg-white rounded-md flex-row items-center justify-between"
               style={styles.box}
@@ -59,10 +58,7 @@ export default function Index() {
                 >
                   Parent
                 </Text>
-                <Text
-                  className="text-md"
-                  font="bold"
-                >
+                <Text className="text-md">
                   Track, Understand & Support your child, emotionally and
                   otherwise.
                 </Text>

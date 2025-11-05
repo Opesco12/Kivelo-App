@@ -10,8 +10,9 @@ export default function RootLayout() {
 
   const [fontsLoaded, fontError] = useFonts({
     "Poppins-Regular": require("@/src/assets/fonts/Poppins-Regular.ttf"),
-    "Poppins-Bold": require("@/src/assets/fonts/Poppins-Medium.ttf"),
-    "Poppins-Italic": require("@/src/assets/fonts/Poppins-Bold.ttf"),
+    "Poppins-Medium": require("@/src/assets/fonts/Poppins-Medium.ttf"),
+    "Poppins-Bold": require("@/src/assets/fonts/Poppins-Bold.ttf"),
+    RammettoOne: require("@/src/assets/fonts/RammettoOne.ttf"),
   });
 
   useEffect(() => {
@@ -26,11 +27,12 @@ export default function RootLayout() {
 
   if (!fontsLoaded && !fontError) return null;
   return (
-    <Stack screenOptions={{ headerShown: false }}>
+    <Stack
+      screenOptions={{ headerShown: false }}
+      initialRouteName="(child)"
+    >
       <Stack.Screen name="(child)" />
-      <Stack.Protected guard>
-        {/* <Stack.Screen name="(onboarding)" /> */}
-      </Stack.Protected>
+      {/* <Stack.Screen name="(onboarding)" /> */}
       <Stack.Screen name="(parent)" />
     </Stack>
   );

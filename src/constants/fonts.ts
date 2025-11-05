@@ -4,6 +4,9 @@ export const Fonts = {
     medium: "Poppins-Medium",
     bold: "Poppins-Bold",
   },
+  RammettoOne: {
+    regular: "RammettoOne",
+  },
 } as const;
 
 export type FontKey = keyof typeof Fonts;
