@@ -7,6 +7,9 @@ export const Fonts = {
   rammettoOne: {
     regular: "RammettoOne-Regular",
   },
+  bauhaus: {
+    regular: "Bauhaus-Regular",
+  },
 } as const;
 
 export type FontKey = keyof typeof Fonts;

@@ -13,6 +13,7 @@ export default function RootLayout() {
     "Poppins-Medium": require("@/src/assets/fonts/Poppins-Medium.ttf"),
     "Poppins-Bold": require("@/src/assets/fonts/Poppins-Bold.ttf"),
     "RammettoOne-Regular": require("@/src/assets/fonts/RammettoOne-Regular.ttf"),
+    "Bauhaus-Regular": require("@/src/assets/fonts/Bauhaus-Regular.ttf"),
   });
 
   useEffect(() => {

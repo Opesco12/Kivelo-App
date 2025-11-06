@@ -1,87 +1,140 @@
-import Text from "@/src/components/ui/Text";
-import { Colors } from "@/src/constants/colors";
-import { LinearGradient } from "expo-linear-gradient";
-import { router } from "expo-router";
-import { Image, Pressable, StyleSheet, View } from "react-native";
+import { useRef, useState } from "react";
+import { Platform, StyleSheet, View } from "react-native";
+import PagerView from "react-native-pager-view";
+import {
+  runOnJS,
+  useDerivedValue,
+  useSharedValue,
+} from "react-native-reanimated";
 
-export default function Index() {
+import ChildOnboarding1 from "@/src/components/onboarding/ChildOnboarding1";
+import ChildOnboarding3 from "@/src/components/onboarding/ChildOnboarding3";
+import ChildOnboarding2 from "@/src/components/onboarding/ChildOnboaring2";
+import DotIndicator from "@/src/components/onboarding/DotIndicator";
+
+const onboardingData = [1, 2, 3];
+
+export default function ChildOnboarding() {
+  const pagerRef = useRef(null);
+
+  const currentPage = useSharedValue(0);
+
+  const [pageIndex, setPageIndex] = useState(0);
+
+  useDerivedValue(() => {
+    const floorIndex = Math.floor(currentPage.value);
+    if (floorIndex !== pageIndex) {
+      runOnJS(setPageIndex)(floorIndex);
+    }
+  }, [pageIndex]);
+
+  const handlePageScroll = (e) => {
+    currentPage.value = e.nativeEvent.position + e.nativeEvent.offset;
+  };
+
   return (
-    <View className="flex-1 justify-center items-center">
-      <LinearGradient
-        style={{ flex: 1, width: "100%", paddingHorizontal: 15 }}
-        colors={["#76D7F7", Colors.light.white]}
+    <View style={styles.container}>
+      <PagerView
+        ref={pagerRef}
+        style={styles.pagerView}
+        initialPage={0}
+        onPageScroll={handlePageScroll}
       >
-        <View className="mt-[15vh]">
-          <Text
-            className="font-bold text-4xl "
-            style={{ marginBottom: 25 }}
-            font="poppins-bold"
-          >
-            I Am a...
-          </Text>
+        <ChildOnboarding1 />
 
-          <Pressable onPress={() => router.push("/(child)/auth/login")}>
-            <View
-              className="bg-white rounded-md flex-row items-center justify-between"
-              style={styles.box}
-            >
-              <View className="w-[60%]">
-                <Text
-                  className="text-2xl  font-bold mb-4"
-                  font="poppins-bold"
-                >
-                  Child / Teen
-                </Text>
-                <Text>
-                  Play exciting games, make discoveries & stay safer while you
-                  grow smarter.
-                </Text>
-              </View>
-              <View>
-                <Image
-                  resizeMode="contain"
-                  source={require("../../assets/images/project-images/child-illustration.png")}
-                />
-              </View>
-            </View>
-          </Pressable>
+        <ChildOnboarding2 key={"2"} />
 
-          <Pressable onPress={() => router.push("/(parent)/auth/signup")}>
-            <View
-              className="bg-white rounded-md flex-row items-center justify-between"
-              style={styles.box}
-            >
-              <View className="w-[60%]">
-                <Text
-                  className="text-2xl font-bold mb-4"
-                  font="poppins-bold"
-                >
-                  Parent
-                </Text>
-                <Text className="text-md">
-                  Track, Understand & Support your child, emotionally and
-                  otherwise.
-                </Text>
-              </View>
-              <View>
-                <Image
-                  resizeMode="contain"
-                  source={require("../../assets/images/project-images/parent-illustration.png")}
-                />
-              </View>
-            </View>
-          </Pressable>
-        </View>
-      </LinearGradient>
+        <ChildOnboarding3 key={"3"} />
+      </PagerView>
+
+      <View style={styles.dotContainer}>
+        {onboardingData.map((_, index) => (
+          <DotIndicator
+            key={index}
+            index={index}
+            currentPage={currentPage}
+          />
+        ))}
+      </View>
     </View>
   );
 }
-
 const styles = StyleSheet.create({
-  box: {
-    height: 180,
-    marginVertical: 15,
-    paddingHorizontal: 12,
-    paddingVertical: 10,
+  container: {
+    flex: 1,
+    backgroundColor: "#fff",
+  },
+  pagerView: {
+    flex: 1,
+  },
+  title: {
+    fontSize: 32,
+    fontWeight: "bold",
+    color: "#fff",
+    marginBottom: 16,
+    textAlign: "center",
+  },
+  description: {
+    fontSize: 18,
+    color: "#fff",
+    textAlign: "center",
+    opacity: 0.9,
+    lineHeight: 26,
+  },
+  footer: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingBottom: 50,
+    paddingHorizontal: 20,
+  },
+  gradient: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
+    height: "60%",
+    justifyContent: "center",
+    paddingBottom: 55,
+  },
+  imageBg: { flex: 1, justifyContent: "center", alignItems: "center" },
+  textContainer: {
+    paddingHorizontal: 15,
+  },
+  dotContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    height: 12,
+    position: "absolute",
+    top: Platform.OS === "ios" ? 70 : 40,
+    left: 20,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  skipButton: {
+    padding: 12,
+  },
+  skipText: {
+    fontSize: 16,
+    color: "#fff",
+    fontWeight: "600",
+  },
+  nextButton: {
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
+    width: 90,
+    paddingVertical: 14,
+    borderRadius: 25,
+  },
+  nextText: {
+    fontSize: 16,
+    color: "#667eea",
+    fontWeight: "700",
   },
 });
