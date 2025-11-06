@@ -16,7 +16,7 @@ import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
 import { router } from "expo-router";
 
-const SignUp = () => {
+const Login = () => {
   const [isChecked, setIsChecked] = useState(false);
   return (
     <View
@@ -38,21 +38,15 @@ const SignUp = () => {
             font="poppins-medium"
             style={styles.header}
           >
-            Sign Up
+            Login
           </Text>
 
           <Formik
             initialValues={{ name: "", email: "", password: "" }}
             onSubmit={() => console.log("")}
           >
-            {({ handleChange, values }) => (
+            {({ handleChange, values, isSubmitting }) => (
               <View>
-                <AnimatedTextField
-                  label="Name"
-                  name="name"
-                  onChangeText={handleChange("name")}
-                  value={values.name}
-                />
                 <AnimatedTextField
                   label="Email Address"
                   name="email"
@@ -69,29 +63,28 @@ const SignUp = () => {
                   secureTextEntry
                 />
 
-                <View
-                  className="flex-row items-center"
-                  style={{ gap: 5, marginTop: 5, marginBottom: 25 }}
-                >
-                  <Checkbox
-                    value={isChecked}
-                    style={{ height: 16, width: 16 }}
-                    onValueChange={setIsChecked}
-                    color={isChecked ? "#2563EB" : "#1E1E1E80"}
-                  />
-
-                  <Text style={{ fontSize: 11 }}>
-                    I agree to the{" "}
-                    <Text style={{ color: "#2563EB" }}>
-                      Terms and Conditions
-                    </Text>{" "}
-                    and <Text style={{ color: "#2563EB" }}>Privacy Policy</Text>
-                  </Text>
+                <View className="flex-row items-center justify-between gap-[5] mt-[5] mb-[25]">
+                  <View className="items-center gap-[2] flex-row">
+                    <Checkbox
+                      value={isChecked}
+                      style={{ height: 16, width: 16 }}
+                      onValueChange={setIsChecked}
+                      color={isChecked ? "#2563EB" : "#1E1E1E80"}
+                    />
+                    <Text>Remember me</Text>
+                  </View>
+                  <Pressable
+                    onPress={() =>
+                      router.push("/(parent)/auth/forgot-password")
+                    }
+                  >
+                    <Text className="text-[#2563EB]">Forgot Password</Text>
+                  </Pressable>
                 </View>
 
                 <Button
-                  text="Signup"
-                  disabled={!isChecked}
+                  text="Login"
+                  disabled={isSubmitting}
                 />
               </View>
             )}
@@ -107,7 +100,7 @@ const SignUp = () => {
             className="h-[60]  border-[#D1D5DB] justify-center items-center flex-row gap-[5]"
             style={{ borderRadius: 100, borderWidth: 1 }}
           >
-            <Text className="text-[#3F3F3F]">Sign up with Google or Apple</Text>
+            <Text className="text-[#3F3F3F]">Continue Google or Apple</Text>
             <View className="w-[48] h-[48] bg-[#E8E8E8] rounded-full justify-center items-center">
               <Image
                 source={require("@/src/assets/images/icons/apple logo.png")}
@@ -121,9 +114,9 @@ const SignUp = () => {
           </TouchableOpacity>
 
           <View className="flex-1 flex-row gap-[10] items-end justify-center pb-[25]">
-            <Text>Already Have An Account?</Text>
-            <Pressable onPress={() => router.push("/(parent)/auth/login")}>
-              <Text className="text-[#2563EB]">Login</Text>
+            <Text>Don't Have An Account?</Text>
+            <Pressable onPress={() => router.push("/(parent)/auth/signup")}>
+              <Text className="text-[#2563EB]">Register</Text>
             </Pressable>
           </View>
         </View>
@@ -144,4 +137,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default SignUp;
+export default Login;
