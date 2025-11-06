@@ -46,7 +46,17 @@
     },
     "extra": {
       "parentDeepLink": "myapp://parent",
-      "childDeepLink": "myapp://child"
+      "childDeepLink": "myapp://child",
+      "router": {},
+      "eas": {
+        "projectId": "bc69fb37-46cc-4ed8-960a-7762477e017d"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/bc69fb37-46cc-4ed8-960a-7762477e017d"
     }
   }
 }
