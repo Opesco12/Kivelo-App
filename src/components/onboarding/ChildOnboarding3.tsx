@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { TouchableOpacity, View } from "react-native";
+import { TouchableOpacity, View, ViewStyle } from "react-native";
 import Animated, {
   Easing,
-  SlideInDown,
+  LinearTransition,
   useAnimatedStyle,
   useSharedValue,
   withSequence,
@@ -10,6 +10,7 @@ import Animated, {
 } from "react-native-reanimated";
 
 import { LinearGradient } from "expo-linear-gradient";
+import { router } from "expo-router";
 import Text from "../ui/Text";
 
 const IMAGES = [
@@ -54,43 +55,65 @@ const ChildOnboarding3 = () => {
     opacity: opacity.value,
   }));
 
-  const AnimatedButton = Animated.createAnimatedComponent(Button);
-
   const [isDisplayed, setIsDisplayed] = useState(false);
 
   return (
     <View className="flex-1 bg-[#DCE775]">
       <View className="flex-1 justify-end items-center">
         <View className="w-[75%] self-center">
-          <Text
-            style={{ fontSize: 33 }}
-            className="text-center text-[#1E1E1EBF] "
-            font="poppins-bold"
+          <Animated.View
+            layout={LinearTransition}
+            style={{ width: "100%", alignItems: "center", marginTop: 10 }}
           >
-            {`Safe Fun \n Just For You!`}
-          </Text>
-          <Text
-            style={{ fontSize: 16 }}
-            className="px-5 mt-[5] leading-[2] text-center mb-[20]"
-            font="poppins-medium"
-          >
-            Play exciting games, make discoveries and stay safe while you grow
-            smarter
-          </Text>
-          <Button
-            text="Get Started"
-            onPress={() => console.log("pressed")}
-          />
+            <Text
+              style={{ fontSize: 33 }}
+              className="text-center text-[#1E1E1EBF] "
+              font="poppins-bold"
+            >
+              {`Safe Fun \n Just For You!`}
+            </Text>
+            <Text
+              style={{ fontSize: 16 }}
+              className="px-5 mt-[5] leading-[2] text-center mb-[5]"
+              font="poppins-medium"
+            >
+              Play exciting games, make discoveries and stay safe while you grow
+              smarter
+            </Text>
 
-          {
-            <View>
-              <AnimatedButton
-                entering={SlideInDown.springify()}
-                text="Create Your Profile"
-                onPress={() => console.log("pressed")}
+            {!isDisplayed && (
+              <Button
+                text="Get Started"
+                onPress={() => setIsDisplayed(true)}
+                style={{ marginBottom: 20 }}
               />
-            </View>
-          }
+            )}
+            {isDisplayed && (
+              <>
+                <Button
+                  text="Create Your Profile"
+                  onPress={() => router.push("/(onboarding)/role-selection")}
+                />
+
+                <TouchableOpacity
+                  onPress={() => router.push("/(onboarding)/role-selection")}
+                  className="w-full h-[60] overflow-hidden my-[5] justify-center items-center"
+                  style={{
+                    borderRadius: 100,
+                    borderColor: "#1E1E1EBF",
+                    borderWidth: 1,
+                  }}
+                >
+                  <Text
+                    font="poppins-medium"
+                    className="text-xl"
+                  >
+                    I have an account
+                  </Text>
+                </TouchableOpacity>
+              </>
+            )}
+          </Animated.View>
         </View>
         <View className="h-[400] justify-end">
           <Animated.Image
@@ -103,12 +126,20 @@ const ChildOnboarding3 = () => {
   );
 };
 
-const Button = ({ text, onPress }: { text: string; onPress?: () => void }) => {
+const Button = ({
+  text,
+  onPress,
+  style,
+}: {
+  text: string;
+  onPress?: () => void;
+  style?: ViewStyle;
+}) => {
   return (
     <TouchableOpacity
       onPress={onPress}
-      className="h-[60] overflow-hidden my-[10]"
-      style={{ borderRadius: 100 }}
+      className="w-full h-[60] overflow-hidden my-[5]"
+      style={[{ borderRadius: 100 }, style]}
     >
       <LinearGradient
         colors={["#A5D22D", "#556C17"]}
