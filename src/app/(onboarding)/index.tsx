@@ -46,7 +46,7 @@ export default function Index() {
             </View>
           </Pressable>
 
-          <Pressable onPress={() => console.log("navigation to parents")}>
+          <Pressable onPress={() => router.push("/(parent)/auth/signup")}>
             <View
               className="bg-white rounded-md flex-row items-center justify-between"
               style={styles.box}

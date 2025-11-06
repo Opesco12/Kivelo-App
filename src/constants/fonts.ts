@@ -4,8 +4,8 @@ export const Fonts = {
     medium: "Poppins-Medium",
     bold: "Poppins-Bold",
   },
-  RammettoOne: {
-    regular: "RammettoOne",
+  rammettoOne: {
+    regular: "RammettoOne-Regular",
   },
 } as const;
 

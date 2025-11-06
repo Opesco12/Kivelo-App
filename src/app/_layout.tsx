@@ -12,7 +12,7 @@ export default function RootLayout() {
     "Poppins-Regular": require("@/src/assets/fonts/Poppins-Regular.ttf"),
     "Poppins-Medium": require("@/src/assets/fonts/Poppins-Medium.ttf"),
     "Poppins-Bold": require("@/src/assets/fonts/Poppins-Bold.ttf"),
-    RammettoOne: require("@/src/assets/fonts/RammettoOne.ttf"),
+    "RammettoOne-Regular": require("@/src/assets/fonts/RammettoOne-Regular.ttf"),
   });
 
   useEffect(() => {
@@ -28,11 +28,11 @@ export default function RootLayout() {
   if (!fontsLoaded && !fontError) return null;
   return (
     <Stack
-      screenOptions={{ headerShown: false }}
-      initialRouteName="(child)"
+      screenOptions={{ headerShown: false, animation: "ios_from_right" }}
+      initialRouteName="(onboarding)"
     >
+      <Stack.Screen name="(onboarding)" />
       <Stack.Screen name="(child)" />
-      {/* <Stack.Screen name="(onboarding)" /> */}
       <Stack.Screen name="(parent)" />
     </Stack>
   );
