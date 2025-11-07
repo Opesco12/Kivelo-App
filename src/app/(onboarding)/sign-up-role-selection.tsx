@@ -4,7 +4,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
 import { Image, Pressable, StyleSheet, View } from "react-native";
 
-export default function Index() {
+export default function SignUpRoleSelection() {
   return (
     <View className="flex-1 justify-center items-center">
       <LinearGradient
