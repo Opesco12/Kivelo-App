@@ -92,11 +92,15 @@ const ChildOnboarding3 = () => {
               <>
                 <Button
                   text="Create Your Profile"
-                  onPress={() => router.push("/(onboarding)/role-selection")}
+                  onPress={() =>
+                    router.push("/(onboarding)/sign-up-role-selection")
+                  }
                 />
 
                 <TouchableOpacity
-                  onPress={() => router.push("/(onboarding)/role-selection")}
+                  onPress={() =>
+                    router.push("/(onboarding)/login-role-selection")
+                  }
                   className="w-full h-[60] overflow-hidden my-[5] justify-center items-center"
                   style={{
                     borderRadius: 100,
