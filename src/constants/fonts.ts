@@ -10,6 +10,11 @@ export const Fonts = {
   bauhaus: {
     regular: "Bauhaus-Regular",
   },
+  inter: {
+    regular: "Inter-Regular",
+    medium: "Inter-Medium",
+    Bold: "Inter-Bold"
+  }
 } as const;
 
 export type FontKey = keyof typeof Fonts;
