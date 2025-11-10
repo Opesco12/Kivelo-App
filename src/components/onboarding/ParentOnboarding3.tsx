@@ -1,82 +1,50 @@
-import { useEffect, useState } from "react";
-import { View } from "react-native";
-import Animated, {
-  Easing,
-  useAnimatedStyle,
-  useSharedValue,
-  withSequence,
-  withTiming,
-} from "react-native-reanimated";
+import { LinearGradient } from "expo-linear-gradient";
+import { Image, TouchableOpacity, View } from "react-native";
 
+import { Colors } from "@/src/constants/colors";
+import { ChevronRight } from "lucide-react-native";
 import Text from "../ui/Text";
 
-const IMAGES = [
-  require("@/src/assets/images/onboarding-images/onboarding1-4.png"),
-  require("@/src/assets/images/onboarding-images/onboarding1-5.png"),
-  require("@/src/assets/images/onboarding-images/onboarding1-6.png"),
-];
-
-const FADE_DURATION = 400;
-const DISPLAY_DURATION = 3000 - FADE_DURATION * 2;
-
 const ParentOnboarding3 = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const opacity = useSharedValue(1);
-
-  useEffect(() => {
-    const timer = setInterval(
-      () => {
-        opacity.value = withSequence(
-          withTiming(1, { duration: 0 }),
-          withTiming(0, {
-            duration: FADE_DURATION,
-            easing: Easing.out(Easing.quad),
-          }),
-          withTiming(1, {
-            duration: FADE_DURATION,
-            easing: Easing.in(Easing.quad),
-          })
-        );
-
-        setTimeout(() => {
-          setCurrentIndex((prev) => (prev + 1) % IMAGES.length);
-        }, FADE_DURATION);
-      },
-      DISPLAY_DURATION + FADE_DURATION * 2
-    );
-
-    return () => clearInterval(timer);
-  }, []);
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    opacity: opacity.value,
-  }));
   return (
-    <View className="flex-1 bg-[#A8D5F4]">
+    <View className="flex-1 bg-[#A8D5F4] px-[20]">
       <View className="flex-1 justify-end items-center">
-        <View className="w-[75%] self-center">
+        <View className="self-center">
           <Text
-            style={{ fontSize: 33 }}
-            className="text-center"
+            style={{ fontSize: 40 }}
+            className=""
             font="poppins-bold"
           >
-            Your Adventure Starts Here
+            Parent Them With Confidence
           </Text>
           <Text
-            style={{ fontSize: 16 }}
-            className="px-5 mt-[5] leading-[2] text-center"
+            style={{ fontSize: 17 }}
+            className="mt-[5] leading-[1.5]"
           >
-            Solve Puzzles, win rewards and climb to new levels of learning
-            everyday
+            Get started with <Text font="poppins-bold">SAFTNEST</Text> today and
+            help your child to feel good.
           </Text>
         </View>
         <View className="h-[500] justify-end">
-          <Animated.Image
-            source={IMAGES[currentIndex]}
-            style={[animatedStyle]}
+          <Image
+            source={require("@/src/assets/images/onboarding-images/parent-onboarding3.png")}
           />
         </View>
       </View>
+      <TouchableOpacity className="h-[65] w-[65] rounded-[32.5] overflow-hidden absolute bottom-[40] right-[30]">
+        <LinearGradient
+          start={{ x: 0, y: 0.5 }}
+          end={{ x: 1, y: 0.5 }}
+          colors={["#2563EB", "#153885"]}
+          className="flex-1 justify-center items-center"
+        >
+          <ChevronRight
+            size={40}
+            color={Colors.light.white}
+            strokeWidth={1.5}
+          />
+        </LinearGradient>
+      </TouchableOpacity>
     </View>
   );
 };
