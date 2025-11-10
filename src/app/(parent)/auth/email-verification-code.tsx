@@ -1,11 +1,30 @@
+import { Formik, FormikHelpers } from "formik";
 import LottieView from "lottie-react-native";
-import { Mail, MessagesSquare } from "lucide-react-native";
-import { TouchableOpacity, View } from "react-native";
+import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import * as Yup from "yup";
 
 import GradientButton from "@/src/components/form/GradientButton";
+import { OtpInput } from "@/src/components/form/OtpInput";
 import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
+
+const validationSchema = Yup.object({
+  otp: Yup.string()
+    .length(6, "Enter all 6 digits")
+    .matches(/^\d{6}$/, "Must be 6 digits")
+    .required("OTP is required"),
+});
+
+type FormValues = { otp: string };
+
+const handleSubmit = (
+  values: FormValues,
+  { setSubmitting }: FormikHelpers<FormValues>
+) => {
+  console.log("Submitted OTP:", values.otp);
+  setSubmitting(false);
+};
 
 const VerifyAccount = () => {
   return (
@@ -32,46 +51,44 @@ const VerifyAccount = () => {
           style={{ height: 200, width: 200, alignSelf: "center" }}
         />
 
-        <TouchableOpacity
-          className="flex-row gap-[8] items-center mt-[25]"
-          style={{
-            borderWidth: 1,
-            borderColor: "#ACB5BB",
-            borderRadius: 8,
-            padding: 16,
-          }}
+        <Formik
+          initialValues={{ otp: "" }}
+          validationSchema={validationSchema}
+          onSubmit={handleSubmit}
         >
-          <MessagesSquare size={25} />
-          <Text
-            className="text-xl"
-            font="poppins-medium"
-          >
-            SMS Verification
-          </Text>
-        </TouchableOpacity>
+          {({ handleSubmit, isSubmitting, errors, touched }) => (
+            <>
+              <OtpInput name="otp" />
 
-        <TouchableOpacity
-          className="flex-row gap-[8] items-center mt-[15] mb-[25]"
-          style={{
-            borderWidth: 1,
-            borderColor: "#ACB5BB",
-            borderRadius: 8,
-            padding: 16,
-          }}
-        >
-          <Mail size={25} />
-          <Text
-            className="text-xl "
-            font="poppins-medium"
-          >
-            Email Verification
-          </Text>
-        </TouchableOpacity>
+              {touched.otp && errors.otp && (
+                <Text className="text-[#EF4444] text-center mt-[5]">
+                  {errors.otp}
+                </Text>
+              )}
 
-        <GradientButton
-          text="Send Code"
-          onPress={() => console.log()}
-        />
+              <View className="my-[20] gap-[15]">
+                <Text
+                  className="text-center text-xl text-[#4D81E7]"
+                  font="poppins-medium"
+                >
+                  Resend Code
+                </Text>
+
+                <Text
+                  className="text-center text-xl text-[#4D81E7]"
+                  font="poppins-medium"
+                >
+                  Change Method
+                </Text>
+              </View>
+
+              <GradientButton
+                text="Send Code"
+                onPress={handleSubmit}
+              />
+            </>
+          )}
+        </Formik>
       </SafeAreaView>
     </View>
   );

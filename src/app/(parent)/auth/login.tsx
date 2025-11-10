@@ -1,6 +1,4 @@
-import { Checkbox } from "expo-checkbox";
 import { Formik } from "formik";
-import { useState } from "react";
 import {
   Image,
   Pressable,
@@ -10,114 +8,100 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import Button from "@/src/components/form/Button";
-import AnimatedTextField from "@/src/components/form/parent/AnimatedTextField";
+import GradientButton from "@/src/components/form/GradientButton";
+import TextField from "@/src/components/form/parent/TextField";
 import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
 import { router } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 
 const Login = () => {
-  const [isChecked, setIsChecked] = useState(false);
   return (
-    <View
-      className="flex-1"
-      style={{ backgroundColor: "#A8D5F4" }}
-    >
+    <View className="flex-1 bg-white px-[15]">
+      <StatusBar style="dark" />
       <SafeAreaView
         className="flex-1"
         edges={["top"]}
       >
-        <View style={{ marginVertical: 30, paddingHorizontal: 15 }}>
-          <BackButton />
+        <View style={{ marginVertical: 10 }}>
+          <BackButton style={{ backgroundColor: "#F5F5F5" }} />
         </View>
-        <View
-          className="flex-1 bg-white"
-          style={styles.container}
-        >
-          <Text
-            font="poppins-medium"
-            style={styles.header}
-          >
-            Login
-          </Text>
 
-          <Formik
-            initialValues={{ name: "", email: "", password: "" }}
-            onSubmit={() => console.log("")}
-          >
-            {({ handleChange, values, isSubmitting }) => (
-              <View>
-                <AnimatedTextField
-                  label="Email Address"
-                  name="email"
-                  onChangeText={handleChange("email")}
-                  value={values.email}
-                  keyboardType="email-address"
-                />
+        <View className="flex-1">
+          <Text className="text-3xl text-center mb-[25]">Sign In</Text>
 
-                <AnimatedTextField
-                  label="Password"
-                  name="password"
-                  onChangeText={handleChange("password")}
-                  value={values.password}
-                  secureTextEntry
-                />
+          <View className="flex-1 bg-[#F5F5F5] rounded-[12] mb-[20] px-[10] py-[20]">
+            <Formik
+              initialValues={{
+                name: "",
+                email: "",
+                password: "",
+                fullName: "",
+              }}
+              onSubmit={() => console.log("")}
+            >
+              {({ handleChange, values }) => (
+                <View className="gap-[10]">
+                  <Text className="text-xl">Sign in to your account</Text>
 
-                <View className="flex-row items-center justify-between gap-[5] mt-[5] mb-[25]">
-                  <View className="items-center gap-[2] flex-row">
-                    <Checkbox
-                      value={isChecked}
-                      style={{ height: 16, width: 16 }}
-                      onValueChange={setIsChecked}
-                      color={isChecked ? "#2563EB" : "#1E1E1E80"}
-                    />
-                    <Text>Remember me</Text>
+                  <TextField
+                    label="Email Address"
+                    name="email"
+                    onChangeText={handleChange("email")}
+                    value={values.email}
+                    keyboardType="email-address"
+                  />
+
+                  <TextField
+                    label="Password"
+                    name="password"
+                    onChangeText={handleChange("password")}
+                    value={values.password}
+                    secureTextEntry
+                  />
+
+                  <View className="my-[10]">
+                    <Pressable>
+                      <Text className="text-right">Forgot Password?</Text>
+                    </Pressable>
                   </View>
-                  <Pressable
-                    onPress={() =>
-                      router.push("/(parent)/auth/forgot-password")
-                    }
-                  >
-                    <Text className="text-[#2563EB]">Forgot Password</Text>
-                  </Pressable>
+
+                  <GradientButton
+                    onPress={() => router.push("/(parent)/auth/verify-account")}
+                    text="Sign In"
+                  />
                 </View>
+              )}
+            </Formik>
 
-                <Button
-                  text="Login"
-                  disabled={isSubmitting}
+            <View className="mt-[30]">
+              <TouchableOpacity
+                className="bg-white border  p-[15] rounded-[12] justify-center items-center flex-row gap-[5]"
+                style={{ borderColor: "#d1d5db" }}
+              >
+                <Image
+                  source={require("@/src/assets/images/icons/google logo.png")}
+                  className="h-[25] w-[25]"
                 />
-              </View>
-            )}
-          </Formik>
-
-          <View className="flex-row items-center my-[10]">
-            <View className="w-[45%] h-[1] bg-gray-300" />
-            <Text className="text-sm  mx-4">or</Text>
-            <View className="w-[45%] h-[1] bg-gray-300" />
-          </View>
-
-          <TouchableOpacity
-            className="h-[60]  border-[#D1D5DB] justify-center items-center flex-row gap-[5]"
-            style={{ borderRadius: 100, borderWidth: 1 }}
-          >
-            <Text className="text-[#3F3F3F]">Continue Google or Apple</Text>
-            <View className="w-[48] h-[48] bg-[#E8E8E8] rounded-full justify-center items-center">
-              <Image
-                source={require("@/src/assets/images/icons/apple logo.png")}
-              />
+                <Image
+                  source={require("@/src/assets/images/icons/apple logo.png")}
+                  className="h-[25] w-[25]"
+                />
+                <Text
+                  className="text-lg"
+                  font="poppins-medium"
+                >
+                  Continue with Google or Apple
+                </Text>
+              </TouchableOpacity>
             </View>
-            <View className="w-[48] h-[48] bg-[#E8E8E8] rounded-full justify-center items-center">
-              <Image
-                source={require("@/src/assets/images/icons/google logo.png")}
-              />
-            </View>
-          </TouchableOpacity>
 
-          <View className="flex-1 flex-row gap-[10] items-end justify-center pb-[25]">
-            <Text>Don't Have An Account?</Text>
-            <Pressable onPress={() => router.push("/(parent)/auth/signup")}>
-              <Text className="text-[#2563EB]">Register</Text>
-            </Pressable>
+            <View className="flex-1 flex-row gap-[10] items-end justify-center pb-[25]">
+              <Text>Don't Have An Account?</Text>
+              <Pressable onPress={() => router.push("/(parent)/auth/login")}>
+                <Text className="text-[#2563EB]">Sign up</Text>
+              </Pressable>
+            </View>
           </View>
         </View>
       </SafeAreaView>

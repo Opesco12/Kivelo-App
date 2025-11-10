@@ -9,11 +9,13 @@ import TextField from "@/src/components/form/parent/TextField";
 import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
 import { router } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 
 const SignUp = () => {
   const [isChecked, setIsChecked] = useState(false);
   return (
     <View className="flex-1 bg-white px-[15]">
+      <StatusBar style="dark" />
       <SafeAreaView
         className="flex-1"
         edges={["top"]}
