@@ -2,6 +2,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Image, TouchableOpacity, View } from "react-native";
 
 import { Colors } from "@/src/constants/colors";
+import { router } from "expo-router";
 import { ChevronRight } from "lucide-react-native";
 import Text from "../ui/Text";
 
@@ -31,7 +32,10 @@ const ParentOnboarding3 = () => {
           />
         </View>
       </View>
-      <TouchableOpacity className="h-[65] w-[65] rounded-[32.5] overflow-hidden absolute bottom-[40] right-[30]">
+      <TouchableOpacity
+        className="h-[65] w-[65] rounded-[32.5] overflow-hidden absolute bottom-[40] right-[30]"
+        onPress={() => router.push("/(onboarding)/parent-index")}
+      >
         <LinearGradient
           start={{ x: 0, y: 0.5 }}
           end={{ x: 1, y: 0.5 }}

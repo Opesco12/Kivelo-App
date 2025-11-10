@@ -37,7 +37,7 @@ const TextField = ({
     <View style={[styles.container, { width: width ? width : "100%" }]}>
       {label && (
         <Text
-          font="poppins-medium"
+          // font="poppins-medium"
           style={{ marginBottom: 3 }}
         >
           {label}

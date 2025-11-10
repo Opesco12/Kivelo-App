@@ -46,7 +46,9 @@ export default function SignUpRoleSelection() {
             </View>
           </Pressable>
 
-          <Pressable onPress={() => router.push("/(onboarding)/parent-index")}>
+          <Pressable
+            onPress={() => router.push("/(onboarding)/parent-onboarding")}
+          >
             <View
               className="bg-white rounded-md flex-row items-center justify-between"
               style={styles.box}
