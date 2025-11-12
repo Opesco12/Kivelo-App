@@ -84,7 +84,10 @@ const ParentDashboard = () => {
           child, emotionally and otherwise.
         </Text>
 
-        <TouchableOpacity className="bg-[#9637EC] w-[130] items-center justify-center py-[10] rounded-[100] my-[10]">
+        <TouchableOpacity
+          className="bg-[#9637EC] w-[130] items-center justify-center py-[10] rounded-[100] my-[10]"
+          onPress={() => router.push("/other-routes/child-wellness")}
+        >
           <Text className="text-white">Go to dashboard</Text>
         </TouchableOpacity>
       </View>

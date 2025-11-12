@@ -5,7 +5,16 @@ import { useEffect } from "react";
 
 import "@/global.css";
 
-export default function RootLayout() {
+export default function App() {
+  return (
+    <>
+      <RootLayout />
+      {/* <Portal */}
+    </>
+  );
+}
+
+function RootLayout() {
   SplashScreen.preventAutoHideAsync();
 
   const [fontsLoaded, fontError] = useFonts({
