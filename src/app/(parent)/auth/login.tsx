@@ -67,7 +67,7 @@ const Login = () => {
                   </View>
 
                   <GradientButton
-                    onPress={() => router.push("/(parent)/auth/verify-account")}
+                    onPress={() => router.push("/(parent)/(tabs)")}
                     text="Sign In"
                   />
                 </View>
