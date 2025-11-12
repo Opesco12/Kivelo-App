@@ -1,3 +1,4 @@
+import { router } from "expo-router";
 import { Lightbulb } from "lucide-react-native";
 import { TouchableOpacity, View } from "react-native";
 
@@ -77,7 +78,10 @@ const Tips = () => {
           </View>
         </View>
 
-        <TouchableOpacity className="h-[48] rounded-[12] bg-[#4A90E2] items-center justify-center">
+        <TouchableOpacity
+          className="h-[48] rounded-[12] bg-[#4A90E2] items-center justify-center"
+          onPress={() => router.push("/(parent)/other-routes/learn-more")}
+        >
           <Text
             className="text-lg text-white"
             font="poppins-medium"
