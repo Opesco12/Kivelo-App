@@ -1,11 +1,10 @@
 import React from "react";
-import { Text, View } from "react-native";
+
+import Screen from "@/src/components/ui/Screen";
 
 const LearningHub = () => {
   return (
-    <View className="flex-1">
-      <Text>LearningHub</Text>
-    </View>
+   <Screen style={{ paddingBottom: 80 }}></Screen>;
   );
 };
 

@@ -1,11 +1,8 @@
 import React from "react";
-import { Text, View } from "react-native";
+
+import Screen from "@/src/components/ui/Screen";
 
 const Settings = () => {
-  return (
-    <View className="flex-1">
-      <Text>Settings</Text>
-    </View>
-  );
+  return <Screen style={{ paddingBottom: 80 }}></Screen>;
 };
 export default Settings;

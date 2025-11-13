@@ -1,12 +1,8 @@
+import Screen from "@/src/components/ui/Screen";
 import React from "react";
-import { Text, View } from "react-native";
 
 const Insights = () => {
-  return (
-    <View className="flex-1">
-      <Text>Insights</Text>
-    </View>
-  );
+  return <Screen style={{ paddingBottom: 80 }}></Screen>;
 };
 
 export default Insights;
