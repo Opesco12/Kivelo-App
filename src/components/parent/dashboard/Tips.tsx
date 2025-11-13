@@ -22,7 +22,7 @@ const Tips = () => {
         <View className="h-[85] bg-[#9333EA8C] rounded-[12] p-[10] justify-center flex-row gap-[8] items-center">
           <View className="bg-[#4A90E2] h-[48] w-[48] rounded-[12] items-center justify-center z-[10]">
             <Lightbulb
-              size={30}
+              size={20}
               color={"#FFD700"}
               fill={"#FFD700"}
             />
@@ -42,7 +42,7 @@ const Tips = () => {
         <View className="h-[85] bg-[#6EE7B78C] rounded-[12] p-[10] justify-center flex-row gap-[8] items-center">
           <View className="bg-[#4A90E2] h-[48] w-[48] rounded-[12] items-center justify-center z-[10]">
             <Lightbulb
-              size={30}
+              size={20}
               color={"#FFD700"}
               fill={"#FFD700"}
             />
@@ -61,7 +61,7 @@ const Tips = () => {
         <View className="h-[85] bg-[#FFD93B8C] rounded-[12] p-[10] justify-center flex-row gap-[8] items-center">
           <View className="bg-[#4A90E2] h-[48] w-[48] rounded-[12] items-center justify-center z-[10]">
             <Lightbulb
-              size={30}
+              size={20}
               color={"#FFD700"}
               fill={"#FFD700"}
             />
