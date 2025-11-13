@@ -1,8 +1,15 @@
+import { ImageBackground } from "expo-image";
 import React from "react";
+import { Dimensions } from "react-native";
 
-import Screen from "@/src/components/ui/Screen";
+const { height, width } = Dimensions.get("screen");
 
 const Settings = () => {
-  return <Screen style={{ paddingBottom: 80 }}></Screen>;
+  return (
+    <ImageBackground
+      style={{ width: width, height: height }}
+      source={require("@/src/assets/images/project-images/parent-settings-background.svg")}
+    />
+  );
 };
 export default Settings;
