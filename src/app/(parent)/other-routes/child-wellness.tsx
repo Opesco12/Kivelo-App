@@ -1,20 +1,29 @@
-import React, { useState } from "react";
-import { Image, ScrollView, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-
-import Select, { SelectOption } from "@/src/components/ui/Select";
-import Text from "@/src/components/ui/Text";
+import Slider from "@react-native-community/slider";
 import { LinearGradient } from "expo-linear-gradient";
-import { Heart } from "iconsax-react-nativejs";
+import LottieView from "lottie-react-native";
 import {
   Calendar,
   CircleAlert,
+  Heart,
   Lightbulb,
   Mic,
   Palette,
 } from "lucide-react-native";
+import React, { useState } from "react";
+import {
+  Image,
+  Pressable,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+import Select, { SelectOption } from "@/src/components/ui/Select";
+import Text from "@/src/components/ui/Text";
 
 const ChildWellness = () => {
+  const [sliderValue, setSliderValue] = useState(0);
   const [value, setValue] = useState<string | number>("");
 
   const options: SelectOption[] = [
@@ -25,8 +34,8 @@ const ChildWellness = () => {
     <View className="flex-1 bg-[#D1FAE5]">
       <SafeAreaView className="flex-1">
         <ScrollView
-          className="pt-[20] flex-1"
-          contentContainerStyle={{ flex: 1 }}
+          className="pt-[20]"
+          contentContainerStyle={{ paddingBottom: 25 }}
         >
           <View className="px-[15] pb-[15]">
             <View className="flex-row gap-[10]">
@@ -182,7 +191,7 @@ const ChildWellness = () => {
               </View>
             </View>
 
-            <View className="h-[140] bg-white rounded-[12] p-[12] mt-[15]">
+            <View className="h-[180] bg-white rounded-[12] p-[12] mt-[15]">
               <Text
                 className="text-xl "
                 font="poppins-medium"
@@ -190,19 +199,98 @@ const ChildWellness = () => {
                 Coaching Insights
               </Text>
 
-              <View className="bg-[#EFF6FF] rounded-[12] mt-[12] p-[12]">
+              <View className="bg-[#EFF6FF] rounded-[12] mt-[12] p-[8] flex-row gap-[10]">
                 <Lightbulb
                   size={25}
                   fill={"#2563EB"}
                 />
-                <View>
+                <View className="w-[85%]">
                   <Text className="text-lg text-[#0F172A]">
                     Your child is in the Stable Zone — great time to celebrate
                     their positive mood!
                   </Text>
 
-                  <Text className="text-[#2563EB] text-lg">View more tips</Text>
+                  <Pressable>
+                    <Text className="text-[#2563EB] text-lg mt-[10]">
+                      View more tips
+                    </Text>
+                  </Pressable>
                 </View>
+              </View>
+            </View>
+
+            <View className="h-[110] bg-white rounded-[12] p-[12] my-[15]">
+              <Text
+                className="text-xl "
+                font="poppins-medium"
+              >
+                Adjust detail level
+              </Text>
+              <View className="relative">
+                <Slider
+                  minimumValue={0}
+                  maximumValue={2}
+                  step={1}
+                  value={sliderValue}
+                  onValueChange={(newValue) => setSliderValue(newValue)}
+                  minimumTrackTintColor="#1E90FF"
+                  maximumTrackTintColor="#D3D3D3"
+                  thumbTintColor="#1E90FF"
+                  style={{
+                    height: 30,
+                    position: "relative",
+                    alignSelf: "flex-start",
+                  }}
+                  StepMarker={({ index, currentValue }) => (
+                    <Text style={{ position: "absolute", bottom: -60 }}>
+                      {["Basic", "Moderate", "Full"][index] || currentValue}
+                    </Text>
+                  )}
+                />
+              </View>
+            </View>
+
+            <View className="min-h-[130] bg-white rounded-[12] p-[12] mb-[15]">
+              <Text
+                className="text-xl "
+                font="poppins-medium"
+              >
+                Quick Actions
+              </Text>
+
+              <TouchableOpacity className="h-[48] my-[10] rounded-[100] gap-[5] flex-row items-center justify-center bg-[#6A1B9A]">
+                <Heart
+                  size={22}
+                  fill={"#FFFFFF"}
+                />
+                <Text
+                  className="text-white text-xl"
+                  font="poppins-medium"
+                >
+                  Send Encouragement
+                </Text>
+              </TouchableOpacity>
+
+              <View className="flex-row justify-between mt-[5]">
+                <TouchableOpacity className="bg-[#F3F4F6] h-[48] w-[48%] items-center justify-center rounded-[8]  flex-row gap-[3]">
+                  <Image
+                    source={require("@/src/assets/images/project-images/woman-child.png")}
+                    style={{ height: 33, width: 40 }}
+                  />
+                  <Text className="text-lg">Child setup</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity className="bg-[#F3F4F6] h-[48] w-[48%] items-center justify-center rounded-[8] flex-row gap-[3]">
+                  <LottieView
+                    source={{
+                      uri: "https://lottie.host/fc848c7b-c9f5-4c3f-b6b2-5f0536b9aa67/NOVc2hsVra.lottie",
+                    }}
+                    style={{ height: 33, width: 40 }}
+                    loop
+                    autoPlay
+                  />
+                  <Text className="text-lg">Insights</Text>
+                </TouchableOpacity>
               </View>
             </View>
           </View>
