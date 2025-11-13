@@ -10,7 +10,7 @@ import { router } from "expo-router";
 
 const ParentDashboard = () => {
   return (
-    <Screen style={{ paddingBottom: 80 }}>
+    <Screen style={{ marginBottom: 80 }}>
       <View className="flex-row gap-[10]">
         <Image
           source={{ uri: "https://picsum.photos/40" }}

@@ -129,20 +129,20 @@ const ChildWellness = () => {
               </Text>
 
               <View className="h-[48] rounded-[12] overflow-hidden flex-row my-[12] justify-between items-center">
-                <View className="flex-row justify-between w-[200]">
-                  <Text style={{ fontSize: 25 }}>😊</Text>
-                  <Text style={{ fontSize: 25 }}>😌</Text>
-                  <Text style={{ fontSize: 25 }}>😄</Text>
-                  <Text style={{ fontSize: 25 }}>🤔</Text>
+                <View className="flex-row justify-between w-[55%]">
+                  <Text style={{ fontSize: 22 }}>😊</Text>
+                  <Text style={{ fontSize: 22 }}>😌</Text>
+                  <Text style={{ fontSize: 22 }}>😄</Text>
+                  <Text style={{ fontSize: 22 }}>🤔</Text>
                 </View>
                 <View>
                   <Text className="text-sm text-[#334155}">7-day Trend</Text>
-                  <View className="h-[32] w-[64]  overflow-hidden rounded-[4]">
+                  <View className="h-[32] w-[70]  overflow-hidden rounded-[6]">
                     <LinearGradient
                       start={{ x: 0, y: 0.5 }}
                       end={{ x: 1, y: 0.5 }}
                       colors={["#22C55E", "#FACC15"]}
-                      className="h-[32] rounded-[8]"
+                      className="h-[32] w-[70] rounded-[8]"
                     ></LinearGradient>
                   </View>
                 </View>
@@ -238,6 +238,7 @@ const ChildWellness = () => {
                   thumbTintColor="#1E90FF"
                   style={{
                     height: 30,
+                    width: "100%",
                     position: "relative",
                     alignSelf: "flex-start",
                   }}
