@@ -20,11 +20,15 @@ const Messages = () => {
 
       <View className="h-[70] my-[20] bg-white  rounded-[50] items-center justify-center flex-row overflow-hidden">
         <Search size={25} />
-        <TextInput className="pl-[15] text-2xl  h-[70] w-[85%]" />
+        <TextInput
+          className="pl-[15] text-2xl  h-[70] w-[85%]"
+          placeholder="Search by name"
+          placeholderTextColor={"#666666"}
+        />
       </View>
 
-      <View className="gap-y-[10]">
-        <View className="h-[190] bg-white rounded-[12] p-[15] justify-between">
+      <View className="gap-y-[15]">
+        <View className="h-[190] bg-white rounded-[18] p-[15] justify-between">
           <View className="flex-row gap-[10] items-start">
             <View className="relative w-[48]">
               <Image
@@ -64,7 +68,7 @@ const Messages = () => {
           </TouchableOpacity>
         </View>
 
-        <View className="h-[190] bg-white rounded-[12] p-[15] justify-between">
+        <View className="h-[190] bg-white rounded-[18] p-[15] justify-between">
           <View className="flex-row gap-[10] items-start">
             <View className="relative w-[48]">
               <Image
@@ -104,7 +108,7 @@ const Messages = () => {
           </TouchableOpacity>
         </View>
 
-        <View className="h-[190] bg-white rounded-[12] p-[15] justify-between">
+        <View className="h-[190] bg-white rounded-[18] p-[15] justify-between">
           <View className="flex-row gap-[10] items-start">
             <View className="relative w-[48]">
               <Image

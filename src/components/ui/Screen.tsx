@@ -16,7 +16,7 @@ const Screen = ({ children, style, className }: ScreenProps) => {
       <SafeAreaView className="flex-1 px-[15]">
         <ScrollView
           showsVerticalScrollIndicator={false}
-          className="pt-[20] pb-[50]"
+          contentContainerStyle={{ marginTop: 20, paddingBottom: 120 }}
         >
           {children}
         </ScrollView>
