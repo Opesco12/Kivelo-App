@@ -2,6 +2,7 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { KeyboardAvoidingView, Platform } from "react-native";
 
 import "@/global.css";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -9,7 +10,13 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <RootLayout />
+      <KeyboardAvoidingView
+        className="flex-1"
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 0}
+      >
+        <RootLayout />
+      </KeyboardAvoidingView>
     </GestureHandlerRootView>
   );
 }
