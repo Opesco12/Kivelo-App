@@ -147,7 +147,7 @@ const Button = ({
     >
       <LinearGradient
         colors={["#A5D22D", "#556C17"]}
-        className="flex-1 justify-center items-center "
+        style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
       >
         <Text
           font="poppins-medium"

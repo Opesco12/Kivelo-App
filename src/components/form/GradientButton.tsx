@@ -21,7 +21,13 @@ const GradientButton = ({ text, icon, onPress, disabled }: ButtonProps) => {
         start={{ x: 0, y: 0.5 }}
         end={{ x: 1, y: 0.5 }}
         colors={["#2563EB", "#6A1B9A"]}
-        className={`flex-1 justify-center items-center gap-1 ${disabled && "opacity-40"}`}
+        style={{
+          height: 60,
+          justifyContent: "center",
+          alignItems: "center",
+          gap: 1,
+          opacity: disabled ? 0.4 : 1,
+        }}
       >
         {icon}
         <Text

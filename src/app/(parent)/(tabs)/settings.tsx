@@ -119,6 +119,7 @@ const Settings = () => {
 
                 {item.hasSwitch ? (
                   <Switch
+                    style={{ alignSelf: "center" }}
                     value={item.value}
                     onValueChange={item.onToggle}
                     trackColor={{ false: "#FDA4AF", true: "#14B8A6" }}

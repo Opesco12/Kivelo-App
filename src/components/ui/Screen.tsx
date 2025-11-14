@@ -1,4 +1,4 @@
-import { ScrollView, View, ViewStyle } from "react-native";
+import { Platform, ScrollView, View, ViewStyle } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 type ScreenProps = {
@@ -16,7 +16,10 @@ const Screen = ({ children, style, className }: ScreenProps) => {
       <SafeAreaView className="flex-1 px-[15]">
         <ScrollView
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ marginTop: 20, paddingBottom: 120 }}
+          contentContainerStyle={{
+            marginTop: 20,
+            paddingBottom: Platform.OS === "ios" ? 60 : 120,
+          }}
         >
           {children}
         </ScrollView>

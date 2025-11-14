@@ -54,7 +54,7 @@ const ChildOnboarding2 = () => {
   }));
   return (
     <LinearGradient
-      className="flex-1 "
+      style={{ flex: 1 }}
       colors={["#76D7F7", "#FFFFFF"]}
     >
       <View className="flex-1 justify-end items-center">

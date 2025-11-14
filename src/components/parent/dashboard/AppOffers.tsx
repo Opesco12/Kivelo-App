@@ -1,6 +1,6 @@
 import { LinearGradient } from "expo-linear-gradient";
 import { useEffect, useRef } from "react";
-import { Image, View } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 import Animated, {
   runOnUI,
   useSharedValue,
@@ -73,7 +73,7 @@ const AppOffers = () => {
           <LinearGradient
             start={{ x: 0, y: 0.5 }}
             end={{ x: 1, y: 0.5 }}
-            className="flex-1 p-[10] px-[15] flex-row items-center justify-between"
+            style={styles.gradient}
             colors={["#4A90E2", "#5DADEC"]}
           >
             <View className="w-[70%]">
@@ -106,7 +106,7 @@ const AppOffers = () => {
           <LinearGradient
             start={{ x: 0, y: 0.5 }}
             end={{ x: 1, y: 0.5 }}
-            className="flex-1 p-[10] px-[15] flex-row items-center justify-between"
+            style={styles.gradient}
             colors={["#4B2E83", "#9333EA"]}
           >
             <View className="w-[70%]">
@@ -139,14 +139,14 @@ const AppOffers = () => {
           <LinearGradient
             start={{ x: 0, y: 0.5 }}
             end={{ x: 1, y: 0.5 }}
-            className="flex-1 p-[10] px-[15] flex-row items-center justify-between"
+            style={styles.gradient}
             colors={["#7F753E", "#E5D370"]}
           >
             <View className="w-[70%]">
               <Text
                 className="text-white"
                 font="poppins-bold"
-                style={{ fontSize: 22 }}
+                style={{ fontSize: 20 }}
               >
                 Family Connection
               </Text>
@@ -171,5 +171,16 @@ const AppOffers = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  gradient: {
+    flex: 1,
+    // padding: 10,
+    paddingHorizontal: 15,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+});
 
 export default AppOffers;

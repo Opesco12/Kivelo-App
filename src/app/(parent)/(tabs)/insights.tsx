@@ -36,7 +36,11 @@ const Insights = () => {
               start={{ x: 0, y: 0.5 }}
               end={{ x: 1, y: 0.5 }}
               colors={["#2563EB", "#0F766E"]}
-              className="flex-1 items-center justify-center"
+              style={{
+                flex: 1,
+                alignItems: "center",
+                justifyContent: "center",
+              }}
             >
               <View
                 className="h-[36] w-[36] rounded-[18] items-center justify-center"

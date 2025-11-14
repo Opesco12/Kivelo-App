@@ -36,7 +36,7 @@ const ParentDashboard = () => {
         </View>
       </View>
 
-      <View className="h-[160] bg-[#FF725E8C] my-[25] rounded-[12] flex-row overflow-hidden">
+      <View className="min-h-[160] bg-[#FF725E8C] my-[25] rounded-[12] flex-row overflow-hidden">
         <View className="pl-[12] py-[14] w-[60%]">
           <Text
             className="text-white"
@@ -60,8 +60,9 @@ const ParentDashboard = () => {
             <Text className="text-sm">Learn More</Text>
           </TouchableOpacity>
         </View>
-        <View className="w-[40%]">
+        <View className="w-[40%] justify-end">
           <Image
+            style={{ alignSelf: "flex-end" }}
             source={require("@/src/assets/images/project-images/banner-image.png")}
           />
         </View>
