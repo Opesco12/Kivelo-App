@@ -74,6 +74,7 @@ const Settings = () => {
       style={{ width: width, height: height }}
       source={require("@/src/assets/images/project-images/parent-settings-background.svg")}
     >
+      {/* <StatusBar style="light" /> */}
       <SafeAreaView className="flex-1 px-[15] mt-[15]">
         <View className="flex-row justify-between items-center">
           <Image
@@ -97,7 +98,7 @@ const Settings = () => {
 
             return (
               <TouchableOpacity
-                activeOpacity={0.4}
+                activeOpacity={item.hasSwitch ? 1 : 0.4}
                 key={index}
                 className="bg-[#FFFFFF26] h-[80] rounded-[16] px-[15] flex-row items-center justify-between"
               >
