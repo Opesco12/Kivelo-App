@@ -8,6 +8,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import ContinueLearning from "@/src/components/parent/learning-hub/ContinueLearning";
 import LearningCategories from "@/src/components/parent/learning-hub/LearningCategories";
 import QuickActions from "@/src/components/parent/learning-hub/QuickActions";
+import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
 
 const LearningHub = () => {

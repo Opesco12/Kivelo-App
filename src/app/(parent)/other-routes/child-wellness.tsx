@@ -1,5 +1,6 @@
 import Slider from "@react-native-community/slider";
 import { LinearGradient } from "expo-linear-gradient";
+import { ArrowLeft } from "iconsax-react-nativejs";
 import LottieView from "lottie-react-native";
 import {
   Calendar,
@@ -21,6 +22,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import Select, { SelectOption } from "@/src/components/ui/Select";
 import Text from "@/src/components/ui/Text";
+import { router } from "expo-router";
 
 const ChildWellness = () => {
   const [sliderValue, setSliderValue] = useState(0);
@@ -34,10 +36,16 @@ const ChildWellness = () => {
     <View className="flex-1 bg-[#D1FAE5]">
       <SafeAreaView className="flex-1">
         <ScrollView
-          className="pt-[20]"
+          className="pt-[5]"
           contentContainerStyle={{ paddingBottom: 25 }}
         >
           <View className="px-[15] pb-[15]">
+            <ArrowLeft
+              size={25}
+              color={"#666666"}
+              style={{ marginBottom: 10 }}
+              onPress={() => router.back()}
+            />
             <View className="flex-row gap-[10]">
               <Image
                 source={{ uri: "https://picsum.photos/40" }}
