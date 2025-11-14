@@ -1,3 +1,4 @@
+import ContinueLearning from "@/src/components/parent/learning-hub/ContinueLearning";
 import LearningCategories from "@/src/components/parent/learning-hub/LearningCategories";
 import Text from "@/src/components/ui/Text";
 import { Image, ImageBackground } from "expo-image";
@@ -125,6 +126,16 @@ const LearningHub = () => {
           </View>
 
           <LearningCategories />
+          <ContinueLearning />
+
+          <View className="my-[15]">
+            <Text
+              className="text-xl"
+              font="poppins-medium"
+            >
+              Continue Learning
+            </Text>
+          </View>
         </View>
       </ScrollView>
     </View>
