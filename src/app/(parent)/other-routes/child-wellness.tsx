@@ -36,7 +36,7 @@ const ChildWellness = () => {
     <View className="flex-1 bg-[#D1FAE5]">
       <ScrollView
         className="pt-[5]"
-        contentContainerStyle={{ paddingBottom: 25 }}
+        // contentContainerStyle={{ paddingBottom: 25 }}
       >
         <SafeAreaView className="">
           <View className="px-[15]">

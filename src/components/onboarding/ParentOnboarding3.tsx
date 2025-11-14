@@ -40,7 +40,7 @@ const ParentOnboarding3 = () => {
           start={{ x: 0, y: 0.5 }}
           end={{ x: 1, y: 0.5 }}
           colors={["#2563EB", "#153885"]}
-          className="flex-1 justify-center items-center"
+          style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
         >
           <ChevronRight
             size={40}

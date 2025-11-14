@@ -8,6 +8,7 @@ import GradientButton from "@/src/components/form/GradientButton";
 import { OtpInput } from "@/src/components/form/OtpInput";
 import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
+import { router } from "expo-router";
 
 const validationSchema = Yup.object({
   otp: Yup.string()
@@ -22,7 +23,7 @@ const handleSubmit = (
   values: FormValues,
   { setSubmitting }: FormikHelpers<FormValues>
 ) => {
-  console.log("Submitted OTP:", values.otp);
+  router.push("/(parent)/auth/login");
   setSubmitting(false);
 };
 

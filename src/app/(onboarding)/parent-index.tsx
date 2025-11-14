@@ -1,4 +1,4 @@
-import { Heart, Smile } from "lucide-react-native";
+import { ChartSpline, Heart, Shield, Smile } from "lucide-react-native";
 import { View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -63,21 +63,19 @@ const ParentIndex = () => {
           <View className="bg-white rounded-[12] flex-row items-center gap-5 px-[10] py-[20]">
             <View
               style={{ borderRadius: 25 }}
-              className="h-[50] w-[50]  bg-[rgba(39,174,96,0.1)] items-center justify-center"
+              className="h-[50] w-[50]  bg-[#8E44AD1A] items-center justify-center"
             >
-              <Smile
+              <Shield
                 size={25}
-                // stroke={"#FFFFFF"}
-                // color={"#27AE60"}
-                // strokeWidth={2}
-                fill={"#27AE60"}
+                fill={"#8E44AD"}
+                strokeWidth={0}
               />
             </View>
             <Text
               font="poppins-regular"
               className="text-xl"
             >
-              {`See how your child feels \neach day.`}
+              {`Fun games that teach \nreal- world safety.`}
             </Text>
           </View>
 
@@ -86,19 +84,18 @@ const ParentIndex = () => {
               style={{ borderRadius: 25 }}
               className="h-[50] w-[50]  bg-[rgba(39,174,96,0.1)] items-center justify-center"
             >
-              <Smile
+              <ChartSpline
                 size={25}
                 // stroke={"#FFFFFF"}
-                // color={"#27AE60"}
+                color={"#27AE60"}
                 // strokeWidth={2}
-                fill={"#27AE60"}
               />
             </View>
             <Text
               font="poppins-regular"
               className="text-xl"
             >
-              {`See how your child feels \neach day.`}
+              {`Celebrate milestones \ntogether.`}
             </Text>
           </View>
         </View>
