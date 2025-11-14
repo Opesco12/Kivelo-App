@@ -1,14 +1,14 @@
-import ContinueLearning from "@/src/components/parent/learning-hub/ContinueLearning";
-import LearningCategories from "@/src/components/parent/learning-hub/LearningCategories";
-import Text from "@/src/components/ui/Text";
 import { Image, ImageBackground } from "expo-image";
 import LottieView from "lottie-react-native";
 import { Info, Star } from "lucide-react-native";
 import React from "react";
-import { Dimensions, ScrollView, TouchableOpacity, View } from "react-native";
+import { ScrollView, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const { height, width } = Dimensions.get("screen");
+import ContinueLearning from "@/src/components/parent/learning-hub/ContinueLearning";
+import LearningCategories from "@/src/components/parent/learning-hub/LearningCategories";
+import QuickActions from "@/src/components/parent/learning-hub/QuickActions";
+import Text from "@/src/components/ui/Text";
 
 const LearningHub = () => {
   return (
@@ -127,15 +127,7 @@ const LearningHub = () => {
 
           <LearningCategories />
           <ContinueLearning />
-
-          <View className="my-[15]">
-            <Text
-              className="text-xl"
-              font="poppins-medium"
-            >
-              Continue Learning
-            </Text>
-          </View>
+          <QuickActions />
         </View>
       </ScrollView>
     </View>
