@@ -67,7 +67,7 @@ const WordMatchingQuestion = ({
   };
 
   return (
-    <ScrollView style={styles.container}>
+    <View className="flex-1">
       <Text
         style={styles.screenTitle}
         font="inter-bold"
@@ -161,7 +161,7 @@ const WordMatchingQuestion = ({
       >
         <Text style={styles.hintButtonText}>💡 Show Hint</Text>
       </TouchableOpacity>
-    </ScrollView>
+    </View>
   );
 };
 
