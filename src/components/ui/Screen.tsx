@@ -18,6 +18,7 @@ const Screen = ({ children, style, className }: ScreenProps) => {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
             marginTop: 20,
+            flex: 1,
             paddingBottom: Platform.OS === "ios" ? 60 : 120,
           }}
         >

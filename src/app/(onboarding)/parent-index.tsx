@@ -86,9 +86,7 @@ const ParentIndex = () => {
             >
               <ChartSpline
                 size={25}
-                // stroke={"#FFFFFF"}
                 color={"#27AE60"}
-                // strokeWidth={2}
               />
             </View>
             <Text
@@ -101,7 +99,7 @@ const ParentIndex = () => {
         </View>
         <GradientButton
           text="Get Started"
-          onPress={() => router.push("/(parent)/auth/signup")}
+          onPress={() => router.push("/literacy-check")}
         />
       </SafeAreaView>
     </View>
