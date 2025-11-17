@@ -16,7 +16,6 @@ const WordMatchingQuestion = ({
   const [shuffledMeanings, setShuffledMeanings] = useState([]);
 
   useEffect(() => {
-    // Shuffle meanings on mount
     const meanings = [...question.pairs.map((p) => p.meaning)];
     setShuffledMeanings(meanings.sort(() => Math.random() - 0.5));
   }, [question]);
@@ -69,11 +68,27 @@ const WordMatchingQuestion = ({
 
   return (
     <ScrollView style={styles.container}>
-      <Text style={styles.screenTitle}>{question.question}</Text>
-      <Text style={styles.screenSubtitle}>{question.subtitle}</Text>
+      <Text
+        style={styles.screenTitle}
+        font="inter-bold"
+      >
+        {question.question}
+      </Text>
+      <Text
+        style={styles.screenSubtitle}
+        font="inter-regular"
+      >
+        {question.subtitle}
+      </Text>
 
       <View style={styles.section}>
-        <Text style={styles.sectionLabel}>Words</Text>
+        <Text
+          style={styles.sectionLabel}
+          className="font-bold"
+          font="inter-medium"
+        >
+          Words
+        </Text>
         {question.pairs.map((pair, index) => {
           const isMatched = matches[pair.word];
           const isSelected = selectedWord === pair.word;
@@ -104,7 +119,13 @@ const WordMatchingQuestion = ({
       </View>
 
       <View style={styles.section}>
-        <Text style={styles.sectionLabel}>Meanings</Text>
+        <Text
+          style={styles.sectionLabel}
+          className="font-bold"
+          font="inter-medium"
+        >
+          Meanings
+        </Text>
         {shuffledMeanings.map((meaning, index) => {
           const isMatched = Object.values(matches).includes(meaning);
           const isSelected = selectedMeaning === meaning;
@@ -147,7 +168,89 @@ const WordMatchingQuestion = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  screenTitle: {
+    fontSize: 20,
+    fontWeight: "600",
+    color: "#333",
+    marginBottom: 10,
+  },
+  screenSubtitle: {
+    fontSize: 15,
+    color: "#666",
+    marginBottom: 20,
+    lineHeight: 20,
+  },
+  section: {
+    marginBottom: 20,
+  },
+  sectionLabel: {
+    fontSize: 16,
+    color: "#666",
+    marginBottom: 10,
+  },
+  matchCard: {
+    backgroundColor: "#FFF",
     padding: 20,
+    borderRadius: 25,
+    marginBottom: 10,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderWidth: 2,
+    borderColor: "#E5E5E5",
+  },
+  matchCardSelected: {
+    borderColor: "#6366F1",
+    backgroundColor: "#F5F5FF",
+  },
+  matchCardMatched: {
+    borderColor: "#10B981",
+    backgroundColor: "#F0FDF4",
+  },
+  matchText: {
+    fontSize: 16,
+    color: "#333",
+    flex: 1,
+    lineHeight: 20,
+  },
+
+  hintButton: {
+    backgroundColor: "#FFF",
+    paddingVertical: 14,
+    borderRadius: 25,
+    marginBottom: 10,
+    borderWidth: 1,
+    borderColor: "#E5E5E5",
+  },
+  hintButtonText: {
+    color: "#666",
+    fontSize: 14,
+    textAlign: "center",
+    fontWeight: "500",
+  },
+
+  radioUnselected: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: "#E5E5E5",
+  },
+  radioSelected: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    borderWidth: 2,
+    borderColor: "#6366F1",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  radioDot: {
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+    backgroundColor: "#6366F1",
   },
 });
 
