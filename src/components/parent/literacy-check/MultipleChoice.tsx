@@ -1,34 +1,48 @@
 import React, { useState } from "react";
-import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 
 import Text from "../../ui/Text";
 
 import { QuestionProps } from "@/src/types/literacy-check";
+import LottieView from "lottie-react-native";
 
 const MultipleChoiceQuestion = ({
   question,
   onAnswer,
   onShowHint,
 }: QuestionProps) => {
-  const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedOption, setSelectedOption] = useState("");
 
-  const handleSelect = (option) => {
+  const handleSelect = (option: string) => {
     setSelectedOption(option);
     onAnswer(option);
   };
 
   return (
-    <View className="flex-1 bg-red-500">
+    <View className="flex-1">
       <View style={styles.questionCard}>
-        <Text style={styles.cardTitle}>Multiple Choice Puzzle</Text>
-        <Text style={styles.questionText}>{question.question}</Text>
+        <Text
+          className="text-2xl mb-[10] font-bold text-[#6B21A8]"
+          font="inter-bold"
+        >
+          Multiple Choice Puzzle
+        </Text>
+        <Text
+          className="text-lg text-[#666666]"
+          font="inter-regular"
+        >
+          {question.question}
+        </Text>
 
         {question.imageUrl && (
-          <View style={styles.imageBox}>
-            <Image
-              source={{ uri: question.imageUrl }}
-              style={styles.questionImage}
-              resizeMode="contain"
+          <View className="h-[120] items-center justify-center">
+            <LottieView
+              loop
+              autoPlay
+              source={{
+                uri: question.imageUrl,
+              }}
+              style={{ height: 120, width: 120 }}
             />
           </View>
         )}
@@ -41,7 +55,7 @@ const MultipleChoiceQuestion = ({
         )}
       </View>
 
-      <View style={styles.optionsContainer}>
+      <View className="my-[20]">
         {question.options.map((option, index) => (
           <TouchableOpacity
             key={index}
@@ -76,21 +90,12 @@ const MultipleChoiceQuestion = ({
 
 const styles = StyleSheet.create({
   questionCard: {
-    backgroundColor: "#FFE4CC",
+    backgroundColor: "#FFAE5E73",
     padding: 20,
     borderRadius: 15,
-  },
-  cardTitle: {
-    fontSize: 16,
-    fontWeight: "600",
-    color: "#6366F1",
-    marginBottom: 10,
-  },
-  questionText: {
-    fontSize: 14,
-    color: "#333",
-    marginBottom: 15,
-    lineHeight: 20,
+    borderStyle: "dashed",
+    borderWidth: 1,
+    borderColor: "#7E22CE",
   },
   imageBox: {
     backgroundColor: "#FFD9B3",
@@ -112,13 +117,9 @@ const styles = StyleSheet.create({
     color: "#666",
     marginTop: 8,
   },
-  optionsContainer: {
-    marginBottom: 20,
-  },
   optionButton: {
     backgroundColor: "#FFF",
-    paddingVertical: 16,
-    paddingHorizontal: 20,
+    padding: 20,
     borderRadius: 25,
     marginBottom: 10,
     flexDirection: "row",
@@ -160,9 +161,8 @@ const styles = StyleSheet.create({
   },
   hintButton: {
     backgroundColor: "#FFF",
-    paddingVertical: 14,
+    paddingVertical: 18,
     borderRadius: 25,
-    marginBottom: 10,
     borderWidth: 1,
     borderColor: "#E5E5E5",
   },

@@ -24,7 +24,7 @@ const LiteracyCheck = () => {
     Alert.alert("Hint", currentQuestion.hint);
   };
   return (
-    <Screen className="bg-green-400">
+    <Screen className="">
       <QuestionRenderer
         question={currentQuestion}
         onAnswer={handleAnswer}

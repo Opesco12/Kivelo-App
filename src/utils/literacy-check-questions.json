@@ -5,7 +5,7 @@
       "type": "multiple-choice",
       "question": "Choose the word that best matches the picture below",
       "image": "apple",
-      "imageUrl": "https://example.com/images/apple.png",
+      "imageUrl": "https://lottie.host/fa5f2405-67d0-451d-abfb-8710a41ce16f/jj9HyHP98K.lottie",
       "options": ["Chair", "House", "Apple", "Mango"],
       "correctAnswer": "Apple",
       "hint": "This is a red/green fruit that grows on trees"
@@ -14,11 +14,11 @@
       "id": 2,
       "type": "multiple-choice",
       "question": "What object is shown in the picture?",
-      "image": "chair",
-      "imageUrl": "https://example.com/images/chair.png",
-      "options": ["Table", "Chair", "Bed", "Lamp"],
-      "correctAnswer": "Chair",
-      "hint": "You sit on this furniture"
+      "image": "Plant",
+      "imageUrl": "https://lottie.host/1f4a1253-5d94-4d93-bf58-f64ec326e8cd/hya5B4hjtu.lottie",
+      "options": ["Table", "Plant", "Bed", "Lamp"],
+      "correctAnswer": "Plant",
+      "hint": "This beautifiess the environnment"
     },
     {
       "id": 3,

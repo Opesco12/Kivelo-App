@@ -5,9 +5,10 @@ type ScreenProps = {
   children: React.ReactNode;
   style?: ViewStyle;
   className?: string;
+  padBottom?: boolean;
 };
 
-const Screen = ({ children, style, className }: ScreenProps) => {
+const Screen = ({ children, style, className, padBottom }: ScreenProps) => {
   return (
     <View
       className={`flex-1 ${className ?? ""}`}
@@ -17,9 +18,9 @@ const Screen = ({ children, style, className }: ScreenProps) => {
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
-            marginTop: 20,
+            marginTop: 15,
             flex: 1,
-            paddingBottom: Platform.OS === "ios" ? 60 : 120,
+            paddingBottom: padBottom ? (Platform.OS === "ios" ? 60 : 120) : 20,
           }}
         >
           {children}
