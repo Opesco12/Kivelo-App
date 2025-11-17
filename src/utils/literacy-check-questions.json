@@ -1,0 +1,111 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "type": "multiple-choice",
+      "question": "Choose the word that best matches the picture below",
+      "image": "apple",
+      "imageUrl": "https://example.com/images/apple.png",
+      "options": ["Chair", "House", "Apple", "Mango"],
+      "correctAnswer": "Apple",
+      "hint": "This is a red/green fruit that grows on trees"
+    },
+    {
+      "id": 2,
+      "type": "multiple-choice",
+      "question": "What object is shown in the picture?",
+      "image": "chair",
+      "imageUrl": "https://example.com/images/chair.png",
+      "options": ["Table", "Chair", "Bed", "Lamp"],
+      "correctAnswer": "Chair",
+      "hint": "You sit on this furniture"
+    },
+    {
+      "id": 3,
+      "type": "word-matching",
+      "question": "Match word to its meaning",
+      "subtitle": "Drag or tap to connect words with their definition",
+      "pairs": [
+        {
+          "word": "Safe",
+          "meaning": "Protected from danger or harm"
+        },
+        {
+          "word": "Happy",
+          "meaning": "Feeling or showing pleasure"
+        },
+        {
+          "word": "Strong",
+          "meaning": "Having power or force"
+        }
+      ],
+      "hint": "Think about how each word makes you feel"
+    },
+    {
+      "id": 4,
+      "type": "word-matching",
+      "question": "Match word to its meaning",
+      "subtitle": "Connect each word with its correct definition",
+      "pairs": [
+        {
+          "word": "Brave",
+          "meaning": "Ready to face danger or pain"
+        },
+        {
+          "word": "Quick",
+          "meaning": "Moving fast or doing something rapidly"
+        },
+        {
+          "word": "Gentle",
+          "meaning": "Kind, mild, and soft in nature"
+        }
+      ],
+      "hint": "Consider the opposite of each word to help you"
+    },
+    {
+      "id": 5,
+      "type": "word-rearrange",
+      "question": "Rearrange the words",
+      "subtitle": "Drag or tap to rearrange the sentence below",
+      "words": ["Build", "Develop", "How", "Calm", "To", "Conversation"],
+      "correctOrder": ["How", "To", "Build", "Calm", "Conversation"],
+      "hint": "Start with 'How To...'"
+    },
+    {
+      "id": 6,
+      "type": "word-rearrange",
+      "question": "Rearrange the words",
+      "subtitle": "Put the words in the correct order to form a sentence",
+      "words": ["The", "Sky", "Blue", "Is", "Very"],
+      "correctOrder": ["The", "Sky", "Is", "Very", "Blue"],
+      "hint": "The sentence starts with 'The'"
+    }
+  ],
+  "difficultyLevels": {
+    "easy": {
+      "name": "Comfort",
+      "tag": "Easy Read",
+      "description": "We'll adjust app summaries to match your reading style.",
+      "scoreRange": [0, 2]
+    },
+    "medium": {
+      "name": "Standard",
+      "tag": "Regular Read",
+      "description": "You'll see standard text and summaries.",
+      "scoreRange": [3, 4]
+    },
+    "advanced": {
+      "name": "Advanced",
+      "tag": "Full Text",
+      "description": "You'll see complete, detailed content.",
+      "scoreRange": [5, 6]
+    }
+  },
+  "settings": {
+    "questionsPerSession": 3,
+    "allowSkip": false,
+    "showHints": true,
+    "randomizeQuestions": false,
+    "randomizeOptions": true
+  }
+}

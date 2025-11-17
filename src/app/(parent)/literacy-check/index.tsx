@@ -3,6 +3,7 @@ import { View } from "react-native";
 import GradientButton from "@/src/components/form/GradientButton";
 import Screen from "@/src/components/ui/Screen";
 import Text from "@/src/components/ui/Text";
+import { router } from "expo-router";
 import LottieView from "lottie-react-native";
 
 const Index = () => {
@@ -32,7 +33,10 @@ const Index = () => {
       </Text>
 
       <View className="flex-1 justify-center gap-[8]">
-        <GradientButton text="Start" />
+        <GradientButton
+          text="Start"
+          onPress={() => router.push("/literacy-check/literacy-check")}
+        />
         <Text className="underline text-center text-lg text-[#2563EB]">
           Why am i seeing this?
         </Text>
