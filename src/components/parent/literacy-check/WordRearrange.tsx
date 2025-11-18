@@ -1,12 +1,6 @@
 import { QuestionProps } from "@/src/types/literacy-check";
 import { useCallback, useEffect, useRef, useState } from "react";
-import {
-  Dimensions,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 import {
   Gesture,
   GestureDetector,
@@ -15,15 +9,14 @@ import {
 import Animated, {
   FadeIn,
   FadeOut,
-  Layout,
+  LinearTransition,
   runOnJS,
   useAnimatedStyle,
   useSharedValue,
   withSpring,
   withTiming,
 } from "react-native-reanimated";
-
-const { width: SCREEN_WIDTH } = Dimensions.get("window");
+import Text from "../../ui/Text";
 
 const DraggableWordChip = ({
   word,
@@ -150,7 +143,7 @@ const WordRearrangeQuestion = ({
   const handleRemoveWord = useCallback(
     (word: string, index: number) => {
       setArrangedWords((prev) => prev.filter((_, i) => i !== index));
-      setAvailableWords((prev) => [...prev, word]); // goes to end
+      setAvailableWords((prev) => [...prev, word]);
       onAnswer(arrangedWords.filter((_, i) => i !== index));
     },
     [arrangedWords, onAnswer]
@@ -207,7 +200,7 @@ const WordRearrangeQuestion = ({
                 key={word} // Important: stable key by word
                 entering={FadeIn.springify().damping(20)}
                 exiting={FadeOut.springify()}
-                layout={Layout.springify()}
+                layout={LinearTransition.springify()}
               >
                 <TouchableOpacity
                   style={styles.placedWordChip}
@@ -226,7 +219,10 @@ const WordRearrangeQuestion = ({
           {availableWords.map((word) => (
             <Animated.View
               key={word}
-              layout={Layout.springify().mass(1).damping(20).stiffness(120)}
+              layout={LinearTransition.springify()
+                .mass(1)
+                .damping(20)
+                .stiffness(120)}
               exiting={FadeOut.springify().duration(200)}
             >
               <DraggableWordChip
