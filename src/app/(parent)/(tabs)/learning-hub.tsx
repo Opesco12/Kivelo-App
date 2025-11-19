@@ -8,8 +8,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import ContinueLearning from "@/src/components/parent/learning-hub/ContinueLearning";
 import LearningCategories from "@/src/components/parent/learning-hub/LearningCategories";
 import QuickActions from "@/src/components/parent/learning-hub/QuickActions";
-import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
+import { router } from "expo-router";
 
 const LearningHub = () => {
   return (
@@ -89,7 +89,10 @@ const LearningHub = () => {
               </View>
             </View>
 
-            <TouchableOpacity className="bg-[#27AE60] h-[48] rounded-[100] items-center justify-center">
+            <TouchableOpacity
+              className="bg-[#27AE60] h-[48] rounded-[100] items-center justify-center"
+              onPress={() => router.push("/(parent)/learning-hub/learn")}
+            >
               <Text className="text-lg text-white">
                 Continue where you left off
               </Text>
