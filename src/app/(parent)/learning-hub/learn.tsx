@@ -1,12 +1,15 @@
 import { LinearGradient } from "expo-linear-gradient";
+import { useState } from "react";
 import { ScrollView, StyleSheet, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import BackButton from "@/src/components/ui/BackButton";
+import FilterChips from "@/src/components/ui/FilterChips";
 import Text from "@/src/components/ui/Text";
 import { Search, Star } from "lucide-react-native";
 
 const Learn = () => {
+  const [selected, setSelected] = useState("All Topics");
   return (
     <View className="flex-1">
       <LinearGradient
@@ -63,10 +66,16 @@ const Learn = () => {
           >
             <Search size={30} />
             <TextInput
-              className=" text-xl flex-1"
+              className="text-xl flex-1"
               placeholder="Search parenting lessons"
             />
           </View>
+
+          <FilterChips
+            onSelect={setSelected}
+            options={["All Topics", "Communications", "Safety Skills"]}
+            selected={selected}
+          />
         </ScrollView>
       </View>
     </View>
