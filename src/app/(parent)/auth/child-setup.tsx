@@ -1,13 +1,39 @@
 import { Formik } from "formik";
 import { StyleSheet, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import * as Yup from "yup";
 
+import DateOfBirthField from "@/src/components/form/DatePicker";
 import GradientButton from "@/src/components/form/GradientButton";
 import TextField from "@/src/components/form/parent/TextField";
 import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
 import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+
+const validationSchema = Yup.object().shape({
+  name: Yup.string().required("Child's name is required"),
+  email: Yup.string()
+    .email("Enter a valid email")
+    .required("Email is required"),
+  dob: Yup.date()
+    .required("Date of birth is required")
+    .max(new Date(), "Date cannot be in the future")
+    .test("is-under-18", "Child must be under 18 years old", (value) => {
+      if (!value) return false;
+      const today = new Date();
+      const birthDate = new Date(value);
+      const age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+      if (
+        monthDiff < 0 ||
+        (monthDiff === 0 && today.getDate() < birthDate.getDate())
+      ) {
+        return age - 1 < 18;
+      }
+      return age < 18;
+    }),
+});
 
 const ChildSetup = () => {
   return (
@@ -31,19 +57,30 @@ const ChildSetup = () => {
               initialValues={{
                 name: "",
                 email: "",
-                dob: "",
+                dob: null as Date | null,
               }}
-              onSubmit={() => console.log("")}
+              validationSchema={validationSchema}
+              onSubmit={(values) => {
+                console.log("Child Setup:", {
+                  name: values.name,
+                  email: values.email,
+                  dob: values.dob,
+                });
+                router.push("/(parent)/(tabs)");
+              }}
             >
-              {({ handleChange, values }) => (
-                <View className="gap-[10]">
-                  <Text className="text-xl">Set up your child's account</Text>
+              {({ handleChange, handleSubmit, values }) => (
+                <View className="gap-[16]">
+                  <Text className="text-xl mb-4">
+                    Set up your child's account
+                  </Text>
 
                   <TextField
                     label="Child's Name"
                     name="name"
                     onChangeText={handleChange("name")}
                     value={values.name}
+                    placeholder="Enter child's full name"
                   />
 
                   <TextField
@@ -52,12 +89,20 @@ const ChildSetup = () => {
                     onChangeText={handleChange("email")}
                     value={values.email}
                     keyboardType="email-address"
+                    placeholder="parent@example.com"
                   />
 
-                  <GradientButton
-                    onPress={() => router.push("/(parent)/(tabs)")}
-                    text="Sign In"
+                  <DateOfBirthField
+                    label="Date of Birth"
+                    name="dob"
                   />
+
+                  <View className="mt-6">
+                    <GradientButton
+                      onPress={handleSubmit}
+                      text="Set Up Account"
+                    />
+                  </View>
                 </View>
               )}
             </Formik>

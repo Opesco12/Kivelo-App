@@ -6,17 +6,20 @@ import { KeyboardAvoidingView, Platform } from "react-native";
 
 import "@/global.css";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { AlertProvider } from "../components/ui/Alert";
 
 export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <KeyboardAvoidingView
-        className="flex-1"
-        behavior={Platform.OS === "ios" ? "padding" : "height"}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 0}
-      >
-        <RootLayout />
-      </KeyboardAvoidingView>
+      <AlertProvider>
+        <KeyboardAvoidingView
+          className="flex-1"
+          behavior={Platform.OS === "ios" ? "padding" : "height"}
+          keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 0}
+        >
+          <RootLayout />
+        </KeyboardAvoidingView>
+      </AlertProvider>
     </GestureHandlerRootView>
   );
 }
@@ -30,9 +33,6 @@ function RootLayout() {
     "Poppins-Bold": require("@/src/assets/fonts/Poppins-Bold.ttf"),
     "RammettoOne-Regular": require("@/src/assets/fonts/RammettoOne-Regular.ttf"),
     "Bauhaus-Regular": require("@/src/assets/fonts/Bauhaus-Regular.ttf"),
-    // "Inter-Regular": require("@/src/assets/fonts/Inter-Regular.ttf"),
-    // "Inter-Medium": require("@/src/assets/fonts/Inter-Medium.ttf"),
-    // "Inter-Bold": require("@/src/assets/fonts/Inter-Bold.ttf"),
 
     Inter: require("@/src/assets/fonts/Inter.Variable.ttf"),
   });
