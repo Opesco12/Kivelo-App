@@ -7,6 +7,7 @@ import LearningCategories2 from "@/src/components/parent/learning-hub/LearningCa
 import BackButton from "@/src/components/ui/BackButton";
 import FilterChips from "@/src/components/ui/FilterChips";
 import Text from "@/src/components/ui/Text";
+import { Image } from "expo-image";
 import { ArrowRight, Search, Star } from "lucide-react-native";
 
 const Learn = () => {
@@ -115,7 +116,8 @@ const Learn = () => {
           <View className="my-[20]">
             <Text
               className="text-xl mb-[10]"
-              font="poppins-medium"
+              family="inter"
+              weight="bold"
             >
               Starter Paths
             </Text>
@@ -192,6 +194,83 @@ const Learn = () => {
                     />
                   </View>
                 </LinearGradient>
+              </View>
+            </ScrollView>
+          </View>
+
+          <View className="mb-[20]">
+            <Text
+              className="text-xl mb-[10]"
+              family="inter"
+              weight="bold"
+            >
+              Suggested for you
+            </Text>
+
+            <ScrollView
+              horizontal
+              contentContainerStyle={{ gap: 10 }}
+            >
+              <View
+                className="min-h-[180] rounded-[16] w-[185] overflow-hidden"
+                style={{ borderWidth: 1, borderColor: "#d1d5db" }}
+              >
+                <Image
+                  source={require("@/src/assets/images/project-images/little-girl.svg")}
+                  style={{ width: 185, height: 100 }}
+                />
+                <View className="p-[10]">
+                  <Text
+                    family="inter"
+                    weight="bold"
+                    className="mb-[5] text-lg"
+                  >
+                    Reading Together
+                  </Text>
+                  <Text
+                    family="inter"
+                    className="text-[#666666]"
+                  >
+                    Build literacy and connection
+                  </Text>
+                  <Text
+                    family="inter"
+                    className="text-[#2196F3] mt-[5]"
+                  >
+                    6 mins
+                  </Text>
+                </View>
+              </View>
+
+              <View
+                className="min-h-[180] rounded-[16] w-[185] overflow-hidden"
+                style={{ borderWidth: 1, borderColor: "#d1d5db" }}
+              >
+                <Image
+                  source={require("@/src/assets/images/project-images/little-girl.svg")}
+                  style={{ width: 185, height: 100 }}
+                />
+                <View className="p-[10]">
+                  <Text
+                    family="inter"
+                    weight="bold"
+                    className="mb-[5] text-lg"
+                  >
+                    Reading Together
+                  </Text>
+                  <Text
+                    family="inter"
+                    className="text-[#666666]"
+                  >
+                    Build literacy and connection
+                  </Text>
+                  <Text
+                    family="inter"
+                    className="text-[#2196F3] mt-[5]"
+                  >
+                    6 mins
+                  </Text>
+                </View>
               </View>
             </ScrollView>
           </View>
