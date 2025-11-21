@@ -15,7 +15,8 @@ import Text from "./Text";
 
 interface ButtonConfig {
   text: string;
-  onPress: () => void;
+  onPress?: () => void | Promise<void>;
+  closeOnPress?: boolean; // Default: true - whether to close alert after press
 }
 
 interface CustomAlertProps {
@@ -114,6 +115,25 @@ const AlertComponent = ({
   type = null,
 }: CustomAlertProps) => {
   const [lottieError, setLottieError] = React.useState(false);
+
+  const handleButtonPress = async (button: ButtonConfig) => {
+    const shouldClose = button.closeOnPress !== false; // Default to true
+
+    try {
+      // Execute the button's onPress if it exists
+      if (button.onPress) {
+        await button.onPress();
+      }
+
+      // Close alert after function completes (if closeOnPress is not false)
+      if (shouldClose && onClose) {
+        onClose();
+      }
+    } catch (error) {
+      // If function throws error, don't close the alert
+      console.error("Alert button onPress error:", error);
+    }
+  };
 
   const handleOverlayPress = () => {
     if (closeOnOverlayTap && onClose) {
@@ -232,7 +252,7 @@ const AlertComponent = ({
               {secondaryButton && (
                 <TouchableOpacity
                   style={[styles.secondaryButton, { width: "48%" }]}
-                  onPress={secondaryButton.onPress}
+                  onPress={() => handleButtonPress(secondaryButton)}
                   activeOpacity={0.8}
                 >
                   <Text style={styles.secondaryButtonText}>
@@ -247,7 +267,7 @@ const AlertComponent = ({
                     styles.primaryButtonWrapper,
                     { width: secondaryButton ? "48%" : "100%" },
                   ]}
-                  onPress={primaryButton.onPress}
+                  onPress={() => handleButtonPress(primaryButton)}
                   activeOpacity={0.8}
                 >
                   <LinearGradient
@@ -441,15 +461,86 @@ export default function App() {
 
 // 2. Use anywhere in your app:
 
-// Success with default Lottie animation
+// ===== BASIC USAGE =====
+
+// Simple alert - closes automatically when button is pressed
 Alert.success({
-  title: 'successful',
+  title: 'Success!',
   subtitle: "Your child's account has been created",
   primaryButton: {
-    text: 'Back to homepage',
-    onPress: () => console.log('Navigate home'),
+    text: 'OK',
+    // No onPress - alert will just close
   },
 });
+
+// Alert with function - runs function then closes
+Alert.success({
+  title: 'Payment Complete',
+  subtitle: 'Your payment was successful',
+  primaryButton: {
+    text: 'Continue',
+    onPress: () => {
+      console.log('Navigate to home');
+      router.push('/home');
+    }
+    // Alert closes after onPress completes
+  },
+});
+
+// ===== ASYNC OPERATIONS =====
+
+// Async function - waits for completion before closing
+Alert.warning({
+  title: 'Delete Account?',
+  subtitle: 'This action cannot be undone',
+  primaryButton: {
+    text: 'Delete',
+    onPress: async () => {
+      await deleteUserAccount(); // Alert stays open until this completes
+      // Alert closes after successful completion
+    },
+  },
+  secondaryButton: {
+    text: 'Cancel',
+    // Just closes the alert
+  },
+});
+
+// ===== PREVENT AUTO-CLOSE =====
+
+// Keep alert open after button press
+Alert.info({
+  title: 'Loading...',
+  subtitle: 'Processing your request',
+  primaryButton: {
+    text: 'Start Process',
+    closeOnPress: false, // Alert stays open!
+    onPress: async () => {
+      await longRunningProcess();
+      // Alert remains open - you control when to close it
+    },
+  },
+});
+
+// ===== ERROR HANDLING =====
+
+// If function throws error, alert stays open
+Alert.error({
+  title: 'Submit Form',
+  primaryButton: {
+    text: 'Submit',
+    onPress: async () => {
+      const result = await submitForm();
+      if (!result.success) {
+        throw new Error('Submission failed');
+        // Alert stays open because of error
+      }
+      // Alert closes only if no error thrown
+    },
+  },
+});
+
+// ===== WITH LOTTIE ANIMATIONS =====
 
 // Success with custom Lottie URL
 Alert.success({
@@ -470,31 +561,6 @@ Alert.error({
   primaryButton: {
     text: 'Try Again',
     onPress: () => console.log('Retry'),
-  },
-});
-
-// Custom alert with static image
-Alert.show({
-  title: 'Welcome',
-  subtitle: 'Get started with our app',
-  image: require('./images/welcome.png'),
-  primaryButton: {
-    text: 'Start',
-    onPress: () => console.log('Start'),
-  },
-});
-
-// Custom with imageComponent (SVG, custom component, etc.)
-Alert.warning({
-  title: 'Are you sure?',
-  imageComponent: <YourCustomSVG />,
-  primaryButton: {
-    text: 'Yes',
-    onPress: () => console.log('Confirmed'),
-  },
-  secondaryButton: {
-    text: 'Cancel',
-    onPress: () => console.log('Cancelled'),
   },
 });
 */
