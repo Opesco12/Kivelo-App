@@ -1,12 +1,13 @@
 import { Messages2 } from "iconsax-react-nativejs";
 import { Compass, Heart, Shield } from "lucide-react-native";
-import { Dimensions, View } from "react-native";
+import { Dimensions, TouchableOpacity, View } from "react-native";
 
+import { router } from "expo-router";
 import Text from "../../ui/Text";
 
 const { width: ScreenWidth } = Dimensions.get("screen");
 
-const categories = [
+export const categories = [
   {
     Icon: Messages2,
     iconType: "iconsax",
@@ -60,7 +61,10 @@ const LearningCategories2 = () => {
         {categories.map((category, index) => {
           const Icon = category.Icon;
           return (
-            <View
+            <TouchableOpacity
+              onPress={() =>
+                router.push(`/learning-hub/categories/${category.name}`)
+              }
               key={index}
               className={`h-[185] bg-[${category.color}] rounded-[16] p-[15]`}
               style={{ width: cardWidth }}
@@ -90,7 +94,7 @@ const LearningCategories2 = () => {
 
               <Text className="text-white">{category.subtitle}</Text>
               <Text className="text-white">{category.mins} mins lessons</Text>
-            </View>
+            </TouchableOpacity>
           );
         })}
       </View>

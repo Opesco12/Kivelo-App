@@ -21,7 +21,7 @@ const FilterChips = ({ options, selected, onSelect }: FilterChipsProps) => {
           const isActive = item === selected;
           return (
             <TouchableOpacity
-              className={`min-h-[40]  rounded-[50] px-[15] py-[10] ${isActive ? "bg-[#2196F3]" : "transparent"} ${!isActive && "border border-[#2196F3]"} `}
+              className={`min-h-[40]  rounded-[50] px-[15] py-[8] ${isActive ? "bg-[#2196F3]" : "transparent"} ${!isActive && "border border-[#2196F3]"} `}
               key={item}
               onPress={() => onSelect(item)}
             >
