@@ -7,7 +7,7 @@ import LearningCategories2 from "@/src/components/parent/learning-hub/LearningCa
 import BackButton from "@/src/components/ui/BackButton";
 import FilterChips from "@/src/components/ui/FilterChips";
 import Text from "@/src/components/ui/Text";
-import { Search, Star } from "lucide-react-native";
+import { ArrowRight, Search, Star } from "lucide-react-native";
 
 const Learn = () => {
   const [selected, setSelected] = useState("All Topics");
@@ -111,6 +111,90 @@ const Learn = () => {
           </View>
 
           <LearningCategories2 />
+
+          <View className="my-[20]">
+            <Text
+              className="text-xl mb-[10]"
+              font="poppins-medium"
+            >
+              Starter Paths
+            </Text>
+
+            <ScrollView
+              horizontal
+              contentContainerStyle={{ gap: 10 }}
+            >
+              <View className="h-[140] w-[270]  rounded-[16] overflow-hidden ">
+                <LinearGradient
+                  start={{ x: 0, y: 0.5 }}
+                  end={{ x: 1, y: 0.5 }}
+                  colors={["#3B82F6", "#9333EA"]}
+                  style={{
+                    flex: 1,
+                    padding: 15,
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Text
+                    family="inter"
+                    weight="bold"
+                    className="text-xl text-white"
+                  >
+                    7 Days to Calm Conversations
+                  </Text>
+                  <Text className="text-white">
+                    Transform daily interactions with your child
+                  </Text>
+
+                  <View className="flex-row justify-between items-center">
+                    <Text className="text-white">
+                      7 lessons . 35 mins total
+                    </Text>
+
+                    <ArrowRight
+                      size={20}
+                      color={"#fff"}
+                    />
+                  </View>
+                </LinearGradient>
+              </View>
+
+              <View className="h-[140] w-[270]  rounded-[16] overflow-hidden ">
+                <LinearGradient
+                  start={{ x: 0, y: 0.5 }}
+                  end={{ x: 1, y: 0.5 }}
+                  colors={["#3B82F6", "#9333EA"]}
+                  style={{
+                    flex: 1,
+                    padding: 15,
+                    justifyContent: "space-between",
+                  }}
+                >
+                  <Text
+                    family="inter"
+                    weight="bold"
+                    className="text-xl text-white"
+                  >
+                    7 Days to Calm Conversations
+                  </Text>
+                  <Text className="text-white">
+                    Transform daily interactions with your child
+                  </Text>
+
+                  <View className="flex-row justify-between items-center">
+                    <Text className="text-white">
+                      7 lessons . 35 mins total
+                    </Text>
+
+                    <ArrowRight
+                      size={20}
+                      color={"#fff"}
+                    />
+                  </View>
+                </LinearGradient>
+              </View>
+            </ScrollView>
+          </View>
         </ScrollView>
       </View>
     </View>
