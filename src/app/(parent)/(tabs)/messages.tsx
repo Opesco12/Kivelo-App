@@ -1,4 +1,3 @@
-import { Search } from "lucide-react-native";
 import React from "react";
 import { Image, TextInput, TouchableOpacity, View } from "react-native";
 
@@ -7,146 +6,123 @@ import Text from "@/src/components/ui/Text";
 
 const Messages = () => {
   return (
-    <Screen className="bg-[#9691E5]/65 px-[5]">
+    <Screen className="bg-[#E3F2FD] ">
       <Text
-        className="text-3xl text-center text-white"
-        font="poppins-medium"
+        family="inter"
+        className="text-2xl"
       >
-        Select Who to chat with
-      </Text>
-      <Text className="mt-[5] text-center text-lg text-white">
-        Choose a child or support contact to start a conversation
+        Messages
       </Text>
 
-      <View className="h-[70] my-[20] bg-white  rounded-[50] items-center justify-center flex-row overflow-hidden">
-        <Search size={25} />
-        <TextInput
-          className="pl-[15] text-2xl  h-[70] w-[85%]"
-          placeholder="Search by name"
-          placeholderTextColor={"#666666"}
-        />
+      <TextInput
+        className="rounded-[50] h-[50] bg-white px-[20] text-lg my-[15]"
+        placeholder="Search messages or names"
+      />
+
+      <View className="flex-row gap-[30] items-center mb-[20] mt-[5]">
+        <Text
+          className="text-xl  underline "
+          family="inter"
+        >
+          All
+        </Text>
+        <Text
+          className="text-lg text-[#666666]"
+          family="inter"
+        >
+          Archived
+        </Text>
       </View>
 
-      <View className="gap-y-[15]">
-        <View className="h-[190] bg-white rounded-[18] p-[15] justify-between">
-          <View className="flex-row gap-[10] items-start">
-            <View className="relative w-[48]">
-              <Image
-                source={{ uri: "https://picsum.photos/40" }}
-                className="h-[48] w-[48] rounded-[24]"
-              />
-              <View
-                className="bg-[#22C55E] h-[16] w-[16] rounded-[8] absolute"
-                style={{
-                  bottom: -2,
-                  right: -2,
-                  borderWidth: 2,
-                  borderColor: "#fff",
-                }}
-              />
-            </View>
+      <Text
+        className="text-[#666666] text-lg "
+        family="inter"
+      >
+        Messages helps you stay connected. If a message feels off, pause and
+        check in
+      </Text>
 
-            <View className="flex-1">
-              <Text
-                className="text-2xl mb-[5]"
-                font="poppins-medium"
-              >
-                Liam
-              </Text>
-              <Text className="text-[#6A1B9A]">Son, Age 10</Text>
+      <View className="mt-[15] gap-[15]">
+        <View className="bg-white p-[15] rounded-[16] flex-row justify-between ">
+          <View className="relative h-[60] w-[60] ">
+            <Image
+              source={{ uri: "https://picsum.photos/40" }}
+              className="h-[60] w-[60] rounded-[30]"
+            />
+            <View
+              className="h-[18] w-[18] bg-[#22C55E] rounded-[8] absolute right-0 bottom-0"
+              style={{ borderWidth: 3, borderColor: "#fff" }}
+            />
+          </View>
 
-              <Text
-                className="text-xl mt-[10] text-pretty"
-                numberOfLines={2}
-              >
-                Can we talk for a bit?
-              </Text>
+          <View className="w-[60%]">
+            <Text
+              className="text-2xl mb-[5]"
+              numberOfLines={1}
+            >
+              Betty
+            </Text>
+            <Text
+              // className="text-lg"
+              numberOfLines={2}
+            >
+              Can we do a safety trip
+            </Text>
+          </View>
+
+          <View>
+            <Text className=" text-[#666666]">2:15pm</Text>
+            <View className="h-[18] w-[18]  bg-[#3378FF] rounded-[9] items-center justify-center self-end">
+              <Text className="text-white text-sm">2</Text>
             </View>
           </View>
-          <TouchableOpacity className="bg-[#3B82F6] h-[48] rounded-[100] items-center justify-center">
-            <Text className="text-xl text-white">Chat Now</Text>
-          </TouchableOpacity>
         </View>
 
-        <View className="h-[190] bg-white rounded-[18] p-[15] justify-between">
-          <View className="flex-row gap-[10] items-start">
-            <View className="relative w-[48]">
-              <Image
-                source={{ uri: "https://picsum.photos/40" }}
-                className="h-[48] w-[48] rounded-[24]"
-              />
-              <View
-                className="bg-[#22C55E] h-[16] w-[16] rounded-[8] absolute"
-                style={{
-                  bottom: -2,
-                  right: -2,
-                  borderWidth: 2,
-                  borderColor: "#fff",
-                }}
-              />
-            </View>
+        <View className="bg-white p-[15] rounded-[16] flex-row justify-between ">
+          <View className="relative h-[60] w-[60] ">
+            <Image
+              source={{ uri: "https://picsum.photos/40" }}
+              className="h-[60] w-[60] rounded-[30]"
+            />
+            <View
+              className="h-[18] w-[18] bg-[#22C55E] rounded-[8] absolute right-0 bottom-0"
+              style={{ borderWidth: 3, borderColor: "#fff" }}
+            />
+          </View>
 
-            <View className="flex-1">
-              <Text
-                className="text-2xl mb-[5]"
-                font="poppins-medium"
-              >
-                Betty
-              </Text>
-              <Text className="text-[#6A1B9A]">Daughter, Age 12</Text>
+          <View className="w-[60%]">
+            <Text
+              className="text-2xl mb-[5]"
+              numberOfLines={1}
+            >
+              Max
+            </Text>
+            <Text
+              // className="text-lg"
+              numberOfLines={2}
+            >
+              Thanks for the help with the homework!
+            </Text>
+          </View>
 
-              <Text
-                className="text-xl mt-[10] text-pretty"
-                numberOfLines={2}
-              >
-                I learned about stranger danger today!!
-              </Text>
+          <View>
+            <Text className=" text-[#666666]">2:15pm</Text>
+            <View className="h-[18] w-[18]  bg-[#3378FF] rounded-[9] items-center justify-center self-end">
+              <Text className="text-white text-sm">2</Text>
             </View>
           </View>
-          <TouchableOpacity className="bg-[#3B82F6] h-[48] rounded-[100] items-center justify-center">
-            <Text className="text-xl text-white">Chat Now</Text>
-          </TouchableOpacity>
         </View>
+      </View>
 
-        <View className="h-[190] bg-white rounded-[18] p-[15] justify-between">
-          <View className="flex-row gap-[10] items-start">
-            <View className="relative w-[48]">
-              <Image
-                source={{ uri: "https://picsum.photos/40" }}
-                className="h-[48] w-[48] rounded-[24]"
-              />
-              <View
-                className="bg-[#22C55E] h-[16] w-[16] rounded-[8] absolute"
-                style={{
-                  bottom: -2,
-                  right: -2,
-                  borderWidth: 2,
-                  borderColor: "#fff",
-                }}
-              />
-            </View>
-
-            <View className="flex-1">
-              <Text
-                className="text-2xl mb-[5]"
-                font="poppins-medium"
-              >
-                Emma
-              </Text>
-              <Text className="text-[#6A1B9A]">Son, Age 8</Text>
-
-              <Text
-                className="text-xl mt-[10] text-pretty"
-                numberOfLines={2}
-              >
-                Hey Mom
-              </Text>
-            </View>
-          </View>
-          <TouchableOpacity className="bg-[#3B82F6] h-[48] rounded-[100] items-center justify-center">
-            <Text className="text-xl text-white">Chat Now</Text>
-          </TouchableOpacity>
-        </View>
+      <View className="mt-[25]">
+        <TouchableOpacity className="bg-[#3378FF] h-[56] rounded-[50] items-center justify-center">
+          <Text
+            family="inter"
+            className="text-white"
+          >
+            Start New Chat
+          </Text>
+        </TouchableOpacity>
       </View>
     </Screen>
   );

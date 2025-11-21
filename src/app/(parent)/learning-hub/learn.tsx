@@ -130,6 +130,7 @@ const Learn = () => {
 
             <ScrollView
               horizontal
+              showsHorizontalScrollIndicator={false}
               contentContainerStyle={{ gap: 10 }}
             >
               <View className="h-[140] w-[270]  rounded-[16] overflow-hidden ">
@@ -215,6 +216,7 @@ const Learn = () => {
 
             <ScrollView
               horizontal
+              showsHorizontalScrollIndicator={false}
               contentContainerStyle={{ gap: 10 }}
             >
               <View
