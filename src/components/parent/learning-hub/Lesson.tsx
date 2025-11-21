@@ -1,15 +1,17 @@
 import { Clock, Heart } from "iconsax-react-nativejs";
 import { Bookmark } from "lucide-react-native";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
 
 import { Colors } from "@/src/constants/colors";
+import { router } from "expo-router";
 import Text from "../../ui/Text";
 
 const Lesson = () => {
   return (
-    <View
+    <TouchableOpacity
       className="h-[150] rounded-[12] bg-white w-[99%] self-center p-[12] flex-row justify-between my-[8]"
       style={styles.shadow}
+      onPress={() => router.push("/learning-hub/lesson")}
     >
       <View className="bg-[#4CAF50] h-[40] w-[40] rounded-[20] items-center justify-center mr-[5]">
         <Heart
@@ -63,7 +65,7 @@ const Lesson = () => {
           fill={"#4CAF50"}
         />
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
