@@ -124,7 +124,10 @@ const LearningHub = () => {
                 </Text>
               </View>
             </View>
-            <TouchableOpacity className="bg-[#FFD93B] h-[48] rounded-[100] items-center justify-center">
+            <TouchableOpacity
+              className="bg-[#FFD93B] h-[48] rounded-[100] items-center justify-center"
+              onPress={() => router.push("/other-routes/today-insights")}
+            >
               <Text className="text-lg ">Start Now</Text>
             </TouchableOpacity>
           </View>

@@ -1,23 +1,13 @@
 import { LinearGradient } from "expo-linear-gradient";
-import { useState } from "react";
-import {
-  ScrollView,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ScrollView, StyleSheet, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import LearningCategories2 from "@/src/components/parent/learning-hub/LearningCategories2";
 import BackButton from "@/src/components/ui/BackButton";
-import FilterChips from "@/src/components/ui/FilterChips";
 import Text from "@/src/components/ui/Text";
 import { Image } from "expo-image";
-import { ArrowRight, Search, Star } from "lucide-react-native";
+import { ArrowRight } from "lucide-react-native";
 
 const Learn = () => {
-  const [selected, setSelected] = useState("All Topics");
   return (
     <View className="flex-1">
       <LinearGradient
@@ -51,73 +41,82 @@ const Learn = () => {
             paddingBottom: 35,
           }}
         >
-          <View className="h-[100] bg-[#E3F2FD] rounded-[16] p-[15] flex-row justify-between">
-            <View className="w-[75%] gap-[5]">
+          <View className="flex-row justify-between">
+            <View className="bg-[#2196F3] rounded-[50] p-[10]">
               <Text
-                className="text-[#2196F3] text-lg"
+                className="text-white"
                 family="inter"
-                weight="medium"
               >
-                Your Progress
-              </Text>
-              <Text
-                family="inter"
-                style={{ fontSize: 15 }}
-              >
-                You've completed 2 lessons this week.
+                Today's Insight
               </Text>
             </View>
-            <View className="h-[38] w-[38]  bg-[#FFD93B] rounded-[19] items-center justify-center">
-              <Star
-                size={20}
-                fill={"#FFF"}
-                strokeWidth={0}
-              />
-            </View>
-          </View>
-
-          <View
-            className="h-[50] rounded-[50] my-[15] flex-row overflow-hidden items-center pl-[15] gap-[10]"
-            style={{ borderColor: "#d1d5db", borderWidth: 1 }}
-          >
-            <Search
-              size={20}
-              color={"#666666"}
-            />
-            <TextInput
-              className="text-xl flex-1"
-              placeholder="Search parenting lessons"
-            />
-          </View>
-
-          <FilterChips
-            onSelect={setSelected}
-            options={["All Topics", "Communications", "Safety Skills"]}
-            selected={selected}
-          />
-
-          <View className="h-[80]  my-[15] flex-row justify-between items-center border border-gray-300 px-[15] rounded-[12]">
-            <View className="gap-[7]">
-              <Text
-                className="text-xl"
-                family="inter"
-                style={{ fontWeight: "700" }}
-              >
-                Setting Healty Boundaries
-              </Text>
-              <Text>3 mins left . 75% complete</Text>
-            </View>
-            <View className="h-[48] w-[48] rounded-[24] border border-dashed border-[#27AE60] items-center justify-center">
+            <View className="bg-[#FACC15] rounded-[50] p-[10]">
               <Text
                 className=""
-                font="poppins-medium"
+                family="inter"
               >
-                75%
+                5 mins
               </Text>
             </View>
           </View>
 
-          <LearningCategories2 />
+          <View className="bg-[#DBEAFE] rounded-[16] mt-[15] p-[15]">
+            <Text
+              className="text-2xl mb-[5]"
+              family="inter"
+              weight="bold"
+            >
+              How to Build Calm Conversations
+            </Text>
+
+            <Text
+              className="text-lg"
+              family="inter"
+            >
+              Learn simple techniques to create peaceful dialogue with your
+              child
+            </Text>
+
+            <View className="bg-[#0EB855] w-[200] rounded-[50] py-[10] items-center justify-center my-[15]">
+              <Text
+                className="text-white"
+                family="inter"
+              >
+                Step 1: Pause & Breathe
+              </Text>
+            </View>
+
+            <Text family="inter">
+              Take three deep breaths before responding to create space for
+              calm.
+            </Text>
+
+            <View className="bg-[#1D4ED8] w-[200] rounded-[50] py-[10] items-center justify-center my-[15]">
+              <Text
+                className="text-white"
+                family="inter"
+              >
+                Step 2: Listen Activity
+              </Text>
+            </View>
+
+            <Text family="inter">
+              Give your full attention and reflect back what you hear.
+            </Text>
+
+            <View className="bg-[#1E7DB2] w-[200] rounded-[50] py-[10] items-center justify-center my-[15]">
+              <Text
+                className="text-white"
+                family="inter"
+              >
+                Step 3: Respond with Empathy
+              </Text>
+            </View>
+
+            <Text family="inter">
+              Acknowledge feelings and offer support without judgment
+            </Text>
+          </View>
 
           <View className="my-[20]">
             <Text
@@ -300,13 +299,13 @@ const Learn = () => {
             </Text>
 
             <TouchableOpacity
-              style={{ borderWidth: 1 }}
-              className="h-[55] rounded-[50] w-[100%] items-center justify-center"
+              //   style={{ borderWidth: 1 }}
+              className="h-[55] rounded-[50] w-[100%] items-center justify-center bg-[#6A1B9A]"
             >
               <Text
                 family="inter"
                 weight="bold"
-                className="text-lg"
+                className="text-lg text-white"
               >
                 Add a child(optional)
               </Text>
