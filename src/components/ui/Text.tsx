@@ -53,7 +53,14 @@ export default function Text({
   return (
     <RNText
       {...props}
-      style={[{ fontFamily }, style]}
+      style={[
+        {
+          fontFamily,
+          fontWeight:
+            weight === "bold" ? "700" : weight === "medium" ? "500" : "400",
+        },
+        style,
+      ]}
     />
   );
 }

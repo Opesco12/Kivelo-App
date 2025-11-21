@@ -26,6 +26,7 @@ const FilterChips = ({ options, selected, onSelect }: FilterChipsProps) => {
               onPress={() => onSelect(item)}
             >
               <Text
+                font="inter-medium"
                 className={`text-lg ${isActive ? "text-white" : "text-[#2196F3]"} `}
               >
                 {item}
