@@ -441,23 +441,6 @@ const styles = StyleSheet.create({
   },
 });
 
-// USAGE EXAMPLES:
-/*
-// INSTALLATION:
-// npm install lottie-react-native
-// or
-// npx expo install lottie-react-native
-
-// 1. Wrap your app with AlertProvider
-import { AlertProvider, Alert } from './Alert';
-
-export default function App() {
-  return (
-    <AlertProvider>
-      <YourApp />
-    </AlertProvider>
-  );
-}
 
 // 2. Use anywhere in your app:
 
