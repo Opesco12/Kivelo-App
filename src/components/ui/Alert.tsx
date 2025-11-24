@@ -441,7 +441,7 @@ const styles = StyleSheet.create({
   },
 });
 
-
+/*
 // 2. Use anywhere in your app:
 
 // ===== BASIC USAGE =====
@@ -469,6 +469,7 @@ Alert.success({
     // Alert closes after onPress completes
   },
 });
+
 
 // ===== ASYNC OPERATIONS =====
 
@@ -499,7 +500,7 @@ Alert.info({
     text: 'Start Process',
     closeOnPress: false, // Alert stays open!
     onPress: async () => {
-      await longRunningProcess();
+      // await longRunningProcess();
       // Alert remains open - you control when to close it
     },
   },
