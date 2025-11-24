@@ -7,13 +7,20 @@ import {
   ListTodo,
   MessageCircleMore,
 } from "lucide-react-native";
+import { useEffect } from "react";
 import { Dimensions, StyleSheet, TouchableOpacity, View } from "react-native";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from "react-native-reanimated";
 
 import Text from "@/src/components/ui/Text";
 
 const { width } = Dimensions.get("screen");
 
 const TabBarWidth = 0.95 * width;
+const CIRCLE_SIZE = 30;
 
 export default function CustomTabBar({
   state,
@@ -28,6 +35,21 @@ export default function CustomTabBar({
     profile: CircleUser,
   };
 
+  const translateX = useSharedValue(0);
+  const numTabs = state.routes.length;
+  const tabWidth = (TabBarWidth - 16) / numTabs; // 16 is horizontal padding
+
+  useEffect(() => {
+    const targetX = state.index * tabWidth + 8 + tabWidth / 2 - CIRCLE_SIZE / 2;
+    translateX.value = withSpring(targetX, { duration: 500 });
+  }, [state.index, tabWidth]);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateX: translateX.value }],
+    };
+  });
+
   return (
     <View style={styles.container}>
       <LinearGradient
@@ -37,6 +59,8 @@ export default function CustomTabBar({
         end={{ x: 1, y: 0 }}
       >
         <View style={styles.tabBar}>
+          <Animated.View style={[styles.circle, animatedStyle]} />
+
           {state.routes.map((route, index) => {
             const { options } = descriptors[route.key];
             const isFocused = state.index === index;
@@ -54,7 +78,7 @@ export default function CustomTabBar({
             };
 
             const Icon = icons[route.name];
-            const color = "#ffffff";
+            const iconColor = isFocused ? "#4A90E2" : "#ffffff";
 
             return (
               <TouchableOpacity
@@ -68,10 +92,11 @@ export default function CustomTabBar({
                 {Icon && (
                   <Icon
                     size={20}
-                    color={color}
+                    color={iconColor}
+                    style={{ zIndex: 2 }}
                   />
                 )}
-                <Text style={[styles.label, { color }]}>
+                <Text style={[styles.label, { color: "#ffffff" }]}>
                   {route.name === "index"
                     ? "Home"
                     : route.name === "learning-hub"
@@ -97,14 +122,6 @@ const styles = StyleSheet.create({
     left: (width - TabBarWidth) / 2,
     overflow: "hidden",
     borderRadius: 24,
-    // shadowColor: "#000",
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 4,
-    // },
-    // shadowOpacity: 0.1,
-    // shadowRadius: 12,
-    // elevation: 5,
   },
   gradient: {
     width: "100%",
@@ -117,13 +134,24 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent",
     borderRadius: 24,
     paddingVertical: 12,
-    paddingHorizontal: 8,
+    paddingHorizontal: 6,
+    position: "relative",
+  },
+  circle: {
+    position: "absolute",
+    width: CIRCLE_SIZE,
+    height: CIRCLE_SIZE,
+    borderRadius: CIRCLE_SIZE / 2,
+    backgroundColor: "#ffffff",
+    top: 8,
+    zIndex: 1,
   },
   tab: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    gap: 4,
+    gap: 8,
+    zIndex: 2,
   },
   label: {
     fontSize: 10,
