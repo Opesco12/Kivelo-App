@@ -1,6 +1,6 @@
 import { Tabs } from "expo-router";
 
-import CustomTabBar from "@/src/components/parent/navigation/CustomTabBar";
+import CustomTabBar from "@/src/components/child/navigation/CustomTabBar";
 
 export default function ParentTabsLayout() {
   return (
@@ -11,10 +11,10 @@ export default function ParentTabsLayout() {
       }}
     >
       <Tabs.Screen name="index" />
-      <Tabs.Screen name="learning-hub" />
-      <Tabs.Screen name="insights" />
-      <Tabs.Screen name="messages" />
-      <Tabs.Screen name="settings" />
+      <Tabs.Screen name="check-in" />
+      <Tabs.Screen name="games" />
+      <Tabs.Screen name="chat" />
+      <Tabs.Screen name="profile" />
     </Tabs>
   );
 }

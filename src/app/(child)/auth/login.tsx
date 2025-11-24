@@ -68,7 +68,7 @@ const ChildLogin = () => {
               </Pressable>
             </View>
             <Button
-              onPress={handleSubmit}
+              onPress={() => router.push("/(child)/(tabs)")}
               text="Login"
             />
           </View>

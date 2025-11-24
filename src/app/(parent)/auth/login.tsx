@@ -33,10 +33,8 @@ const Login = () => {
           <View className="flex-1 bg-[#F5F5F5] rounded-[12] mb-[20] px-[10] py-[20]">
             <Formik
               initialValues={{
-                name: "",
                 email: "",
                 password: "",
-                fullName: "",
               }}
               onSubmit={() => console.log("")}
             >
