@@ -1,6 +1,6 @@
 import LottieView from "lottie-react-native";
 import { useEffect, useState } from "react";
-import { ScrollView, TouchableOpacity } from "react-native";
+import { Platform, ScrollView, TouchableOpacity, View } from "react-native";
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -8,12 +8,15 @@ import Animated, {
 } from "react-native-reanimated";
 
 import Text from "@/src/components/ui/Text";
+import { Image } from "expo-image";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 type Mood = {
   label: string;
   value: string;
   color: string;
   lottieUrl: string;
+  emotion: string;
 };
 
 const moods: Mood[] = [
@@ -23,6 +26,7 @@ const moods: Mood[] = [
     color: "#7092CF",
     lottieUrl:
       "https://lottie.host/b6007160-be5b-46c5-94fd-434e6396863b/olxtUIt7YV.lottie",
+    emotion: require("@/src/assets/images/project-images/happy-emotion.svg"),
   },
   {
     label: "Angry",
@@ -30,6 +34,7 @@ const moods: Mood[] = [
     color: "#EE7887",
     lottieUrl:
       "https://lottie.host/b6007160-be5b-46c5-94fd-434e6396863b/olxtUIt7YV.lottie",
+    emotion: require("@/src/assets/images/project-images/angry-emotion.svg"),
   },
   {
     label: "Suprised",
@@ -37,6 +42,7 @@ const moods: Mood[] = [
     color: "#7092CF",
     lottieUrl:
       "https://lottie.host/b6007160-be5b-46c5-94fd-434e6396863b/olxtUIt7YV.lottie",
+    emotion: require("@/src/assets/images/project-images/suprised-emotion.svg"),
   },
   {
     label: "Afraid",
@@ -44,6 +50,7 @@ const moods: Mood[] = [
     color: "#FF966A",
     lottieUrl:
       "https://lottie.host/b6007160-be5b-46c5-94fd-434e6396863b/olxtUIt7YV.lottie",
+    emotion: require("@/src/assets/images/project-images/afraid-emotion.svg"),
   },
 ];
 
@@ -65,41 +72,86 @@ const CheckIn = () => {
 
   return (
     <Animated.View
-      className="flex-1"
-      style={animatedStyle}
+      className="flex-1 justify-start"
+      style={[animatedStyle]}
     >
-      <ScrollView
-        horizontal
-        contentContainerStyle={{ gap: 10 }}
-      >
-        {moods.map((mood, index) => (
-          <TouchableOpacity
-            onPress={() => setMoodIndex(index)}
-            key={index}
-            style={{
-              borderWidth: moodIndex === index ? 2 : 0,
-              borderColor: "#4A90E2",
-            }}
-            className="h-[120] w-[100] bg-white rounded-[12] items-center justify-center"
-          >
-            <LottieView
-              source={{
-                uri: mood.lottieUrl,
-              }}
-              loop
-              autoPlay
-              style={{ height: 80, width: 80, alignSelf: "center" }}
-            />
-
-            <Text
-              className="text-lg mt-[5]"
-              font="poppins-bold"
+      <SafeAreaView className="flex-1">
+        <Text
+          className="mt-[20] text-2xl text-white text-center"
+          font="poppins-bold"
+        >
+          {`How Are You Feeling \nToday?`}
+        </Text>
+        <Image
+          source={moods[moodIndex].emotion}
+          style={{
+            height: 200,
+            width: 280,
+            alignSelf: "center",
+          }}
+          contentFit="contain"
+        />
+        <Text
+          className="mt-[20] text-4xl  text-white text-center"
+          font="poppins-bold"
+        >
+          {moods[moodIndex].label}
+        </Text>
+        <View
+          className="flex-1 justify-end gap-[35] "
+          style={{
+            paddingBottom: Platform.OS === "ios" ? 60 : 120,
+          }}
+        >
+          <View>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ gap: 10 }}
             >
-              {mood.label}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
+              {moods.map((mood, index) => (
+                <TouchableOpacity
+                  onPress={() => setMoodIndex(index)}
+                  key={index}
+                  style={{
+                    borderWidth: moodIndex === index ? 2 : 0,
+                    borderColor: "#4A90E2",
+                    marginLeft: index === 0 ? 15 : 0,
+                  }}
+                  className="h-[120] w-[100] bg-white rounded-[12] items-center justify-center"
+                >
+                  <LottieView
+                    source={{
+                      uri: mood.lottieUrl,
+                    }}
+                    loop
+                    autoPlay
+                    style={{ height: 80, width: 80, alignSelf: "center" }}
+                  />
+
+                  <Text
+                    className="text-lg mt-[5]"
+                    font="poppins-bold"
+                  >
+                    {mood.label}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
+
+          <View className="px-[15]">
+            <TouchableOpacity className="h-[60] rounded-[50] bg-black items-center justify-center">
+              <Text
+                className="text-white text-lg"
+                family="inter"
+              >
+                Next
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </SafeAreaView>
     </Animated.View>
   );
 };
