@@ -2,6 +2,7 @@ import LottieView from "lottie-react-native";
 import { useEffect, useState } from "react";
 import { Platform, ScrollView, TouchableOpacity, View } from "react-native";
 import Animated, {
+  SlideInDown,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
@@ -33,7 +34,7 @@ const moods: Mood[] = [
     value: "angry",
     color: "#EE7887",
     lottieUrl:
-      "https://lottie.host/b6007160-be5b-46c5-94fd-434e6396863b/olxtUIt7YV.lottie",
+      "https://lottie.host/6a27e9e7-381f-4a04-b4e9-2a8bb28f769d/fY5LWu3bMY.lottie",
     emotion: require("@/src/assets/images/project-images/angry-emotion.svg"),
   },
   {
@@ -41,7 +42,7 @@ const moods: Mood[] = [
     value: "suprised",
     color: "#7092CF",
     lottieUrl:
-      "https://lottie.host/b6007160-be5b-46c5-94fd-434e6396863b/olxtUIt7YV.lottie",
+      "https://lottie.host/9ffa63e4-7f42-4e66-aa6e-e7a0eb906fb1/dyorQjQxdR.lottie",
     emotion: require("@/src/assets/images/project-images/suprised-emotion.svg"),
   },
   {
@@ -49,7 +50,7 @@ const moods: Mood[] = [
     value: "afraid",
     color: "#FF966A",
     lottieUrl:
-      "https://lottie.host/b6007160-be5b-46c5-94fd-434e6396863b/olxtUIt7YV.lottie",
+      "https://lottie.host/2c5f0be0-648f-4c5c-94b7-e84e956fd421/VHUIDi9Hi7.lottie",
     emotion: require("@/src/assets/images/project-images/afraid-emotion.svg"),
   },
 ];
@@ -82,15 +83,18 @@ const CheckIn = () => {
         >
           {`How Are You Feeling \nToday?`}
         </Text>
-        <Image
-          source={moods[moodIndex].emotion}
-          style={{
-            height: 200,
-            width: 280,
-            alignSelf: "center",
-          }}
-          contentFit="contain"
-        />
+        <Animated.View entering={SlideInDown.springify().duration(500)}>
+          <Image
+            source={moods[moodIndex].emotion}
+            style={{
+              height: 230,
+              width: 280,
+              alignSelf: "center",
+            }}
+            contentFit="contain"
+          />
+        </Animated.View>
+
         <Text
           className="mt-[20] text-4xl  text-white text-center"
           font="poppins-bold"
