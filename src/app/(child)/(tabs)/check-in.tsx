@@ -1,7 +1,107 @@
-import { View } from "react-native";
+import LottieView from "lottie-react-native";
+import { useEffect, useState } from "react";
+import { ScrollView, TouchableOpacity } from "react-native";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
+
+import Text from "@/src/components/ui/Text";
+
+type Mood = {
+  label: string;
+  value: string;
+  color: string;
+  lottieUrl: string;
+};
+
+const moods: Mood[] = [
+  {
+    label: "Happy",
+    value: "happy",
+    color: "#7092CF",
+    lottieUrl:
+      "https://lottie.host/b6007160-be5b-46c5-94fd-434e6396863b/olxtUIt7YV.lottie",
+  },
+  {
+    label: "Angry",
+    value: "angry",
+    color: "#EE7887",
+    lottieUrl:
+      "https://lottie.host/b6007160-be5b-46c5-94fd-434e6396863b/olxtUIt7YV.lottie",
+  },
+  {
+    label: "Suprised",
+    value: "suprised",
+    color: "#7092CF",
+    lottieUrl:
+      "https://lottie.host/b6007160-be5b-46c5-94fd-434e6396863b/olxtUIt7YV.lottie",
+  },
+  {
+    label: "Afraid",
+    value: "afraid",
+    color: "#FF966A",
+    lottieUrl:
+      "https://lottie.host/b6007160-be5b-46c5-94fd-434e6396863b/olxtUIt7YV.lottie",
+  },
+];
 
 const CheckIn = () => {
-  return <View></View>;
+  const [moodIndex, setMoodIndex] = useState(0);
+  const backgroundColor = useSharedValue(moods[0].color);
+
+  useEffect(() => {
+    backgroundColor.value = withTiming(moods[moodIndex].color, {
+      duration: 500,
+    });
+  }, [moodIndex]);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      backgroundColor: backgroundColor.value,
+    };
+  });
+
+  return (
+    <Animated.View
+      className="flex-1"
+      style={animatedStyle}
+    >
+      <ScrollView
+        horizontal
+        contentContainerStyle={{ gap: 10 }}
+      >
+        {moods.map((mood, index) => (
+          <TouchableOpacity
+            onPress={() => setMoodIndex(index)}
+            key={index}
+            style={{
+              borderWidth: moodIndex === index ? 2 : 0,
+              borderColor: "#4A90E2",
+            }}
+            className="h-[120] w-[100] bg-white rounded-[12] items-center justify-center"
+          >
+            <LottieView
+              source={{
+                uri: mood.lottieUrl,
+              }}
+              loop
+              autoPlay
+              style={{ height: 80, width: 80, alignSelf: "center" }}
+            />
+
+            <Text
+              className="text-lg mt-[5]"
+              font="poppins-bold"
+            >
+              {mood.label}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+    </Animated.View>
+  );
 };
 
 export default CheckIn;
