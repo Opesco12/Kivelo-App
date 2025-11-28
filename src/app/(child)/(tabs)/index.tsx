@@ -1,18 +1,20 @@
 import { Image } from "expo-image";
-import { Platform, ScrollView, TouchableOpacity, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-
-import NotificationBadge from "@/src/components/ui/NotificationBadge";
-import Text from "@/src/components/ui/Text";
 import { router } from "expo-router";
+import { Headphone, Message } from "iconsax-react-nativejs";
 import LottieView from "lottie-react-native";
 import {
+  BicepsFlexed,
   ChartSpline,
   CircleAlert,
   Heart,
   Mic,
   Palette,
 } from "lucide-react-native";
+import { Platform, ScrollView, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+import NotificationBadge from "@/src/components/ui/NotificationBadge";
+import Text from "@/src/components/ui/Text";
 
 const ChildDashboard = () => {
   return (
@@ -352,6 +354,67 @@ const ChildDashboard = () => {
                 </View>
               ))}
             </ScrollView>
+          </View>
+
+          <View className="mt-[25]">
+            <Text
+              className="text-xl text-[#4B2E83]"
+              font="poppins-medium"
+            >
+              Achievements
+            </Text>
+
+            <View className="mt-[10] gap-[10]">
+              <TouchableOpacity className="bg-[#BDEAF973] p-[15] rounded-[12] flex-row gap-[8] items-center">
+                <View className="h-[48] w-[48] rounded-[24] bg-[#BDEAF973] items-center justify-center">
+                  <BicepsFlexed
+                    size={25}
+                    color={"#2563EB"}
+                  />
+                </View>
+
+                <View>
+                  <Text>Try a 5-minute stretch</Text>
+                  <Text className="text-[#4A1A4A99]">
+                    Move your body and feel great!
+                  </Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity className="bg-[#98FFBE73] p-[15] rounded-[12] flex-row gap-[8] items-center">
+                <View className="h-[48] w-[48] rounded-[24] bg-[#DCFCE7] items-center justify-center">
+                  <Headphone
+                    size={25}
+                    color={"#16A34A"}
+                    variant="Bold"
+                  />
+                </View>
+
+                <View>
+                  <Text>Listen to calming music</Text>
+                  <Text className="text-[#4A1A4A99]">
+                    Relax with your favorite tunes
+                  </Text>
+                </View>
+              </TouchableOpacity>
+
+              <TouchableOpacity className="bg-[#C2F0FF73] p-[15] rounded-[12] flex-row gap-[8] items-center">
+                <View className="h-[48] w-[48] rounded-[24] bg-[#FCE7F3] items-center justify-center">
+                  <Message
+                    size={25}
+                    color={"#DB2777"}
+                    variant="Bold"
+                  />
+                </View>
+
+                <View>
+                  <Text>Share a happy thought</Text>
+                  <Text className="text-[#4A1A4A99]">
+                    Spread some positivity!
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
           </View>
         </ScrollView>
       </View>
