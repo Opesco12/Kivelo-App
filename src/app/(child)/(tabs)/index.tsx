@@ -322,6 +322,37 @@ const ChildDashboard = () => {
               </View>
             </View>
           </View>
+
+          <View>
+            <View className="flex-row justify-between items-center">
+              <Text
+                className="text-xl text-[#4B2E83]"
+                font="poppins-medium"
+              >
+                Achievements
+              </Text>
+
+              <Text className="text-[#4B2E83]">See all {">"}</Text>
+            </View>
+            <ScrollView
+              style={{
+                marginTop: 15,
+              }}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={{ gap: 10 }}
+            >
+              {Array.from({ length: 8 }, (_, i) => (
+                <View className="h-[48] w-[48]  bg-[#4A90E273] overflow-hidden rounded-[24] items-center justify-center">
+                  <Image
+                    source={require("@/src/assets/images/project-images/cup.png")}
+                    style={{ height: 32, width: 20 }}
+                    contentFit="contain"
+                  />
+                </View>
+              ))}
+            </ScrollView>
+          </View>
         </ScrollView>
       </View>
     </View>
