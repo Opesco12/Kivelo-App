@@ -1,5 +1,5 @@
-import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
+import { router } from "expo-router";
 import { Settings, Star } from "lucide-react-native";
 import {
   Platform,
@@ -15,31 +15,15 @@ import Avatar2 from "@/src/assets/images/svg/Avatar2";
 import Avatar3 from "@/src/assets/images/svg/Avatar3";
 import FirstPlaceBadge from "@/src/assets/images/svg/FirstPlaceBadge";
 import FivePointedStar from "@/src/assets/images/svg/FivePointedStar";
-import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
 import { Colors } from "@/src/constants/colors";
-import { router } from "expo-router";
-
-const Repeat: React.FC<{
-  times: number;
-  children: (index: number) => React.ReactNode;
-}> = ({ times, children }) => (
-  <>{Array.from({ length: times }, (_, i) => children(i))}</>
-);
 
 const Profile = () => {
   return (
     <View className="flex-1 bg-[#B39DDB]">
       <ScrollView showsVerticalScrollIndicator={false}>
         <SafeAreaView className="flex-1">
-          <View className="flex-row justify-between items-center px-[15]">
-            <BackButton />
-            <Text
-              className="text-xl text-white"
-              font="poppins-medium"
-            >
-              Profile
-            </Text>
+          <View className="items-end px-[15] mt-[10]">
             <Settings
               size={30}
               color={Colors.light.white}
@@ -48,6 +32,12 @@ const Profile = () => {
               }
             />
           </View>
+          <Text
+            className="text-xl text-center text-white"
+            font="poppins-medium"
+          >
+            Profile
+          </Text>
 
           <View className="my-[20] relative px-[15]">
             <View className="h-[120] rounded-[25] overflow-hidden">
@@ -96,10 +86,7 @@ const Profile = () => {
                 </Text>
 
                 <View className="bg-[#F9F9F9] flex-row items-center rounded-[12] gap-[5] p-[5]">
-                  <Image
-                    source={require("@/src/assets/images/project-images/five-pointed-star.svg")}
-                    style={{ height: 40, width: 40 }}
-                  />
+                  <FivePointedStar style={{ height: 40, width: 40 }} />
                   <Text
                     className="text-[#E9962E] text-xl"
                     font="poppins-bold"
@@ -180,7 +167,7 @@ const Profile = () => {
                 <View
                   style={{
                     position: "absolute",
-                    bottom: -10,
+                    bottom: 12,
                     right: -10,
                     zIndex: 1,
                   }}
@@ -229,10 +216,7 @@ const Profile = () => {
                     className="p-[10] flex-row rounded-[12] justify-between items-center"
                   >
                     <View className="flex-row gap-[15] items-center">
-                      <Image
-                        source={require("@/src/assets/images/project-images/avatar1.svg")}
-                        style={{ height: 45, width: 45 }}
-                      />
+                      <Avatar1 style={{ height: 45, width: 45 }} />
 
                       <Text>Favour Theodeon</Text>
                     </View>
@@ -252,3 +236,10 @@ const Profile = () => {
 };
 
 export default Profile;
+
+const Repeat: React.FC<{
+  times: number;
+  children: (index: number) => React.ReactNode;
+}> = ({ times, children }) => (
+  <>{Array.from({ length: times }, (_, i) => children(i))}</>
+);

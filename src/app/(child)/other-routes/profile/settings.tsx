@@ -127,7 +127,7 @@ const Settings = () => {
               })}
             </View>
 
-            <TouchableOpacity className="h-[60] rounded-[50] bg-[#9333EA] items-center justify-center">
+            <TouchableOpacity className="h-[60] rounded-[50] my-[20] bg-[#9333EA] items-center justify-center">
               <Text
                 className="text-white text-lg"
                 font="poppins-medium"
