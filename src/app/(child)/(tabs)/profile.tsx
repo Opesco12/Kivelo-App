@@ -7,6 +7,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
 import { Colors } from "@/src/constants/colors";
+import { router } from "expo-router";
 
 const Repeat: React.FC<{
   times: number;
@@ -31,6 +32,9 @@ const Profile = () => {
             <Settings
               size={30}
               color={Colors.light.white}
+              onPress={() =>
+                router.push("/(child)/other-routes/profile/settings")
+              }
             />
           </View>
 
