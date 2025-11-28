@@ -290,7 +290,10 @@ const ChildDashboard = () => {
                   </Text>
                 </View>
                 <View className="flex-row ">
-                  <TouchableOpacity className="bg-white rounded-[50] px-[15] py-[10] mt-[15]">
+                  <TouchableOpacity
+                    className="bg-white rounded-[50] px-[15] py-[10] mt-[15]"
+                    onPress={() => router.push("/other-routes/draw")}
+                  >
                     <Text className="text-[#4B2E83] text-sm">
                       Draw something
                     </Text>
@@ -408,7 +411,10 @@ const ChildDashboard = () => {
               contentContainerStyle={{ gap: 10 }}
             >
               {Array.from({ length: 8 }, (_, i) => (
-                <View className="h-[48] w-[48]  bg-[#4A90E273] overflow-hidden rounded-[24] items-center justify-center">
+                <View
+                  key={i}
+                  className="h-[48] w-[48]  bg-[#4A90E273] overflow-hidden rounded-[24] items-center justify-center"
+                >
                   <Image
                     source={require("@/src/assets/images/project-images/cup.png")}
                     style={{ height: 32, width: 20 }}

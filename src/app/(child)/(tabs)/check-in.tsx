@@ -87,7 +87,7 @@ const CheckIn = () => {
           <Image
             source={moods[moodIndex].emotion}
             style={{
-              height: 250,
+              height: 220,
               width: 280,
               alignSelf: "center",
             }}
