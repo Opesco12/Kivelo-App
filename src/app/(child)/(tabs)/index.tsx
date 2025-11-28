@@ -1,4 +1,5 @@
-import { Image, ScrollView, View } from "react-native";
+import { Image } from "expo-image";
+import { ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import NotificationBadge from "@/src/components/ui/NotificationBadge";
@@ -10,10 +11,10 @@ const ChildDashboard = () => {
     <View className="flex-1">
       <View className="h-[120] bg-[#ADD7F4]">
         <SafeAreaView className="flex-1">
-          <View className="flex-row gap-[10] px-[15] items-center justify-center flex-1">
+          <View className="flex-row gap-[10] px-[15] mt-[20] items-center flex-1">
             <Image
               source={{ uri: "https://picsum.photos/40" }}
-              className="h-[40] w-[40] rounded-[20]"
+              style={{ height: 40, width: 40, borderRadius: 40 }}
             />
             <View className="flex-row items-center justify-between flex-1">
               <View>

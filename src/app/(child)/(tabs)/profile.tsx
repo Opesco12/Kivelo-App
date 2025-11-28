@@ -10,6 +10,11 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import Avatar1 from "@/src/assets/images/svg/Avatar1";
+import Avatar2 from "@/src/assets/images/svg/Avatar2";
+import Avatar3 from "@/src/assets/images/svg/Avatar3";
+import FirstPlaceBadge from "@/src/assets/images/svg/FirstPlaceBadge";
+import FivePointedStar from "@/src/assets/images/svg/FivePointedStar";
 import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
 import { Colors } from "@/src/constants/colors";
@@ -25,7 +30,7 @@ const Repeat: React.FC<{
 const Profile = () => {
   return (
     <View className="flex-1 bg-[#B39DDB]">
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <SafeAreaView className="flex-1">
           <View className="flex-row justify-between items-center px-[15]">
             <BackButton />
@@ -59,21 +64,26 @@ const Profile = () => {
                 }
               >
                 <View className="relative">
-                  <Image
-                    source={require("@/src/assets/images/project-images/avatar1.svg")}
-                    style={{ height: 100, width: 100 }}
+                  <Avatar1
+                    height={100}
+                    width={100}
                   />
-                  <Image
-                    source={require("@/src/assets/images/project-images/first-place-badge.svg")}
+
+                  <View
                     style={{
-                      height: 50,
-                      width: 35,
                       position: "absolute",
                       bottom: -10,
-                      right: 5,
+                      right: -10,
                       zIndex: 1,
                     }}
-                  />
+                  >
+                    <FirstPlaceBadge
+                      style={{
+                        height: 60,
+                        width: 60,
+                      }}
+                    />
+                  </View>
                 </View>
               </Pressable>
 
@@ -101,7 +111,7 @@ const Profile = () => {
             </View>
           </View>
           <View
-            className="flex-1 mt-[70] bg-[#F9FAFB] px-[15]"
+            className="flex-1 mt-[70] bg-[#f5f5f5] px-[15]"
             style={{
               borderTopRightRadius: 60,
               borderTopLeftRadius: 60,
@@ -145,22 +155,15 @@ const Profile = () => {
               </Text>
             </TouchableOpacity>
 
-            <View
-              className="flex-row items-center justify-between bg-white my-[20] p-[15] rounded-[12] "
-              // style={{ elevation: 2 }}
-            >
+            <View className="flex-row items-center justify-between bg-white my-[20] p-[15] rounded-[12] ">
               <View className="relative">
-                <Image
-                  source={require("@/src/assets/images/project-images/avatar2.svg")}
-                  style={{ height: 70, width: 70 }}
-                />
+                <Avatar2 style={{ height: 70, width: 70 }} />
 
                 <View className="flex-row gap-[2] self-center mt-[10]">
                   <Repeat times={4}>
                     {(index) => (
-                      <Image
+                      <FivePointedStar
                         key={index}
-                        source={require("@/src/assets/images/project-images/five-pointed-star.svg")}
                         style={{ height: 15, width: 11 }}
                       />
                     )}
@@ -169,28 +172,31 @@ const Profile = () => {
               </View>
 
               <View className="relative">
-                <Image
-                  source={require("@/src/assets/images/project-images/avatar1.svg")}
-                  style={{ height: 100, width: 100 }}
-                />
-                <Image
-                  source={require("@/src/assets/images/project-images/first-place-badge.svg")}
-                  style={{
-                    height: 50,
-                    width: 35,
-                    position: "absolute",
-                    bottom: 20,
-                    right: 5,
-                    zIndex: 1,
-                  }}
+                <Avatar1
+                  height={100}
+                  width={100}
                 />
 
+                <View
+                  style={{
+                    position: "absolute",
+                    bottom: -10,
+                    right: -10,
+                    zIndex: 1,
+                  }}
+                >
+                  <FirstPlaceBadge
+                    style={{
+                      height: 60,
+                      width: 60,
+                    }}
+                  />
+                </View>
                 <View className="flex-row gap-[2] self-center mt-[10]">
                   <Repeat times={5}>
                     {(index) => (
-                      <Image
+                      <FivePointedStar
                         key={index}
-                        source={require("@/src/assets/images/project-images/five-pointed-star.svg")}
                         style={{ height: 15, width: 11 }}
                       />
                     )}
@@ -199,17 +205,13 @@ const Profile = () => {
               </View>
 
               <View className="relative">
-                <Image
-                  source={require("@/src/assets/images/project-images/avatar3.svg")}
-                  style={{ height: 70, width: 70 }}
-                />
+                <Avatar3 style={{ height: 70, width: 70 }} />
 
                 <View className="flex-row gap-[2] self-center mt-[10]">
                   <Repeat times={3}>
                     {(index) => (
-                      <Image
+                      <FivePointedStar
                         key={index}
-                        source={require("@/src/assets/images/project-images/five-pointed-star.svg")}
                         style={{ height: 15, width: 11 }}
                       />
                     )}

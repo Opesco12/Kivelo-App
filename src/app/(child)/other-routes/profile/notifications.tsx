@@ -19,7 +19,7 @@ import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
 import { Colors } from "@/src/constants/colors";
 
-const { width } = Dimensions.get("window");
+const { width } = Dimensions.get("screen");
 const TAB_WIDTH = (width - 30 - 30) / 4;
 
 const Notifications = () => {
@@ -33,7 +33,7 @@ const Notifications = () => {
     translateX.value = withTiming(index * TAB_WIDTH, { duration: 300 });
   };
 
-  const animatedPillStyle = useAnimatedStyle(() => ({
+  const animatedStyle = useAnimatedStyle(() => ({
     transform: [{ translateX: translateX.value }],
   }));
 
@@ -62,7 +62,7 @@ const Notifications = () => {
             <View className="relative  py-[20] bg-white rounded-[12] overflow-hidden">
               <Animated.View
                 style={[
-                  animatedPillStyle,
+                  animatedStyle,
                   {
                     position: "absolute",
                     left: 15,
