@@ -1,6 +1,6 @@
 import { Image } from "expo-image";
 import { router } from "expo-router";
-import { Headphone, Message } from "iconsax-react-nativejs";
+import { Cup, Headphone, Message } from "iconsax-react-nativejs";
 import LottieView from "lottie-react-native";
 import {
   BicepsFlexed,
@@ -13,60 +13,113 @@ import {
 import { Platform, ScrollView, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+import DailyTips from "@/src/components/child/dashboard/DailyTIps";
 import NotificationBadge from "@/src/components/ui/NotificationBadge";
 import Text from "@/src/components/ui/Text";
 
 const ChildDashboard = () => {
   return (
     <View className="flex-1">
-      <View
-        className="h-[120] bg-[#ADD7F4]"
-        style={{ zIndex: 100 }}
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingBottom: Platform.OS === "android" ? 110 : 60,
+        }}
       >
-        <SafeAreaView className="flex-1">
-          <View className="flex-row gap-[10] px-[15] mt-[20] items-center flex-1">
-            <Image
-              source={{ uri: "https://picsum.photos/40" }}
-              style={{ height: 40, width: 40, borderRadius: 40 }}
-            />
-            <View className="flex-row items-center justify-between flex-1">
-              <View>
-                <Text
-                  className="text-2xl"
-                  font="poppins-bold"
-                >
-                  Hello, Favour
-                </Text>
-                <Text
-                  className="text-[#6B7280]"
-                  font="poppins-medium"
-                >
-                  Welcome Back!
-                </Text>
-              </View>
-
-              <NotificationBadge
-                onPress={() =>
-                  router.push("/(child)/other-routes/profile/notifications")
-                }
-              />
-            </View>
-          </View>
-        </SafeAreaView>
-      </View>
-
-      <View className="flex-1 px-[15]">
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{
-            marginTop: 20,
-            paddingBottom: Platform.OS === "android" ? 110 : 60,
-          }}
+        <View
+          className="h-[120] bg-[#ADD7F4]"
+          style={{ zIndex: 100 }}
         >
+          <SafeAreaView className="flex-1">
+            <View className="flex-row gap-[10] px-[15] mt-[20] items-center flex-1">
+              <Image
+                source={{ uri: "https://picsum.photos/40" }}
+                style={{ height: 40, width: 40, borderRadius: 40 }}
+              />
+              <View className="flex-row items-center justify-between flex-1">
+                <View>
+                  <Text
+                    className="text-2xl"
+                    font="poppins-bold"
+                  >
+                    Hello, Favour
+                  </Text>
+                  <Text
+                    className="text-[#6B7280]"
+                    font="poppins-medium"
+                  >
+                    Welcome Back!
+                  </Text>
+                </View>
+
+                <NotificationBadge
+                  onPress={() =>
+                    router.push("/(child)/other-routes/profile/notifications")
+                  }
+                />
+              </View>
+            </View>
+          </SafeAreaView>
+        </View>
+
+        <View className="flex-1 px-[15] mt-[25]">
           <View className="bg-white p-[15] rounded-[12]">
             <Text className="text-xl">This Week's Moods</Text>
 
-            <View className="bg-[#DEF7FF73] py-[15] items-center justify-center">
+            <View className="flex-row my-[15] justify-between">
+              <View>
+                <View className="h-[48] w-[48] rounded-[24] bg-[#4ADE80] items-center justify-center">
+                  <Text className="text-2xl">😊</Text>
+                </View>
+                <Text className="text-center mt-[10] text-[#4B2E83]">Mon</Text>
+              </View>
+
+              <View>
+                <View className="h-[48] w-[48] rounded-[24] bg-[#4ADE80] items-center justify-center">
+                  <Text className="text-2xl">😊</Text>
+                </View>
+                <Text className="text-center mt-[10] text-[#4B2E83]">Tue</Text>
+              </View>
+
+              <View>
+                <View className="h-[48] w-[48] rounded-[24] bg-[#3B82F6] items-center justify-center">
+                  <Text className="text-2xl">😊</Text>
+                </View>
+                <Text className="text-center mt-[10] text-[#4B2E83]">Wed</Text>
+              </View>
+
+              <View>
+                <View className="h-[48] w-[48] rounded-[24] bg-[#EAB308] items-center justify-center">
+                  <Text className="text-2xl">😊</Text>
+                </View>
+                <Text className="text-center mt-[10] text-[#4B2E83]">Thu</Text>
+              </View>
+
+              <View>
+                <View className="h-[48] w-[48] rounded-[24] bg-[#F4F2F2] items-center justify-center">
+                  <Text className="text-2xl text-[#9CA3AF]">?</Text>
+                </View>
+                <Text className="text-center mt-[10] text-[#4B2E83]">Thu</Text>
+              </View>
+
+              <View>
+                <View className="h-[48] w-[48] rounded-[24] bg-[#F4F2F2] items-center justify-center">
+                  <Text className="text-2xl text-[#9CA3AF]">?</Text>
+                </View>
+                <Text className="text-center mt-[10] text-[#4B2E83]">Thu</Text>
+              </View>
+            </View>
+
+            <View className="flex-row justify-between">
+              <Text>This week's streak</Text>
+              <Text>4/7 days</Text>
+            </View>
+
+            <View className="h-[9]  bg-[#F5F5F5]  overflow-hidden rounded-[100] my-[5]">
+              <View className="bg-[#EAB308] rounded-[50] w-[70%] h-[9]" />
+            </View>
+
+            <View className="bg-[#DEF7FF73] py-[15] items-center justify-center mt-[10]">
               <Text className="text-center">{`You've checked in 4 days in a row \nawesome! ⭐`}</Text>
             </View>
           </View>
@@ -356,12 +409,14 @@ const ChildDashboard = () => {
             </ScrollView>
           </View>
 
-          <View className="mt-[25]">
+          <DailyTips />
+
+          <View className="mt-[15]">
             <Text
               className="text-xl text-[#4B2E83]"
               font="poppins-medium"
             >
-              Achievements
+              Activity Suggestion
             </Text>
 
             <View className="mt-[10] gap-[10]">
@@ -414,10 +469,31 @@ const ChildDashboard = () => {
                   </Text>
                 </View>
               </TouchableOpacity>
+
+              <View className="bg-[#CDFCDF73] p-[15] rounded-[12] flex-row gap-[5] items-center justify-center">
+                <Cup
+                  size={20}
+                  variant="Bold"
+                  color="#EAB308"
+                />
+                <Text>Next reward unlocks in 2 quests!</Text>
+                <View className="flex-row gap-[2]">
+                  <View className="h-[8] w-[8] rounded-[4] bg-[#EAB308]" />
+                  <View className="h-[8] w-[8] rounded-[4] bg-[#EAB308]" />
+                  <View className="h-[8] w-[8] rounded-[4] bg-[#D1D5DB]" />
+                  <View className="h-[8] w-[8] rounded-[4] bg-[#D1D5DB]" />
+                </View>
+              </View>
             </View>
           </View>
-        </ScrollView>
-      </View>
+
+          <View className="bg-white px-[15] py-[8] my-[20] rounded-[12] flex-row gap-[5] items-center justify-center">
+            <Text className="text-[#4A1A4A99] text-center">
+              🔒 Your journal is private. Only you and your parent can see it
+            </Text>
+          </View>
+        </View>
+      </ScrollView>
     </View>
   );
 };
