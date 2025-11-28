@@ -74,7 +74,6 @@ const Settings = () => {
       style={{ width: width, height: height }}
       source={require("@/src/assets/images/project-images/parent-settings-background.svg")}
     >
-      {/* <StatusBar style="light" /> */}
       <SafeAreaView className="flex-1 px-[15] mt-[15]">
         <View className="flex-row justify-between items-center">
           <Image
