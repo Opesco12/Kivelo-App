@@ -200,29 +200,30 @@ const ChildDashboard = () => {
               Today's Overview
             </Text>
 
-            <View className="mt-[15] flex-row justify-between">
-              <View className="bg-[#4A90E2BF] rounded-[12] p-[12] w-[48%]">
-                <View className="h-[44] w-[44] rounded-[22] bg-white items-center justify-center">
-                  <ChartSpline
-                    size={25}
-                    color={"#4A90E2BF"}
-                  />
+            <View className="mt-[15] flex-row justify-between flex-wrap gap-y-[10]">
+              <View className="bg-[#4A90E2BF] rounded-[12] p-[12] w-[48%] justify-between">
+                <View>
+                  <View className="h-[44] w-[44] rounded-[22] bg-white items-center justify-center">
+                    <ChartSpline
+                      size={25}
+                      color={"#4A90E2BF"}
+                    />
+                  </View>
+                  <Text
+                    className="text-xl text-white mt-[10] mb-[5]"
+                    font="poppins-bold"
+                  >
+                    Journal Activity
+                  </Text>
+
+                  <Text
+                    className="text-white"
+                    numberOfLines={5}
+                  >
+                    You've written 3 journal entries this week. Writing helps
+                    you understand your feelings better
+                  </Text>
                 </View>
-                <Text
-                  className="text-xl text-white mt-[10] mb-[5]"
-                  font="poppins-bold"
-                >
-                  Journal Activity
-                </Text>
-
-                <Text
-                  className="text-white"
-                  numberOfLines={5}
-                >
-                  You've written 3 journal entries this week. Writing helps you
-                  understand your feelings better
-                </Text>
-
                 <View className="flex-row ">
                   <TouchableOpacity className="bg-white rounded-[50] px-[15] py-[10] mt-[15]">
                     <Text className="text-[#4B2E83] text-sm">
@@ -232,34 +233,90 @@ const ChildDashboard = () => {
                 </View>
               </View>
 
-              <View className="bg-[#A5D22DBF] rounded-[12] p-[12] w-[48%]">
-                <View className="h-[44] w-[44] rounded-[22] bg-white items-center justify-center">
-                  <LottieView
-                    source={{
-                      uri: "https://lottie.host/4b52c942-25c0-4a89-8996-685939395c7d/bW8An7BNRZ.lottie",
-                    }}
-                    loop
-                    autoPlay
-                    style={{ height: 25, width: 25 }}
-                  />
-                </View>
-                <Text
-                  className="text-xl text-white mt-[10] mb-[5]"
-                  font="poppins-bold"
-                >
-                  Journal Activity
-                </Text>
+              <View className="bg-[#A5D22DBF] rounded-[12] p-[12] w-[48%] justify-between">
+                <View>
+                  <View className="h-[44] w-[44] rounded-[22] bg-white items-center justify-center">
+                    <LottieView
+                      source={{
+                        uri: "https://lottie.host/4b52c942-25c0-4a89-8996-685939395c7d/bW8An7BNRZ.lottie",
+                      }}
+                      loop
+                      autoPlay
+                      style={{ height: 25, width: 25 }}
+                    />
+                  </View>
+                  <Text
+                    className="text-xl text-white mt-[10] mb-[5]"
+                    font="poppins-bold"
+                  >
+                    Today’s Mood
+                  </Text>
 
-                <Text className="text-white">
-                  You've written 3 journal entries this week. Writing helps you
-                  understand your feelings better
-                </Text>
+                  <Text className="text-white">
+                    Feeling Happy Today Keep that smile going 😊” or “It’s okay
+                    to have ups and downs.
+                  </Text>
+                </View>
 
                 <View className="flex-row">
                   <TouchableOpacity className="bg-white rounded-[50] px-[15] py-[10] mt-[15]">
-                    <Text className="text-[#4B2E83] text-sm">
-                      Draw something
-                    </Text>
+                    <Text className="text-[#4B2E83] text-sm">Update mood</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              <View className="bg-[#EB996EBF] rounded-[12] p-[12] w-[48%] justify-between">
+                <View>
+                  <View className="h-[44] w-[44] rounded-[22] bg-white items-center justify-center">
+                    <Image
+                      source={require("@/src/assets/images/project-images/growing-graph.png")}
+                      style={{ height: 25, width: 25 }}
+                    />
+                  </View>
+                  <Text
+                    className="text-xl text-white mt-[10] mb-[5]"
+                    font="poppins-bold"
+                  >
+                    My Progress
+                  </Text>
+
+                  <Text className="text-white">
+                    You’re doing great! You’ve completed 70% of your weekly
+                    goals.
+                  </Text>
+                </View>
+
+                <View className="flex-row">
+                  <TouchableOpacity className="bg-white rounded-[50] px-[15] py-[10] mt-[15]">
+                    <Text className="text-[#4B2E83] text-sm">Update mood</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              <View className="bg-[#22C55EBF] rounded-[12] p-[12] w-[48%] justify-between">
+                <View>
+                  <View className="h-[44] w-[44] rounded-[22] bg-white items-center justify-center">
+                    <Image
+                      source={require("@/src/assets/images/project-images/businessman.png")}
+                      style={{ height: 25, width: 25 }}
+                    />
+                  </View>
+                  <Text
+                    className="text-xl text-white mt-[10] mb-[5]"
+                    font="poppins-bold"
+                  >
+                    Today’s Challenge
+                  </Text>
+
+                  <Text className="text-white">
+                    Say something nice to a friend or family member. Little acts
+                    of kindness make big smiles.
+                  </Text>
+                </View>
+
+                <View className="flex-row">
+                  <TouchableOpacity className="bg-white rounded-[50] px-[15] py-[10] mt-[15]">
+                    <Text className="text-[#4B2E83] text-sm">mark as done</Text>
                   </TouchableOpacity>
                 </View>
               </View>
