@@ -1,17 +1,26 @@
 import { Image } from "expo-image";
-import { Platform, ScrollView, View } from "react-native";
+import { Platform, ScrollView, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import NotificationBadge from "@/src/components/ui/NotificationBadge";
 import Text from "@/src/components/ui/Text";
 import { router } from "expo-router";
 import LottieView from "lottie-react-native";
-import { CircleAlert, Heart, Mic, Palette } from "lucide-react-native";
+import {
+  ChartSpline,
+  CircleAlert,
+  Heart,
+  Mic,
+  Palette,
+} from "lucide-react-native";
 
 const ChildDashboard = () => {
   return (
     <View className="flex-1">
-      <View className="h-[120] bg-[#ADD7F4]">
+      <View
+        className="h-[120] bg-[#ADD7F4]"
+        style={{ zIndex: 100 }}
+      >
         <SafeAreaView className="flex-1">
           <View className="flex-row gap-[10] px-[15] mt-[20] items-center flex-1">
             <Image
@@ -121,7 +130,7 @@ const ChildDashboard = () => {
                 </View>
               </View>
 
-              <View className="p-[10] bg-[#9EC9FBBF] rounded-[12] flex-row gap-[8]">
+              <View className="p-[10] bg-[#51F88EBF] rounded-[12] flex-row gap-[8]">
                 <View className="bg-white p-[5] rounded-[12] justify-center items-center">
                   <LottieView
                     source={{
@@ -181,6 +190,80 @@ const ChildDashboard = () => {
             <Text className="text-[#334155]">
               Based on shared mood and activity patterns
             </Text>
+          </View>
+
+          <View className="my-[25]">
+            <Text
+              className="text-xl"
+              font="poppins-medium"
+            >
+              Today's Overview
+            </Text>
+
+            <View className="mt-[15] flex-row justify-between">
+              <View className="bg-[#4A90E2BF] rounded-[12] p-[12] w-[48%]">
+                <View className="h-[44] w-[44] rounded-[22] bg-white items-center justify-center">
+                  <ChartSpline
+                    size={25}
+                    color={"#4A90E2BF"}
+                  />
+                </View>
+                <Text
+                  className="text-xl text-white mt-[10] mb-[5]"
+                  font="poppins-bold"
+                >
+                  Journal Activity
+                </Text>
+
+                <Text
+                  className="text-white"
+                  numberOfLines={5}
+                >
+                  You've written 3 journal entries this week. Writing helps you
+                  understand your feelings better
+                </Text>
+
+                <View className="flex-row ">
+                  <TouchableOpacity className="bg-white rounded-[50] px-[15] py-[10] mt-[15]">
+                    <Text className="text-[#4B2E83] text-sm">
+                      Draw something
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+
+              <View className="bg-[#A5D22DBF] rounded-[12] p-[12] w-[48%]">
+                <View className="h-[44] w-[44] rounded-[22] bg-white items-center justify-center">
+                  <LottieView
+                    source={{
+                      uri: "https://lottie.host/4b52c942-25c0-4a89-8996-685939395c7d/bW8An7BNRZ.lottie",
+                    }}
+                    loop
+                    autoPlay
+                    style={{ height: 25, width: 25 }}
+                  />
+                </View>
+                <Text
+                  className="text-xl text-white mt-[10] mb-[5]"
+                  font="poppins-bold"
+                >
+                  Journal Activity
+                </Text>
+
+                <Text className="text-white">
+                  You've written 3 journal entries this week. Writing helps you
+                  understand your feelings better
+                </Text>
+
+                <View className="flex-row">
+                  <TouchableOpacity className="bg-white rounded-[50] px-[15] py-[10] mt-[15]">
+                    <Text className="text-[#4B2E83] text-sm">
+                      Draw something
+                    </Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </View>
           </View>
         </ScrollView>
       </View>
