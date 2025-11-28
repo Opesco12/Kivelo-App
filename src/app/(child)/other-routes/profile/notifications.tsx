@@ -1,7 +1,12 @@
 import { router } from "expo-router";
-import { Settings } from "lucide-react-native";
+import {
+  ChevronRight,
+  Lightbulb,
+  Palette,
+  Settings,
+} from "lucide-react-native";
 import { useState } from "react";
-import { Dimensions, ScrollView, View } from "react-native";
+import { Dimensions, ScrollView, TouchableOpacity, View } from "react-native";
 import Animated, {
   LinearTransition,
   useAnimatedStyle,
@@ -103,7 +108,43 @@ const Notifications = () => {
               borderTopLeftRadius: 60,
             }}
           >
-            <View className="px-[15] py-[25] bg-white gap-[15] rounded-[16] mt-[-50]" />
+            <View className="px-[15] py-[25] bg-white gap-[15] rounded-[16] mt-[-50]">
+              <TouchableOpacity className="bg-[#F5F4F8] h-[80] rounded-[16] px-[15] flex-row items-center justify-between">
+                <View
+                  className="h-[48] w-[48] rounded-[12] items-center justify-center"
+                  style={{ backgroundColor: "#C4B5FD" }}
+                >
+                  <Palette
+                    size={22}
+                    color={"#FFF"}
+                  />
+                </View>
+
+                <Text className=" text-xl flex-1 ml-[15]">
+                  Don't forget to draw today
+                </Text>
+
+                <ChevronRight size={24} />
+              </TouchableOpacity>
+
+              <TouchableOpacity className="bg-[#F5F4F8] h-[80] rounded-[16] px-[15] flex-row items-center justify-between">
+                <View
+                  className="h-[48] w-[48] rounded-[12] items-center justify-center"
+                  style={{ backgroundColor: "#FBBF24" }}
+                >
+                  <Lightbulb
+                    size={22}
+                    color={"#FFF"}
+                  />
+                </View>
+
+                <Text className=" text-xl flex-1 ml-[15]">
+                  Learning games up for you
+                </Text>
+
+                <ChevronRight size={24} />
+              </TouchableOpacity>
+            </View>
           </View>
         </SafeAreaView>
       </ScrollView>
