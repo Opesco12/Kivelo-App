@@ -1,7 +1,13 @@
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { Settings, Star } from "lucide-react-native";
-import { Platform, ScrollView, TouchableOpacity, View } from "react-native";
+import {
+  Platform,
+  Pressable,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import BackButton from "@/src/components/ui/BackButton";
@@ -47,23 +53,29 @@ const Profile = () => {
             </View>
 
             <View className="flex-row absolute justify-between items-center w-[100%] bottom-[-30] left-[15] px-[15]">
-              <View className="relative">
-                <Image
-                  source={require("@/src/assets/images/project-images/avatar1.svg")}
-                  style={{ height: 100, width: 100 }}
-                />
-                <Image
-                  source={require("@/src/assets/images/project-images/first-place-badge.svg")}
-                  style={{
-                    height: 50,
-                    width: 35,
-                    position: "absolute",
-                    bottom: -10,
-                    right: 5,
-                    zIndex: 1,
-                  }}
-                />
-              </View>
+              <Pressable
+                onPress={() =>
+                  router.push("/(child)/other-routes/profile/customize-profile")
+                }
+              >
+                <View className="relative">
+                  <Image
+                    source={require("@/src/assets/images/project-images/avatar1.svg")}
+                    style={{ height: 100, width: 100 }}
+                  />
+                  <Image
+                    source={require("@/src/assets/images/project-images/first-place-badge.svg")}
+                    style={{
+                      height: 50,
+                      width: 35,
+                      position: "absolute",
+                      bottom: -10,
+                      right: 5,
+                      zIndex: 1,
+                    }}
+                  />
+                </View>
+              </Pressable>
 
               <View className="bg-white rounded-[12] p-[12]">
                 <Text
