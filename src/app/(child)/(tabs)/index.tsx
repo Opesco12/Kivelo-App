@@ -10,7 +10,13 @@ import {
   Mic,
   Palette,
 } from "lucide-react-native";
-import { Platform, ScrollView, TouchableOpacity, View } from "react-native";
+import {
+  Platform,
+  Pressable,
+  ScrollView,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import DailyTips from "@/src/components/child/dashboard/DailyTIps";
@@ -178,35 +184,39 @@ const ChildDashboard = () => {
                   <Text>{`Mood \nCheck`}</Text>
                   <Text
                     className="text-[#4A1A4AB2]"
-                    style={{ fontSize: 12 }}
+                    style={{ fontSize: 10 }}
                   >
                     {`tell us how \nyou feel \ntoday`}
                   </Text>
                 </View>
               </View>
 
-              <View className="p-[10] bg-[#51F88EBF] rounded-[12] flex-row gap-[8]">
-                <View className="bg-white p-[5] rounded-[12] justify-center items-center">
-                  <LottieView
-                    source={{
-                      uri: "https://lottie.host/b16e1026-11c6-4367-ae8f-94dd509ef06e/V4I5HIXAsK.lottie",
-                    }}
-                    loop
-                    autoPlay
-                    style={{ height: 45, width: 45 }}
-                  />
-                </View>
+              <Pressable
+                onPress={() => router.push("/(child)/other-routes/journal")}
+              >
+                <View className="p-[10] bg-[#51F88EBF] rounded-[12] flex-row gap-[8]">
+                  <View className="bg-white p-[5] rounded-[12] justify-center items-center">
+                    <LottieView
+                      source={{
+                        uri: "https://lottie.host/b16e1026-11c6-4367-ae8f-94dd509ef06e/V4I5HIXAsK.lottie",
+                      }}
+                      loop
+                      autoPlay
+                      style={{ height: 45, width: 45 }}
+                    />
+                  </View>
 
-                <View>
-                  <Text>{`Mood \nCheck`}</Text>
-                  <Text
-                    className="text-[#4A1A4AB2]"
-                    style={{ fontSize: 12 }}
-                  >
-                    {`tell us how \nyou feel \ntoday`}
-                  </Text>
+                  <View>
+                    <Text>{`Mini \nJournal`}</Text>
+                    <Text
+                      className="text-[#4A1A4AB2]"
+                      style={{ fontSize: 10 }}
+                    >
+                      {`Write or \ndoodle about \nyour day`}
+                    </Text>
+                  </View>
                 </View>
-              </View>
+              </Pressable>
             </View>
           </View>
 
