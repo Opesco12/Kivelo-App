@@ -3,6 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import NotificationBadge from "@/src/components/ui/NotificationBadge";
 import Text from "@/src/components/ui/Text";
+import { router } from "expo-router";
 
 const ChildDashboard = () => {
   return (
@@ -30,7 +31,11 @@ const ChildDashboard = () => {
                 </Text>
               </View>
 
-              <NotificationBadge />
+              <NotificationBadge
+                onPress={() =>
+                  router.push("/(child)/other-routes/profile/notifications")
+                }
+              />
             </View>
           </View>
         </SafeAreaView>

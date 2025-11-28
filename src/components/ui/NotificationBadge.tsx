@@ -4,9 +4,13 @@ import { Pressable, View } from "react-native";
 
 import Text from "./Text";
 
-const NotificationBadge = () => {
+const NotificationBadge = ({ onPress }: { onPress?: () => void }) => {
   return (
-    <Pressable onPress={() => router.push("/other-routes/notifications")}>
+    <Pressable
+      onPress={
+        onPress ? onPress : () => router.push("/other-routes/notifications")
+      }
+    >
       <View className="bg-[#FF725E] h-[15] w-[15] rounded-[8] justify-center items-center  absolute top-[-2] right-0 z-10">
         <Text
           className="text-white"
