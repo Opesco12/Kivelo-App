@@ -138,7 +138,6 @@ export default function Draw() {
         <TouchableOpacity
           style={styles.saveButton}
           onPress={() => {
-            // Handle save functionality
             console.log("Drawing saved!");
           }}
         >
