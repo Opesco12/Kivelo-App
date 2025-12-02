@@ -99,7 +99,7 @@ const ParentIndex = () => {
         </View>
         <GradientButton
           text="Get Started"
-          onPress={() => router.push("/literacy-check")}
+          onPress={() => router.push("/(parent)/auth/signup")}
         />
       </SafeAreaView>
     </View>
