@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -7,6 +8,15 @@ import { KeyboardAvoidingView, Platform } from "react-native";
 import "@/global.css";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { AlertProvider } from "../components/ui/Alert";
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: 2,
+      staleTime: 1000 * 60, // 1 minute
+    },
+  },
+});
 
 export default function App() {
   return (
@@ -49,13 +59,15 @@ function RootLayout() {
 
   if (!fontsLoaded && !fontError) return null;
   return (
-    <Stack
-      screenOptions={{ headerShown: false, animation: "ios_from_right" }}
-      initialRouteName="(onboarding)"
-    >
-      <Stack.Screen name="(onboarding)" />
-      <Stack.Screen name="(child)" />
-      <Stack.Screen name="(parent)" />
-    </Stack>
+    <QueryClientProvider client={queryClient}>
+      <Stack
+        screenOptions={{ headerShown: false, animation: "ios_from_right" }}
+        initialRouteName="(onboarding)"
+      >
+        <Stack.Screen name="(onboarding)" />
+        <Stack.Screen name="(child)" />
+        <Stack.Screen name="(parent)" />
+      </Stack>
+    </QueryClientProvider>
   );
 }
