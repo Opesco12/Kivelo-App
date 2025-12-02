@@ -19,7 +19,6 @@ import TextField from "@/src/components/form/parent/TextField";
 import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
 
-// Validation Schema with Yup
 const validationSchema = Yup.object().shape({
   firstname: Yup.string().required("First name is required"),
   lastname: Yup.string().required("Last name is required"),
@@ -27,12 +26,19 @@ const validationSchema = Yup.object().shape({
     .email("Please enter a valid email")
     .required("Email is required"),
   password: Yup.string()
-    .min(8, "Password must be at least 8 characters")
+    .required("Password is required")
+    .min(6, "Password must be at least 6 characters")
     .matches(
-      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]/,
-      "Password must contain at least one uppercase, lowercase, number and special character"
+      /^[A-Za-z\d@$!%*?#&]+$/,
+      "Password can only contain letters, numbers, and @$!%*#?&"
     )
-    .required("Password is required"),
+    .matches(/[a-z]/, "Password must contain at least one lowercase letter")
+    .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .matches(/\d/, "Password must contain at least one number")
+    .matches(
+      /[@$!%*?&#]/,
+      "Password must contain at least one special character (@$!%*?&#)"
+    ),
   confirmPassword: Yup.string()
     .oneOf([Yup.ref("password")], "Passwords must match")
     .required("Please confirm your password"),
@@ -93,6 +99,7 @@ const SignUp = () => {
 
             <View className="flex-1 bg-[#F5F5F5] rounded-[12] mb-[20] px-[10] py-[20]">
               <Formik
+                enableReinitialize={true}
                 initialValues={{
                   firstname: "",
                   lastname: "",
@@ -104,7 +111,7 @@ const SignUp = () => {
                 validationSchema={validationSchema}
                 onSubmit={(values) => {
                   console.log("Form submitted:", values);
-                  router.push("/(parent)/auth/verify-account");
+                  // router.push("/(parent)/auth/verify-account");
                 }}
               >
                 {({
@@ -148,7 +155,7 @@ const SignUp = () => {
                     />
 
                     <TextField
-                      label="Set Password"
+                      label="Password"
                       name="password"
                       onChangeText={handleChange("password")}
                       onBlur={handleBlur("password")}
@@ -173,10 +180,15 @@ const SignUp = () => {
                         onPress={() => setShowDatePicker(true)}
                         className="border-[#D1D5DB] h-[60] border-2 rounded-lg px-4 py-3 bg-white justify-center"
                       >
-                        <Text style={{ fontSize: 18 }}>
+                        <Text
+                          style={{
+                            fontSize: dob ? 18 : 15,
+                            color: dob ? "#000" : "#374151",
+                          }}
+                        >
                           {dob
                             ? dob.toLocaleDateString()
-                            : "Tap to select your date of birth"}
+                            : "select date of birth"}
                         </Text>
                       </Pressable>
                       {touched.dob && errors.dob && (

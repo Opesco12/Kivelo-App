@@ -31,18 +31,11 @@ const TextField = ({
 }: Props) => {
   const { values, errors, touched } = useFormikContext();
 
-  const [isSecured, setIsSecured] = useState(false);
+  const [isSecured, setIsSecured] = useState(true);
 
   return (
     <View style={[styles.container, { width: width ? width : "100%" }]}>
-      {label && (
-        <Text
-          // font="poppins-medium"
-          style={{ marginBottom: 3 }}
-        >
-          {label}
-        </Text>
-      )}
+      {label && <Text style={{ marginBottom: 3 }}>{label}</Text>}
       <TextInput
         style={styles.input}
         placeholder={placeholder}
@@ -55,7 +48,7 @@ const TextField = ({
       {secureTextEntry &&
         (isSecured ? (
           <Eye
-            size={17}
+            size={20}
             color="#d1d5db"
             variant="Bold"
             style={{ position: "absolute", right: 20, top: label ? 42 : 22 }}
@@ -63,7 +56,7 @@ const TextField = ({
           />
         ) : (
           <EyeSlash
-            size={17}
+            size={20}
             color="#d1d5db"
             variant="Bold"
             style={{ position: "absolute", right: 20, top: label ? 42 : 22 }}
@@ -72,7 +65,7 @@ const TextField = ({
         ))}
 
       {touched[name] && errors[name] && (
-        <Text className="text-red">{errors[name]}</Text>
+        <Text className="text-red-500">{errors[name]}</Text>
       )}
     </View>
   );
