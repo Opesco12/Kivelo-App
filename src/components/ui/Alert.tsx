@@ -32,6 +32,8 @@ interface CustomAlertProps {
   secondaryButton?: ButtonConfig | null;
   closeOnOverlayTap?: boolean | null;
   type?: "success" | "error" | "warning" | "info" | null;
+
+  autoCloseAfter?: number | null;
 }
 
 // Alert Manager
@@ -113,6 +115,7 @@ const AlertComponent = ({
   secondaryButton = null,
   closeOnOverlayTap = true,
   type = null,
+  autoCloseAfter,
 }: CustomAlertProps) => {
   const [lottieError, setLottieError] = React.useState(false);
 
@@ -147,6 +150,17 @@ const AlertComponent = ({
       setLottieError(false);
     }
   }, [visible]);
+
+  // Auto-close after delay
+  React.useEffect(() => {
+    if (!visible || autoCloseAfter == null) return;
+
+    const timer = setTimeout(() => {
+      onClose?.();
+    }, autoCloseAfter);
+
+    return () => clearTimeout(timer);
+  }, [visible, autoCloseAfter, onClose]);
 
   // Determine which image/animation to show
   const getImageComponent = () => {

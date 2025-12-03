@@ -7,6 +7,7 @@ import Tips from "@/src/components/parent/dashboard/Tips";
 import NotificationBadge from "@/src/components/ui/NotificationBadge";
 import Screen from "@/src/components/ui/Screen";
 import Text from "@/src/components/ui/Text";
+
 import { useAuth } from "@/src/context/auth-provider";
 
 const ParentDashboard = () => {
