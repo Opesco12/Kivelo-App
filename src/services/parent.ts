@@ -12,22 +12,28 @@ import {
 export const parentApi = {
   register: async (
     credentials: ParentRegisterCredentials
-  ): Promise<ParentRegisterResponse> => {
+  ): Promise<{ data: ParentRegisterResponse; status: number }> => {
     const response = await axiosInstance.post<ParentRegisterResponse>(
       endpoints.parent.auth.register,
       credentials
     );
-    return response.data;
+    return {
+      data: response.data,
+      status: response.status,
+    };
   },
 
   login: async (
     credentials: ParentLoginCredentials
-  ): Promise<ParentLoginResponse> => {
+  ): Promise<{ data: ParentLoginResponse; status: number }> => {
     const response = await axiosInstance.post<ParentLoginResponse>(
       endpoints.parent.auth.login,
       credentials
     );
-    return response.data;
+    return {
+      data: response.data,
+      status: response.status,
+    };
   },
 
   verifyEmail: async (credentials: VerifyEmailCredentials) => {

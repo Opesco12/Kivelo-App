@@ -14,8 +14,10 @@ export interface ParentLoginCredentials {
 export interface ParentLoginResponse {
   success: boolean;
   message: string;
-  needsVerification: boolean;
   email: string;
+  user: User;
+  accessToken?: string;
+  refreshToken?: string;
 }
 
 export interface ParentRegisterCredentials {
@@ -38,13 +40,13 @@ export interface ParentRegisterResponse {
 
 export interface VerifyEmailCredentials {
   email: string;
-  password?: string;
+  verificationCode?: string;
 }
 
 export interface VerifyEmailResponse {
   success: boolean;
+  message: string;
   accessToken?: string;
   refreshToken?: string;
   user?: User;
-  message: string;
 }

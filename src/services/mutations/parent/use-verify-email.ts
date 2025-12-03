@@ -1,18 +1,21 @@
 import { useMutation } from "@tanstack/react-query";
 
 import { parentApi } from "../../parent";
-import {
-  ParentRegisterCredentials,
-  ParentRegisterResponse,
-} from "../../types/auth";
+import { VerifyEmailCredentials, VerifyEmailResponse } from "../../types/auth";
 
-export const useParentRegister = () => {
-  return useMutation<ParentRegisterResponse, Error, ParentRegisterCredentials>({
-    mutationFn: parentApi.register,
+export const useVerifyEmail = () => {
+  return useMutation<VerifyEmailResponse, Error, VerifyEmailCredentials>({
+    mutationFn: parentApi.verifyEmail,
 
     onSuccess: async (data) => {
-      console.log(data.message);
+      //   console.log(data.message);
     },
     onError: (error) => {},
+  });
+};
+
+export const useResendVerification = () => {
+  return useMutation<VerifyEmailResponse, Error, VerifyEmailCredentials>({
+    mutationFn: parentApi.resendVerification,
   });
 };

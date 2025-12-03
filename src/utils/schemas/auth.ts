@@ -52,3 +52,10 @@ export const ParentLoginSchema = Yup.object().shape({
     .required("Email is required"),
   password: Yup.string().required("Password is required"),
 });
+
+export const VerifyEmailSchema = Yup.object({
+  otp: Yup.string()
+    .length(6, "Enter all 6 digits")
+    .matches(/^\d{6}$/, "Must be 6 digits")
+    .required("OTP is required"),
+});

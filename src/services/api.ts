@@ -13,3 +13,35 @@ axiosInstance.interceptors.request.use(async (config) => {
   if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
+
+axiosInstance.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response) {
+      // Server responded with a status code outside 2xx
+      const formattedError = {
+        status: error.response.status,
+        data: error.response.data, // contains your backend error message
+        message:
+          error.response.data?.message ||
+          "An error occurred while processing your request",
+      };
+
+      return Promise.reject(formattedError);
+    }
+
+    if (error.request) {
+      // Request made but no response (network error, timeout, etc.)
+      return Promise.reject({
+        status: null,
+        message: "Network error. Please check your connection.",
+      });
+    }
+
+    // Something else happened
+    return Promise.reject({
+      status: null,
+      message: error.message || "Unexpected error occurred",
+    });
+  }
+);

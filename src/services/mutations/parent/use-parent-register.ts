@@ -7,10 +7,14 @@ import {
 } from "../../types/auth";
 
 export const useParentRegister = () => {
-  return useMutation<ParentRegisterResponse, Error, ParentRegisterCredentials>({
+  return useMutation<
+    { data: ParentRegisterResponse; status: number },
+    Error,
+    ParentRegisterCredentials
+  >({
     mutationFn: parentApi.register,
 
-    onSuccess: async (data) => {
+    onSuccess: async ({ data }) => {
       console.log(data.message);
     },
     onError: (error) => {},

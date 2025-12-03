@@ -17,6 +17,7 @@ import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
 import { useLogin } from "@/src/services/mutations/parent/use-login";
 import { ParentLoginSchema } from "@/src/utils/schemas/auth";
+import { useAuth } from "@/src/context/auth-provider";
 
 type FormValues = {
   email: string;
@@ -29,6 +30,8 @@ const Login = () => {
     password: "",
   };
 
+  const { saveUser } = useAuth();
+
   const mutation = useLogin();
 
   const handleLogin = (
@@ -36,27 +39,41 @@ const Login = () => {
     setSubmitting: (isSubmitting: boolean) => void
   ) => {
     mutation.mutate(values, {
-      onSuccess: (data) => {
+      onSuccess: ({ data, status }) => {
         console.log(data);
         Alert.success({
           title: "Login Succesful",
         });
+        console.log("status code: ", status);
         setSubmitting(false);
-        // router.replace({
-        //   pathname: "/(parent)/auth/verify-account",
-        //   params: {
-        //     email: values?.email,
-        //   },
-        // });
+        saveUser(data?.email, data?.accessToken, data?.user);
+        setTimeout(() => {
+          router.push({
+            pathname: "/(parent)/(tabs)",
+            params: {
+              email: values?.email,
+            },
+          });
+        }, 1000);
       },
       onError: (error: any) => {
-        const msg = error.response?.data?.message;
+        const msg = error.data?.message;
         console.log(msg);
         setSubmitting(false);
         Alert.error({
           title: "Login Failed",
           subtitle: msg ?? "",
         });
+        if (error?.status === 403) {
+          setTimeout(() => {
+            router.push({
+              pathname: "/(parent)/auth/email-verification-code",
+              params: {
+                email: values?.email,
+              },
+            });
+          }, 1000);
+        }
       },
     });
   };

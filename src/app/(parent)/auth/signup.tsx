@@ -68,7 +68,7 @@ const SignUp = () => {
     console.log(values);
 
     mutation.mutate(requestData, {
-      onSuccess: (data) => {
+      onSuccess: ({ data }) => {
         console.log(data);
         Alert.success({
           title: "Registration Succesful",
@@ -76,14 +76,14 @@ const SignUp = () => {
         });
         setSubmitting(false);
         router.replace({
-          pathname: "/(parent)/auth/verify-account",
+          pathname: "/(parent)/auth/email-verification-code",
           params: {
             email: values?.email,
           },
         });
       },
       onError: (error: any) => {
-        const msg = error.response?.data?.message;
+        const msg = error.data?.message;
         console.log(msg);
         setSubmitting(false);
         Alert.error({

@@ -8,6 +8,7 @@ import { KeyboardAvoidingView, Platform } from "react-native";
 import "@/global.css";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { AlertProvider } from "../components/ui/Alert";
+import { AuthProvider } from "../context/auth-provider";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -21,15 +22,17 @@ const queryClient = new QueryClient({
 export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <AlertProvider>
-        <KeyboardAvoidingView
-          className="flex-1"
-          behavior={Platform.OS === "ios" ? "padding" : "height"}
-          keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 0}
-        >
-          <RootLayout />
-        </KeyboardAvoidingView>
-      </AlertProvider>
+      <AuthProvider>
+        <AlertProvider>
+          <KeyboardAvoidingView
+            className="flex-1"
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 0}
+          >
+            <RootLayout />
+          </KeyboardAvoidingView>
+        </AlertProvider>
+      </AuthProvider>
     </GestureHandlerRootView>
   );
 }

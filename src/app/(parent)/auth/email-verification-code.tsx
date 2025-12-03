@@ -1,38 +1,97 @@
+import { router, useLocalSearchParams } from "expo-router";
 import { Formik, FormikHelpers } from "formik";
 import LottieView from "lottie-react-native";
-import { View } from "react-native";
+import { TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import * as Yup from "yup";
 
 import GradientButton from "@/src/components/form/GradientButton";
 import { OtpInput } from "@/src/components/form/OtpInput";
 import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
-import { router, useLocalSearchParams } from "expo-router";
 
-const validationSchema = Yup.object({
-  otp: Yup.string()
-    .length(6, "Enter all 6 digits")
-    .matches(/^\d{6}$/, "Must be 6 digits")
-    .required("OTP is required"),
-});
+import { Alert } from "@/src/components/ui/Alert";
+import {
+  useResendVerification,
+  useVerifyEmail,
+} from "@/src/services/mutations/parent/use-verify-email";
+import { VerifyEmailSchema } from "@/src/utils/schemas/auth";
+import { useState } from "react";
 
 type FormValues = { otp: string };
-
-const handleSubmit = (
-  values: FormValues,
-  { setSubmitting }: FormikHelpers<FormValues>
-) => {
-  router.push("/(parent)/auth/login");
-  setSubmitting(false);
-};
 
 const VerifyAccount = () => {
   const params = useLocalSearchParams();
 
+  const [isResendingCode, setIsResendingCode] = useState(false);
+  const [hasResentCode, setHasResentCode] = useState(false);
+
+  console.log("params: ", params);
+
   if (!params?.email) {
     router.replace("/(parent)/auth/login");
   }
+
+  const mutation = useVerifyEmail();
+  const ResendCodeMutation = useResendVerification();
+
+  const handleSubmit = (
+    values: FormValues,
+    { setSubmitting }: FormikHelpers<FormValues>
+  ) => {
+    mutation.mutate(
+      {
+        email: params?.email,
+        verificationCode: values?.otp,
+      },
+      {
+        onSuccess: (data) => {
+          Alert.success({
+            title: "Verification Succesful",
+            subtitle: data?.message,
+          });
+          setSubmitting(false);
+          router.replace("/(parent)/(tabs)");
+        },
+        onError(error: any) {
+          const msg = error?.data?.message;
+          console.log(msg);
+          setSubmitting(false);
+          Alert.error({
+            title: "Verification Failed",
+            subtitle: msg ?? "",
+          });
+        },
+      }
+    );
+  };
+
+  const ResendVerification = () => {
+    setIsResendingCode(true);
+    ResendCodeMutation.mutate(
+      {
+        email: params?.email,
+      },
+      {
+        onSuccess: (data) => {
+          Alert.success({
+            // title: "Verification Succesful",
+            subtitle: data?.message,
+          });
+          setIsResendingCode(false);
+          setHasResentCode(true);
+        },
+        onError(error: any) {
+          const msg = error?.data?.message;
+          console.log(msg);
+          setIsResendingCode(false);
+          Alert.error({
+            title: "Failed to resend code",
+            subtitle: msg ?? "",
+          });
+        },
+      }
+    );
+  };
 
   return (
     <View className="flex-1 bg-white px-[15]">
@@ -60,7 +119,7 @@ const VerifyAccount = () => {
 
         <Formik
           initialValues={{ otp: "" }}
-          validationSchema={validationSchema}
+          validationSchema={VerifyEmailSchema}
           onSubmit={handleSubmit}
         >
           {({ handleSubmit, isSubmitting, errors, touched }) => (
@@ -74,22 +133,28 @@ const VerifyAccount = () => {
               )}
 
               <View className="my-[20] gap-[15]">
-                <Text
-                  className="text-center text-xl text-[#4D81E7]"
-                  font="poppins-medium"
+                <TouchableOpacity
+                  onPress={ResendVerification}
+                  disabled={isResendingCode || hasResentCode}
                 >
-                  Resend Code
-                </Text>
+                  <Text
+                    className="text-center text-xl text-[#4D81E7]"
+                    font="poppins-medium"
+                  >
+                    Resend Code
+                  </Text>
+                </TouchableOpacity>
 
-                <Text
+                {/* <Text
                   className="text-center text-xl text-[#4D81E7]"
                   font="poppins-medium"
                 >
                   Change Method
-                </Text>
+                </Text> */}
               </View>
 
               <GradientButton
+                isLoading={isSubmitting}
                 text="Send Code"
                 onPress={handleSubmit}
               />
