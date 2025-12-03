@@ -8,7 +8,7 @@ import GradientButton from "@/src/components/form/GradientButton";
 import { OtpInput } from "@/src/components/form/OtpInput";
 import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 
 const validationSchema = Yup.object({
   otp: Yup.string()
@@ -28,6 +28,12 @@ const handleSubmit = (
 };
 
 const VerifyAccount = () => {
+  const params = useLocalSearchParams();
+
+  if (!params?.email) {
+    router.replace("/(parent)/auth/login");
+  }
+
   return (
     <View className="flex-1 bg-white px-[15]">
       <SafeAreaView className="flex-1">

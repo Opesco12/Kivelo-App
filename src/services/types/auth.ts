@@ -1,3 +1,11 @@
+export type User = {
+  id: string;
+  email: string;
+  name: string;
+  role: "parent" | "child";
+  isVerified: boolean;
+};
+
 export interface ParentLoginCredentials {
   email: string;
   password: string;
@@ -22,35 +30,21 @@ export interface ParentRegisterCredentials {
 export interface ParentRegisterResponse {
   success: boolean;
   message: string;
-  user?: {
-    id: string;
-    email: string;
-    name: string;
-    role: "parent" | "child";
-    isVerified: boolean;
-  };
+  user?: User;
   parent?: {
     familyCode: string;
   };
 }
 
-// export interface ParentLoginResponse {
-//   success: boolean;
-//   message: string;
-//   accessToken: string;
-//   refreshToken: string;
-//   data: {
-//     user: {};
-//     familyCode: string;
-//     subscription: string;
-//     hasSetPassword: boolean;
-//     parentId: string;
-//   };
-// }
+export interface VerifyEmailCredentials {
+  email: string;
+  password?: string;
+}
 
-// {
-//   "success": false,
-//   "message": "Please verify your email before logging in. Check your email for the verification code.",
-//   "needsVerification": true,
-//   "email": "parent@example.com"
-// }
+export interface VerifyEmailResponse {
+  success: boolean;
+  accessToken?: string;
+  refreshToken?: string;
+  user?: User;
+  message: string;
+}

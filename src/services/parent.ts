@@ -5,6 +5,8 @@ import {
   ParentLoginResponse,
   ParentRegisterCredentials,
   ParentRegisterResponse,
+  VerifyEmailCredentials,
+  VerifyEmailResponse,
 } from "./types/auth";
 
 export const parentApi = {
@@ -25,6 +27,24 @@ export const parentApi = {
       endpoints.parent.auth.login,
       credentials
     );
+    return response.data;
+  },
+
+  verifyEmail: async (credentials: VerifyEmailCredentials) => {
+    const response = await axiosInstance.post<VerifyEmailResponse>(
+      endpoints.parent.auth.verifyEmail,
+      credentials
+    );
+
+    return response.data;
+  },
+
+  resendVerification: async (credentials: VerifyEmailCredentials) => {
+    const response = await axiosInstance.post<VerifyEmailResponse>(
+      endpoints.parent.auth.resendVerification,
+      credentials
+    );
+
     return response.data;
   },
 };
