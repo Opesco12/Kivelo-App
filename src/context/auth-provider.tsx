@@ -3,11 +3,11 @@ import * as SecureStore from "expo-secure-store";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
 import { User } from "../types/User";
+import { STORAGE_KEYS } from "../utils/storage/keys";
 
 interface AuthContextType {
   user: User | null;
   accessToken: string | null;
-  //   refreshToken: string | null;
   isLoading: boolean;
   isAuthenticated: boolean;
 
@@ -16,13 +16,6 @@ interface AuthContextType {
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-// Secure storage keys
-const STORAGE_KEYS = {
-  ACCESS_TOKEN: "access_token",
-  //   REFRESH_TOKEN: "refresh_token",
-  USER_DATA: "user_data",
-};
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<User | null>(null);
@@ -39,18 +32,32 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   // Handle navigation based on auth state
   useEffect(() => {
-    if (isLoading) return;
+    const checkUser = async () => {
+      if (isLoading) return;
 
-    // const inAuthGroup = segments[0] === "(auth)";
-    // const inParentAuthGroup = segments[1] === "auth";
+      if (!user) {
+        try {
+          const role = await SecureStore.getItemAsync(STORAGE_KEYS.role);
+          if (role) {
+            const parsedRole = JSON.parse(role) ?? "";
+            if (parsedRole === "parent") {
+              router.replace("/(parent)/auth/login");
+              return;
+            } else if (parsedRole === "child") {
+              router.replace("/(child)/auth/login");
+              return;
+            }
+          }
+        } catch (error) {
+          router.replace("/(onboarding)");
+        }
+      } else if (user) {
+        // Redirect to home if authenticated and on auth screens
+        router.replace("/(parent)/(tabs)");
+      }
+    };
 
-    if (!user) {
-      // Redirect to login if not authenticated
-      router.replace("/(parent)/auth/login");
-    } else if (user) {
-      // Redirect to home if authenticated and on auth screens
-      router.replace("/(parent)/(tabs)");
-    }
+    checkUser();
   }, [user, segments, isLoading]);
 
   const loadStoredAuth = async () => {

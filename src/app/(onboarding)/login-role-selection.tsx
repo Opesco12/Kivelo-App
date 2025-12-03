@@ -2,9 +2,29 @@ import Text from "@/src/components/ui/Text";
 import { Colors } from "@/src/constants/colors";
 import { LinearGradient } from "expo-linear-gradient";
 import { router } from "expo-router";
+import * as SecureStore from "expo-secure-store";
 import { Image, Pressable, StyleSheet, View } from "react-native";
 
+import { STORAGE_KEYS } from "@/src/utils/storage/keys";
+
 export default function LoginRoleSelection() {
+  const handleSelectParent = () => {
+    try {
+      SecureStore.setItemAsync(STORAGE_KEYS.role, "parent");
+    } catch (error) {
+      console.error("Failed to save role");
+    }
+    router.push("/(parent)/auth/login");
+  };
+
+  const handleSelectChild = () => {
+    try {
+      SecureStore.setItemAsync(STORAGE_KEYS.role, "child");
+    } catch (error) {
+      console.error("Failed to save role");
+    }
+    router.push("/(child)/auth/login");
+  };
   return (
     <View className="flex-1 justify-center items-center">
       <LinearGradient
@@ -20,7 +40,7 @@ export default function LoginRoleSelection() {
             I Am a...
           </Text>
 
-          <Pressable onPress={() => router.push("/(child)/auth/login")}>
+          <Pressable onPress={handleSelectChild}>
             <View
               className="bg-white rounded-md flex-row items-center justify-between"
               style={styles.box}
@@ -46,7 +66,7 @@ export default function LoginRoleSelection() {
             </View>
           </Pressable>
 
-          <Pressable onPress={() => router.push("/(parent)/auth/login")}>
+          <Pressable onPress={handleSelectParent}>
             <View
               className="bg-white rounded-md flex-row items-center justify-between"
               style={styles.box}

@@ -16,7 +16,7 @@ export interface ParentLoginResponse {
   message: string;
   email: string;
   user: User;
-  accessToken?: string;
+  accessToken: string;
   refreshToken?: string;
 }
 
