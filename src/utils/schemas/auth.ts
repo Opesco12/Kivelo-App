@@ -45,3 +45,10 @@ export const ParentRegistrationSchema = Yup.object().shape({
       return age >= 18;
     }),
 });
+
+export const ParentLoginSchema = Yup.object().shape({
+  email: Yup.string()
+    .email("Please enter a valid email")
+    .required("Email is required"),
+  password: Yup.string().required("Password is required"),
+});

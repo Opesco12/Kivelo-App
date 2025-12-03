@@ -1,3 +1,5 @@
+import { router } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import { Formik } from "formik";
 import {
   Image,
@@ -10,12 +12,55 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import GradientButton from "@/src/components/form/GradientButton";
 import TextField from "@/src/components/form/parent/TextField";
+import { Alert } from "@/src/components/ui/Alert";
 import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
-import { router } from "expo-router";
-import { StatusBar } from "expo-status-bar";
+import { useLogin } from "@/src/services/mutations/parent/use-login";
+import { ParentLoginSchema } from "@/src/utils/schemas/auth";
+
+type FormValues = {
+  email: string;
+  password: string;
+};
 
 const Login = () => {
+  const initialValues: FormValues = {
+    email: "",
+    password: "",
+  };
+
+  const mutation = useLogin();
+
+  const handleLogin = (
+    values: FormValues,
+    setSubmitting: (isSubmitting: boolean) => void
+  ) => {
+    mutation.mutate(values, {
+      onSuccess: (data) => {
+        console.log(data);
+        Alert.success({
+          title: "Login Succesful",
+        });
+        setSubmitting(false);
+        // router.replace({
+        //   pathname: "/(parent)/auth/verify-account",
+        //   params: {
+        //     email: values?.email,
+        //   },
+        // });
+      },
+      onError: (error: any) => {
+        const msg = error.response?.data?.message;
+        console.log(msg);
+        setSubmitting(false);
+        Alert.error({
+          title: "Login Failed",
+          subtitle: msg ?? "",
+        });
+      },
+    });
+  };
+
   return (
     <View className="flex-1 bg-white px-[15]">
       <StatusBar style="dark" />
@@ -32,13 +77,13 @@ const Login = () => {
 
           <View className="flex-1 bg-[#F5F5F5] rounded-[12] mb-[20] px-[10] py-[20]">
             <Formik
-              initialValues={{
-                email: "",
-                password: "",
-              }}
-              onSubmit={() => console.log("")}
+              validationSchema={ParentLoginSchema}
+              initialValues={initialValues}
+              onSubmit={(values, { setSubmitting }) =>
+                handleLogin(values, setSubmitting)
+              }
             >
-              {({ handleChange, values }) => (
+              {({ handleChange, values, handleSubmit, isSubmitting }) => (
                 <View className="gap-[10]">
                   <Text className="text-xl">Sign in to your account</Text>
 
@@ -65,7 +110,8 @@ const Login = () => {
                   </View>
 
                   <GradientButton
-                    onPress={() => router.push("/(parent)/(tabs)")}
+                    isLoading={isSubmitting}
+                    onPress={handleSubmit}
                     text="Sign In"
                   />
                 </View>
