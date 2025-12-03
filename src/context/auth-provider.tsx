@@ -1,4 +1,4 @@
-import { router, useSegments } from "expo-router";
+import { router } from "expo-router";
 import * as SecureStore from "expo-secure-store";
 import React, { createContext, useContext, useEffect, useState } from "react";
 
@@ -11,7 +11,7 @@ interface AuthContextType {
   isLoading: boolean;
   isAuthenticated: boolean;
 
-  saveUser: (email: string, accessToken: string, user: User) => Promise<void>;
+  saveUser: (accessToken: string, user: User) => Promise<void>;
   clearUser: () => Promise<void>;
 }
 
@@ -22,8 +22,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [accessToken, setAccessToken] = useState<string | null>(null);
   //   const [refreshToken, setRefreshToken] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-
-  const segments = useSegments();
 
   // Load stored auth data on mount
   useEffect(() => {
@@ -39,26 +37,30 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         try {
           const role = await SecureStore.getItemAsync(STORAGE_KEYS.role);
           if (role) {
-            const parsedRole = JSON.parse(role) ?? "";
-            if (parsedRole === "parent") {
+            if (role === "parent") {
               router.replace("/(parent)/auth/login");
               return;
-            } else if (parsedRole === "child") {
+            } else if (role === "child") {
               router.replace("/(child)/auth/login");
               return;
             }
           }
         } catch (error) {
+          console.log("error occured, navigating to onboarding");
           router.replace("/(onboarding)");
         }
       } else if (user) {
         // Redirect to home if authenticated and on auth screens
-        router.replace("/(parent)/(tabs)");
+        if (user.role === "child") {
+          router.replace("/(child)/(tabs)");
+        } else if (user.role === "parent") {
+          router.replace("/(parent)/(tabs)");
+        }
       }
     };
 
     checkUser();
-  }, [user, segments, isLoading]);
+  }, [user, isLoading]);
 
   const loadStoredAuth = async () => {
     try {
@@ -78,7 +80,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  const saveUser = async (email: string, accessToken: string, user: User) => {
+  const saveUser = async (accessToken: string, user: User) => {
     try {
       // Store tokens and user data securely
       await Promise.all([

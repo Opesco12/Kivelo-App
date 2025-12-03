@@ -14,10 +14,14 @@ export interface ParentLoginCredentials {
 export interface ParentLoginResponse {
   success: boolean;
   message: string;
-  email: string;
-  user: User;
   accessToken: string;
-  refreshToken?: string;
+  data: {
+    user: User;
+    familyCode: string;
+    subscription: string;
+    hasSetPassword: boolean;
+    parentId: string;
+  };
 }
 
 export interface ParentRegisterCredentials {

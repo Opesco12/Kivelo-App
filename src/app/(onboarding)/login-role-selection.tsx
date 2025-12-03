@@ -8,18 +8,18 @@ import { Image, Pressable, StyleSheet, View } from "react-native";
 import { STORAGE_KEYS } from "@/src/utils/storage/keys";
 
 export default function LoginRoleSelection() {
-  const handleSelectParent = () => {
+  const handleSelectParent = async () => {
     try {
-      SecureStore.setItemAsync(STORAGE_KEYS.role, "parent");
+      await SecureStore.setItemAsync(STORAGE_KEYS.role, "parent");
     } catch (error) {
       console.error("Failed to save role");
     }
     router.push("/(parent)/auth/login");
   };
 
-  const handleSelectChild = () => {
+  const handleSelectChild = async () => {
     try {
-      SecureStore.setItemAsync(STORAGE_KEYS.role, "child");
+      await SecureStore.setItemAsync(STORAGE_KEYS.role, "child");
     } catch (error) {
       console.error("Failed to save role");
     }

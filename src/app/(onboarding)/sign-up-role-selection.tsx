@@ -10,18 +10,18 @@ const STORAGE_KEYS = {
 };
 
 export default function SignUpRoleSelection() {
-  const handleSelectParent = () => {
+  const handleSelectParent = async () => {
     try {
-      SecureStore.setItemAsync(STORAGE_KEYS.role, "parent");
+      await SecureStore.setItemAsync(STORAGE_KEYS.role, "parent");
     } catch (error) {
       console.error("Failed to save role");
     }
     router.push("/(onboarding)/parent-onboarding");
   };
 
-  const handleSelectChild = () => {
+  const handleSelectChild = async () => {
     try {
-      SecureStore.setItemAsync(STORAGE_KEYS.role, "child");
+      await SecureStore.setItemAsync(STORAGE_KEYS.role, "child");
     } catch (error) {
       console.error("Failed to save role");
     }

@@ -46,7 +46,7 @@ const Login = () => {
         });
         console.log("status code: ", status);
         setSubmitting(false);
-        saveUser(data?.email, data.accessToken, data?.user);
+        saveUser(data.accessToken, data?.data?.user);
         setTimeout(() => {
           router.push({
             pathname: "/(parent)/(tabs)",
