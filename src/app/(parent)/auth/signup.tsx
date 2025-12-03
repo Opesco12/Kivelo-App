@@ -4,74 +4,94 @@ import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { Formik } from "formik";
 import { useState } from "react";
-import {
-  Platform,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  View,
-} from "react-native";
+import { Platform, Pressable, ScrollView, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import * as Yup from "yup";
 
 import GradientButton from "@/src/components/form/GradientButton";
 import TextField from "@/src/components/form/parent/TextField";
+import { Alert } from "@/src/components/ui/Alert";
 import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
 
-const validationSchema = Yup.object().shape({
-  firstname: Yup.string().required("First name is required"),
-  lastname: Yup.string().required("Last name is required"),
-  email: Yup.string()
-    .email("Please enter a valid email")
-    .required("Email is required"),
-  password: Yup.string()
-    .required("Password is required")
-    .min(6, "Password must be at least 6 characters")
-    .matches(
-      /^[A-Za-z\d@$!%*?#&]+$/,
-      "Password can only contain letters, numbers, and @$!%*#?&"
-    )
-    .matches(/[a-z]/, "Password must contain at least one lowercase letter")
-    .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
-    .matches(/\d/, "Password must contain at least one number")
-    .matches(
-      /[@$!%*?&#]/,
-      "Password must contain at least one special character (@$!%*?&#)"
-    ),
-  confirmPassword: Yup.string()
-    .oneOf([Yup.ref("password")], "Passwords must match")
-    .required("Please confirm your password"),
-  dob: Yup.date()
-    .required("Date of birth is required")
-    .max(new Date(), "Date of birth cannot be in the future")
-    .test("age", "You must be at least 18 years old", (value) => {
-      if (!value) return false;
-      const today = new Date();
-      const birthDate = new Date(value);
-      let age = today.getFullYear() - birthDate.getFullYear();
-      const monthDiff = today.getMonth() - birthDate.getMonth();
-      if (
-        monthDiff < 0 ||
-        (monthDiff === 0 && today.getDate() < birthDate.getDate())
-      ) {
-        age--;
-      }
-      return age >= 18;
-    }),
-});
+import { useParentRegister } from "@/src/services/mutations/parent/use-parent-register";
+import { ParentRegistrationSchema } from "@/src/utils/schemas/auth";
+
+type FormValues = {
+  firstname: string;
+  lastname: string;
+  email: string;
+  password: string;
+  confirmPassword: string;
+  dob: string;
+  phoneNo: string;
+};
 
 const SignUp = () => {
   const [isChecked, setIsChecked] = useState(false);
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [dob, setDob] = useState<Date | null>(null);
 
+  const formatPhoneNumber = (text: string) => {
+    let cleaned = text.replace(/[^\d+]/g, "");
+
+    if (!cleaned.startsWith("+")) {
+      cleaned = "+" + cleaned.replace(/\+/g, "");
+    }
+
+    cleaned = "+" + cleaned.slice(1).replace(/\+/g, "");
+
+    return cleaned;
+  };
   const onDateChange = (event: any, selectedDate?: Date) => {
     const currentDate = selectedDate || dob;
     setShowDatePicker(Platform.OS === "ios");
     if (selectedDate) {
       setDob(selectedDate);
     }
+  };
+
+  const mutation = useParentRegister();
+
+  const handleRegister = (
+    values: FormValues,
+    setSubmitting: (isSubmitting: boolean) => void
+  ) => {
+    const { firstname, lastname, dob, email, password, phoneNo } = values;
+    const requestData = {
+      name: `${firstname} ${lastname}`,
+      email: email,
+      password: password,
+      phone: phoneNo,
+      dob: dob?.split("T")[0],
+      termsAccepted: isChecked,
+    };
+    console.log(values);
+
+    mutation.mutate(requestData, {
+      onSuccess: (data) => {
+        console.log(data);
+        Alert.success({
+          title: "Registration Succesful",
+          subtitle: data?.message,
+        });
+        setSubmitting(false);
+        router.replace({
+          pathname: "/(parent)/auth/verify-account",
+          params: {
+            email: values?.email,
+          },
+        });
+      },
+      onError: (error: any) => {
+        const msg = error.response?.data?.message;
+        console.log(msg);
+        setSubmitting(false);
+        Alert.error({
+          title: "Registration Failed",
+          subtitle: msg,
+        });
+      },
+    });
   };
 
   return (
@@ -107,11 +127,11 @@ const SignUp = () => {
                   password: "",
                   confirmPassword: "",
                   dob: "",
+                  phoneNo: "+234",
                 }}
-                validationSchema={validationSchema}
-                onSubmit={(values) => {
-                  console.log("Form submitted:", values);
-                  // router.push("/(parent)/auth/verify-account");
+                validationSchema={ParentRegistrationSchema}
+                onSubmit={(values, { setSubmitting }) => {
+                  handleRegister(values, setSubmitting);
                 }}
               >
                 {({
@@ -123,6 +143,7 @@ const SignUp = () => {
                   touched,
                   setFieldValue,
                   setFieldTouched,
+                  isSubmitting,
                 }) => (
                   <View className="gap-[10]">
                     <Text className="text-xl mb-4">
@@ -152,6 +173,20 @@ const SignUp = () => {
                       onBlur={handleBlur("email")}
                       value={values.email}
                       keyboardType="email-address"
+                      autoCapitalize="none"
+                    />
+
+                    <TextField
+                      label="Phone Number"
+                      name="phoneNo"
+                      placeholder="+2348012345678"
+                      onChangeText={(text) => {
+                        const formatted = formatPhoneNumber(text);
+                        setFieldValue("phoneNo", formatted);
+                      }}
+                      onBlur={handleBlur("phoneNo")}
+                      value={values.phoneNo}
+                      keyboardType="phone-pad"
                     />
 
                     <TextField
@@ -161,6 +196,7 @@ const SignUp = () => {
                       onBlur={handleBlur("password")}
                       value={values.password}
                       secureTextEntry
+                      autoCapitalize="none"
                     />
 
                     <TextField
@@ -170,10 +206,11 @@ const SignUp = () => {
                       onBlur={handleBlur("confirmPassword")}
                       value={values.confirmPassword}
                       secureTextEntry
+                      autoCapitalize="none"
                     />
 
-                    <View className="mt-2  rounded-[12]">
-                      <Text className="font-medium mb-1 text-gray-700 ">
+                    <View className="mt-2 rounded-[12]">
+                      <Text className="font-medium mb-1 text-gray-700">
                         Date of Birth
                       </Text>
                       <Pressable
@@ -239,9 +276,10 @@ const SignUp = () => {
                     </View>
 
                     <GradientButton
+                      isLoading={isSubmitting}
                       onPress={handleSubmit}
                       text="Signup"
-                      disabled={!isChecked || Object.keys(errors).length > 0}
+                      disabled={!isChecked || isSubmitting}
                     />
                   </View>
                 )}
@@ -260,13 +298,5 @@ const SignUp = () => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    borderTopRightRadius: 25,
-    borderTopLeftRadius: 25,
-    paddingHorizontal: 15,
-  },
-});
 
 export default SignUp;

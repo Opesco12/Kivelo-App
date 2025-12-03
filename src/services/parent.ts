@@ -12,7 +12,7 @@ export const parentApi = {
     credentials: ParentRegisterCredentials
   ): Promise<ParentRegisterResponse> => {
     const response = await axiosInstance.post<ParentRegisterResponse>(
-      endpoints.parent.auth.login,
+      endpoints.parent.auth.register,
       credentials
     );
     return response.data;

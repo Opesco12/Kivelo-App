@@ -1,5 +1,6 @@
+import { Colors } from "@/src/constants/colors";
 import { LinearGradient } from "expo-linear-gradient";
-import { TouchableOpacity } from "react-native";
+import { ActivityIndicator, TouchableOpacity } from "react-native";
 import Text from "../ui/Text";
 
 type ButtonProps = {
@@ -7,9 +8,16 @@ type ButtonProps = {
   icon?: React.ReactNode;
   onPress?: () => void;
   disabled?: boolean;
+  isLoading?: boolean;
 };
 
-const GradientButton = ({ text, icon, onPress, disabled }: ButtonProps) => {
+const GradientButton = ({
+  text,
+  icon,
+  onPress,
+  disabled,
+  isLoading,
+}: ButtonProps) => {
   return (
     <TouchableOpacity
       activeOpacity={disabled ? 1 : 0.2}
@@ -26,17 +34,26 @@ const GradientButton = ({ text, icon, onPress, disabled }: ButtonProps) => {
           justifyContent: "center",
           alignItems: "center",
           gap: 1,
-          opacity: disabled ? 0.4 : 1,
+          opacity: disabled ? 0.7 : 1,
         }}
       >
-        {icon}
-        <Text
-          className="text-white"
-          style={{ fontSize: 18 }}
-          font="poppins-medium"
-        >
-          {text}
-        </Text>
+        {isLoading ? (
+          <ActivityIndicator
+            size={"small"}
+            color={Colors.light.white}
+          />
+        ) : (
+          <>
+            {icon}
+            <Text
+              className="text-white"
+              style={{ fontSize: 18 }}
+              font="poppins-medium"
+            >
+              {text}
+            </Text>
+          </>
+        )}
       </LinearGradient>
     </TouchableOpacity>
   );

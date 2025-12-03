@@ -41,7 +41,7 @@ const VerifyAccount = () => {
           Enter Verification Code
         </Text>
         <Text className="text-[#ACB5BB] my-[10] text-center">
-          We sent a 6-digit code to your selected method
+          We sent a 6-digit code to your email
         </Text>
         <LottieView
           source={{

@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { Image, TouchableOpacity, View } from "react-native";
+import { router } from "expo-router";
 
 import AppOffers from "@/src/components/parent/dashboard/AppOffers";
 import Tips from "@/src/components/parent/dashboard/Tips";
@@ -7,7 +8,6 @@ import { Alert } from "@/src/components/ui/Alert";
 import NotificationBadge from "@/src/components/ui/NotificationBadge";
 import Screen from "@/src/components/ui/Screen";
 import Text from "@/src/components/ui/Text";
-import { router } from "expo-router";
 
 const ParentDashboard = () => {
   useEffect(() => {
