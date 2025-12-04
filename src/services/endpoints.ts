@@ -20,7 +20,7 @@ export const endpoints = {
     },
     profile: "parents",
     dashboardData: "parents/dashboard",
-    chilrenList: "parents/children-list",
+    childrenList: "parents/children-list",
     getReports: "parents/reports",
     notifications: "parents/notifications",
     settings: "parents/settings",
