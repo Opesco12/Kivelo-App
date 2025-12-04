@@ -38,7 +38,7 @@ export const endpoints = {
       recordMood: "moods/record",
       getMood: "moods",
     },
-
+    profile: "children",
     dashboardData: "children/dashboard",
     activities: "children/activities",
     childProgress: "children/progress",
