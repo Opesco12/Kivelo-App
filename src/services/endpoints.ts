@@ -1,4 +1,11 @@
 export const endpoints = {
+  users: {
+    profile: "users/profile",
+    updatePassword: "users/update-password",
+    deactivate: "users/deactivate",
+    dashboard: "users/dashboard",
+    avatar: "users/avatar",
+  },
   parent: {
     auth: {
       login: "auth/login",
