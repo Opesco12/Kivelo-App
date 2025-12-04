@@ -59,3 +59,29 @@ export const VerifyEmailSchema = Yup.object({
     .matches(/^\d{6}$/, "Must be 6 digits")
     .required("OTP is required"),
 });
+
+export const ChildSetupSchema = Yup.object().shape({
+  firstname: Yup.string().required("Child's name is required"),
+  lastname: Yup.string().required("Child's name is required"),
+  email: Yup.string()
+    .email("Enter a valid email")
+    .required("Email is required"),
+  dob: Yup.date()
+    .required("Date of birth is required")
+    .max(new Date(), "Date cannot be in the future")
+    .test("is-under-18", "Child must be under 18 years old", (value) => {
+      if (!value) return false;
+      const today = new Date();
+      const birthDate = new Date(value);
+      const age = today.getFullYear() - birthDate.getFullYear();
+      const monthDiff = today.getMonth() - birthDate.getMonth();
+      if (
+        monthDiff < 0 ||
+        (monthDiff === 0 && today.getDate() < birthDate.getDate())
+      ) {
+        return age - 1 < 18;
+      }
+      return age < 18;
+    }),
+  gender: Yup.string().required("Select gender"),
+});

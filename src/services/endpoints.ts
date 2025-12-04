@@ -4,8 +4,10 @@ export const endpoints = {
       login: "auth/login",
       register: "auth/register-parent",
       verifyEmail: "auth/verify-email",
-      resendVerification: "/resend-verification",
+      resendVerification: "auth/resend-verification",
+      generateChildCode: "auth/generate-code",
     },
+    chilrenList: "parents/children-list",
   },
   child: {},
 };

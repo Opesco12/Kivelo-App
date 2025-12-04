@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.light.white,
     borderColor: "#D1D5DB",
     borderWidth: 2,
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: "Poppins",
   },
 });

@@ -1,5 +1,6 @@
 import { router } from "expo-router";
-import React from "react";
+import { StatusBar } from "expo-status-bar";
+import React, { useEffect } from "react";
 import { Image, TouchableOpacity, View } from "react-native";
 
 import AppOffers from "@/src/components/parent/dashboard/AppOffers";
@@ -8,28 +9,40 @@ import NotificationBadge from "@/src/components/ui/NotificationBadge";
 import Screen from "@/src/components/ui/Screen";
 import Text from "@/src/components/ui/Text";
 
+import { Alert } from "@/src/components/ui/Alert";
 import { useAuth } from "@/src/context/auth-provider";
+import { useChildrenList } from "@/src/services/mutations/parent/use-children-list";
 
 const ParentDashboard = () => {
   const { user } = useAuth();
-  // useEffect(() => {
-  //   Alert.error({
-  //     title: "Would you like to set up your child's account?",
-  //     lottieUrl:
-  //       "https://lottie.host/05bbfc20-38ea-4749-b1f1-bccbf39db6b1/dVhOV8azDl.lottie",
-  //     // subtitle: "Would you like to set up your child's account?",
-  //     primaryButton: {
-  //       text: "Yes",
-  //       onPress: () => router.push("/auth/child-setup"),
-  //     },
-  //     secondaryButton: {
-  //       text: "Skip",
-  //       onPress: () => console.log("go back"),
-  //     },
-  //   });
-  // }, []);
+  const { data, isFetched } = useChildrenList();
+
+  if (isFetched) {
+    console.log("Data from endpoint: ", data);
+  }
+
+  useEffect(() => {
+    if (data?.totalChildren ?? 0 < 5) {
+      Alert.error({
+        title: "Would you like to set up your child's account?",
+        lottieUrl:
+          "https://lottie.host/05bbfc20-38ea-4749-b1f1-bccbf39db6b1/dVhOV8azDl.lottie",
+        subtitle: "Would you like to set up your child's account?",
+        primaryButton: {
+          text: "Yes",
+          onPress: () => router.push("/auth/child-setup"),
+        },
+        secondaryButton: {
+          text: "Skip",
+          onPress: () => {},
+        },
+      });
+    }
+  }, [data]);
+
   return (
     <Screen padBottom>
+      <StatusBar style="dark" />
       <View className="flex-row gap-[10]">
         <Image
           source={{ uri: "https://picsum.photos/40" }}

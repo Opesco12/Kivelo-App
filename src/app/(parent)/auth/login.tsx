@@ -43,6 +43,7 @@ const Login = () => {
         console.log(data);
         Alert.success({
           title: "Login Succesful",
+          autoCloseAfter: 2000,
         });
         console.log("status code: ", status);
         setSubmitting(false);
@@ -63,6 +64,7 @@ const Login = () => {
         Alert.error({
           title: "Login Failed",
           subtitle: msg ?? "",
+          autoCloseAfter: 2000,
         });
         if (error?.status === 403) {
           setTimeout(() => {

@@ -1,6 +1,8 @@
 import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 
+import { STORAGE_KEYS } from "../utils/storage/keys";
+
 const BASE_URL = "https://family-wellness.onrender.com/api/";
 
 export const axiosInstance = axios.create({
@@ -9,7 +11,7 @@ export const axiosInstance = axios.create({
 });
 
 axiosInstance.interceptors.request.use(async (config) => {
-  const token = await SecureStore.getItemAsync("authToken");
+  const token = await SecureStore.getItemAsync(STORAGE_KEYS.ACCESS_TOKEN);
   if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });

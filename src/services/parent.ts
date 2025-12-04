@@ -8,6 +8,7 @@ import {
   VerifyEmailCredentials,
   VerifyEmailResponse,
 } from "./types/auth";
+import { GetChildrenResponse } from "./types/Parent";
 
 export const parentApi = {
   register: async (
@@ -51,6 +52,22 @@ export const parentApi = {
       credentials
     );
 
+    return response.data;
+  },
+
+  addChild: async (credentials) => {
+    const response = await axiosInstance.post(
+      endpoints.parent.auth.generateChildCode,
+      credentials
+    );
+
+    return response.data;
+  },
+
+  getChildrenList: async () => {
+    const response = await axiosInstance.get<GetChildrenResponse>(
+      endpoints.parent.chilrenList
+    );
     return response.data;
   },
 };
