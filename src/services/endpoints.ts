@@ -8,11 +8,29 @@ export const endpoints = {
       generateChildCode: "auth/generate-code",
       logout: "auth/logout",
     },
+    profile: "parents",
+    dashboardData: "parents/dashboard",
     chilrenList: "parents/children-list",
+    getReports: "parents/reports",
+    notifications: "parents/notifications",
+    settings: "parents/settings",
+    getChildMood: "parents/mood",
+    getChildSummary: "parents/summary",
   },
   child: {
     auth: {
       login: "auth/child-login",
+      setChildpassword: "auth/set-child-password",
+      resetChildPassword: "auth/reset-child-password",
     },
+
+    mood: {
+      recordMood: "moods/record",
+      getMood: "moods",
+    },
+
+    dashboardData: "children/dashboard",
+    activities: "children/activities",
+    childProgress: "children/progress",
   },
 };
