@@ -1,5 +1,4 @@
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { router } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { Formik } from "formik";
 import { useState } from "react";
@@ -19,7 +18,9 @@ import { Alert } from "@/src/components/ui/Alert";
 import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
 import { useGenerateCode } from "@/src/services/mutations/parent/use-generate-code";
+import { copyToClipboard } from "@/src/utils/functions/copy-to-clipboard";
 import { ChildSetupSchema } from "@/src/utils/schemas/auth";
+import { router } from "expo-router";
 
 type FormValues = {
   firstname: string;
@@ -71,9 +72,11 @@ const ChildSetup = () => {
       onSuccess: (data) => {
         console.log(data);
         Alert.success({
-          // title: "Login Succesful",
-          subtitle: data?.message ?? "",
-          autoCloseAfter: 2000,
+          title: `Child set-up code \n ${data.code.slice(0, 3)}-${data.code.slice(3, 6)} `,
+          primaryButton: {
+            text: "Copy Code",
+            onPress: () => copyToClipboard(data?.code ?? ""),
+          },
         });
         setSubmitting(false);
         setTimeout(() => {
@@ -146,7 +149,7 @@ const ChildSetup = () => {
                       name="firstname"
                       onChangeText={handleChange("firstname")}
                       value={values.firstname}
-                      placeholder="Enter  name"
+                      placeholder="Enter First Name"
                     />
 
                     <TextField
@@ -154,7 +157,7 @@ const ChildSetup = () => {
                       name="lastname"
                       onChangeText={handleChange("lastname")}
                       value={values.lastname}
-                      placeholder="Enter name"
+                      placeholder="Enter Last Name"
                     />
 
                     <TextField

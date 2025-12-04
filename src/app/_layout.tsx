@@ -4,6 +4,7 @@ import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
 import { KeyboardAvoidingView, Platform } from "react-native";
+import { Toaster } from "sonner-native";
 
 import "@/global.css";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
@@ -30,6 +31,7 @@ export default function App() {
             keyboardVerticalOffset={Platform.OS === "ios" ? 60 : 0}
           >
             <RootLayout />
+            <Toaster />
           </KeyboardAvoidingView>
         </AlertProvider>
       </AuthProvider>

@@ -23,7 +23,7 @@ interface CustomAlertProps {
   visible?: boolean;
   onClose?: () => void;
   title?: string;
-  subtitle?: string;
+  subtitle?: string | ReactNode;
   image?: ImageSourcePropType | null;
   imageComponent?: ReactNode | null;
   lottieUrl?: string | null;
