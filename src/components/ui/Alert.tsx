@@ -78,8 +78,9 @@ class AlertManager {
 // Default Lottie URLs for each type
 const DefaultLottieUrls = {
   success:
-    "https://lottie.host/dfa11c65-db4c-4987-be2a-30fe5daa9429/K8zxK5LkPX.json",
-  error: "https://lottie.host/e1e9c0e0-8e5f-4b5a-b5e5-5e5e5e5e5e5e/error.json", // Replace with actual URL
+    "https://lottie.host/c59379c5-276d-4181-8430-43638a35b308/AyuF61MP1J.lottie",
+  error:
+    "https://lottie.host/315ed844-2a61-47c4-b2b9-3da9c1299d2a/Iah7KiQybZ.lottie",
   warning:
     "https://lottie.host/w1w9c0e0-8e5f-4b5a-b5e5-5e5e5e5e5e5e/warning.json", // Replace with actual URL
   info: "https://lottie.host/i1i9c0e0-8e5f-4b5a-b5e5-5e5e5e5e5e5e/info.json", // Replace with actual URL
@@ -173,7 +174,6 @@ const AlertComponent = ({
         <LottieView
           source={{ uri: lottieUrl }}
           autoPlay
-          loop
           style={styles.lottie}
           onAnimationFailure={() => setLottieError(true)}
         />
@@ -185,7 +185,6 @@ const AlertComponent = ({
         <LottieView
           source={lottieSource}
           autoPlay
-          loop
           style={styles.lottie}
           onAnimationFailure={() => setLottieError(true)}
         />
@@ -209,7 +208,6 @@ const AlertComponent = ({
         <LottieView
           source={{ uri: DefaultLottieUrls[type] }}
           autoPlay
-          loop
           style={styles.lottie}
           onAnimationFailure={() => setLottieError(true)}
         />

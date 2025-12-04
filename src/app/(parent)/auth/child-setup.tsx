@@ -20,7 +20,6 @@ import Text from "@/src/components/ui/Text";
 import { useGenerateCode } from "@/src/services/mutations/parent/use-generate-code";
 import { copyToClipboard } from "@/src/utils/functions/copy-to-clipboard";
 import { ChildSetupSchema } from "@/src/utils/schemas/auth";
-import { router } from "expo-router";
 
 type FormValues = {
   firstname: string;
@@ -59,7 +58,8 @@ const ChildSetup = () => {
 
   const handleChildSetup = (
     values: FormValues,
-    setSubmitting: (isSubmitting: boolean) => void
+    setSubmitting: (isSubmitting: boolean) => void,
+    resetForm: () => void
   ) => {
     const { dob, email, firstname, lastname, gender } = values;
     const requestData = {
@@ -70,23 +70,25 @@ const ChildSetup = () => {
     };
     mutation.mutate(requestData, {
       onSuccess: (data) => {
+        resetForm();
         console.log(data);
         Alert.success({
-          title: `Child set-up code \n ${data.code.slice(0, 3)}-${data.code.slice(3, 6)} `,
+          title: `Child set-up code \n \n \n ${data.code.slice(0, 3)}-${data.code.slice(3, 6)} `,
           primaryButton: {
             text: "Copy Code",
             onPress: () => copyToClipboard(data?.code ?? ""),
           },
         });
         setSubmitting(false);
-        setTimeout(() => {
-          router.replace({
-            pathname: "/(parent)/(tabs)",
-            params: {
-              email: values?.email,
-            },
-          });
-        }, 1000);
+
+        // setTimeout(() => {
+        //   router.replace({
+        //     pathname: "/(parent)/(tabs)",
+        //     params: {
+        //       email: values?.email,
+        //     },
+        //   });
+        // }, 1000);
       },
       onError: (error: any) => {
         const msg = error.data?.message;
@@ -125,8 +127,8 @@ const ChildSetup = () => {
               <Formik
                 initialValues={initalValues}
                 validationSchema={ChildSetupSchema}
-                onSubmit={(values, { setSubmitting }) => {
-                  handleChildSetup(values, setSubmitting);
+                onSubmit={(values, { setSubmitting, resetForm }) => {
+                  handleChildSetup(values, setSubmitting, resetForm);
                 }}
               >
                 {({
