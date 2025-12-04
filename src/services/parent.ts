@@ -1,4 +1,3 @@
-import axios from "axios";
 import { axiosInstance } from "./api";
 import { endpoints } from "./endpoints";
 import {
@@ -81,6 +80,43 @@ export const parentApi = {
 
   getReports: async () => {
     const response = await axiosInstance.get(endpoints.parent.getReports);
+    return response.data;
+  },
+
+  getNotifications: async () => {
+    const response = await axiosInstance.get(endpoints.parent.notifications);
+    return response.data;
+  },
+  markNotificationAsRead: async (notificationId) => {
+    const response = await axiosInstance.put(
+      `${endpoints.parent.notifications}/${notificationId}/read`
+    );
+    return response.data;
+  },
+
+  getSettings: async () => {
+    const response = await axiosInstance.get(endpoints.parent.settings);
+    return response.data;
+  },
+
+  updateSettings: async (credentials) => {
+    const response = await axiosInstance.put(
+      endpoints.parent.settings,
+      credentials
+    );
+    return response.data;
+  },
+  getChildMood: async (childId) => {
+    const response = await axiosInstance.get(
+      `${endpoints.parent.getChildMood}/${childId}`
+    );
+    return response.data;
+  },
+
+  getChildMoodSummary: async (childId) => {
+    const response = await axiosInstance.get(
+      `${endpoints.parent.getChildSummary}/${childId}`
+    );
     return response.data;
   },
 

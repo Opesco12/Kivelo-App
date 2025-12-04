@@ -24,7 +24,7 @@ export const endpoints = {
     getReports: "parents/reports",
     notifications: "parents/notifications",
     settings: "parents/settings",
-    getChildMood: "parents/mood",
+    getChildMood: "parents/moods",
     getChildSummary: "parents/summary",
   },
   child: {
