@@ -6,6 +6,9 @@ export const endpoints = {
     dashboard: "users/dashboard",
     avatar: "users/avatar",
   },
+  family: {
+    family: "families",
+  },
   parent: {
     auth: {
       login: "auth/login",
@@ -39,5 +42,12 @@ export const endpoints = {
     dashboardData: "children/dashboard",
     activities: "children/activities",
     childProgress: "children/progress",
+    childPreferences: "children/preferences",
+  },
+  ai: {
+    chat: "ai/chat",
+    getHistory: "ai/chat/history",
+    clearHistory: "ai/chat/clear-history",
+    status: "ai/status",
   },
 };
