@@ -37,6 +37,11 @@ export const parentApi = {
     };
   },
 
+  logout: async () => {
+    const response = await axiosInstance.post(endpoints.parent.auth.logout);
+    return response.data;
+  },
+
   verifyEmail: async (credentials: VerifyEmailCredentials) => {
     const response = await axiosInstance.post<VerifyEmailResponse>(
       endpoints.parent.auth.verifyEmail,

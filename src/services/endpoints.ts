@@ -6,6 +6,7 @@ export const endpoints = {
       verifyEmail: "auth/verify-email",
       resendVerification: "auth/resend-verification",
       generateChildCode: "auth/generate-code",
+      logout: "auth/logout",
     },
     chilrenList: "parents/children-list",
   },
