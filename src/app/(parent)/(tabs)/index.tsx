@@ -11,7 +11,7 @@ import Text from "@/src/components/ui/Text";
 
 import { Alert } from "@/src/components/ui/Alert";
 import { useAuth } from "@/src/context/auth-provider";
-import { useChildrenList } from "@/src/services/mutations/parent/use-children-list";
+import { useChildrenList } from "@/src/services/hooks/parent/use-children-list";
 
 const ParentDashboard = () => {
   const { user } = useAuth();

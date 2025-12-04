@@ -13,7 +13,7 @@ import { Alert } from "@/src/components/ui/Alert";
 import {
   useResendVerification,
   useVerifyEmail,
-} from "@/src/services/mutations/parent/use-verify-email";
+} from "@/src/services/hooks/parent/use-verify-email";
 import { VerifyEmailSchema } from "@/src/utils/schemas/auth";
 import { useState } from "react";
 

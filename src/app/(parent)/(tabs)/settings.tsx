@@ -22,7 +22,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import Text from "@/src/components/ui/Text";
 import { useAuth } from "@/src/context/auth-provider";
-import { useLogout } from "@/src/services/mutations/parent/use-logout";
+import { useLogout } from "@/src/services/hooks/parent/use-logout";
 
 const { height, width } = Dimensions.get("screen");
 

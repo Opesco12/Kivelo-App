@@ -10,5 +10,9 @@ export const endpoints = {
     },
     chilrenList: "parents/children-list",
   },
-  child: {},
+  child: {
+    auth: {
+      login: "auth/child-login",
+    },
+  },
 };

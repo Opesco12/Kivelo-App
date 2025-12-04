@@ -33,7 +33,7 @@ const ChildLogin = () => {
           console.log("form submitted with values: ", values)
         }
       >
-        {({ handleChange, handleSubmit }) => (
+        {({ handleChange, handleSubmit, isSubmitting }) => (
           <View style={{ gap: 20 }}>
             <TextField
               name={"email"}
@@ -68,7 +68,8 @@ const ChildLogin = () => {
               </Pressable>
             </View>
             <Button
-              onPress={() => router.push("/(child)/(tabs)")}
+              isLoading={isSubmitting}
+              onPress={handleSubmit}
               text="Login"
             />
           </View>

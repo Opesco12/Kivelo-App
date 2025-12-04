@@ -3,6 +3,7 @@ import { View } from "react-native";
 
 import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
+import { router } from "expo-router";
 
 type AuthScreenProps = {
   title?: string;
@@ -22,9 +23,11 @@ const AuthScreen = ({ title, children }: AuthScreenProps) => {
         colors={["#76D7F7", "#457E91"]}
       >
         <View style={{ height: 45, position: "relative" }}>
-          <View style={{ position: "absolute", left: 0, top: 0, zIndex: 10 }}>
-            <BackButton />
-          </View>
+          {router.canGoBack() && (
+            <View style={{ position: "absolute", left: 0, top: 0, zIndex: 10 }}>
+              <BackButton />
+            </View>
+          )}
           <View
             style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
           >

@@ -24,7 +24,7 @@ axiosInstance.interceptors.response.use(
       // Server responded with a status code outside 2xx
       const formattedError = {
         status: error.response.status,
-        data: error.response.data, // contains your backend error message
+        data: error.response.data,
         message:
           error.response.data?.message ||
           "An error occurred while processing your request",

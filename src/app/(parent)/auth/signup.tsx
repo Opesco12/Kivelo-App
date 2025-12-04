@@ -13,7 +13,7 @@ import { Alert } from "@/src/components/ui/Alert";
 import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
 
-import { useParentRegister } from "@/src/services/mutations/parent/use-parent-register";
+import { useParentRegister } from "@/src/services/hooks/parent/use-parent-register";
 import { ParentRegistrationSchema } from "@/src/utils/schemas/auth";
 
 type FormValues = {

@@ -17,7 +17,7 @@ import SelectField from "@/src/components/SelectField";
 import { Alert } from "@/src/components/ui/Alert";
 import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
-import { useGenerateCode } from "@/src/services/mutations/parent/use-generate-code";
+import { useGenerateCode } from "@/src/services/hooks/parent/use-generate-code";
 import { copyToClipboard } from "@/src/utils/functions/copy-to-clipboard";
 import { ChildSetupSchema } from "@/src/utils/schemas/auth";
 
