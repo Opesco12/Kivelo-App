@@ -10,10 +10,5 @@ export const useLogin = () => {
     ParentLoginCredentials
   >({
     mutationFn: parentApi.login,
-
-    onSuccess: async ({ data }) => {
-      console.log(data.message);
-    },
-    onError: (error) => {},
   });
 };

@@ -8,7 +8,11 @@ import {
   VerifyEmailCredentials,
   VerifyEmailResponse,
 } from "./types/auth";
-import { GetChildrenResponse } from "./types/Parent";
+import {
+  GetChildrenResponse,
+  ParentProfile,
+  UpdateParentProfileCredentials,
+} from "./types/Parent";
 
 export const parentApi = {
   register: async (
@@ -60,12 +64,14 @@ export const parentApi = {
     return response.data;
   },
 
-  getParentProfile: async () => {
+  getParentProfile: async (): Promise<ParentProfile["parent"]> => {
     const response = await axiosInstance.get(endpoints.parent.profile);
     return response.data;
   },
 
-  updateParentProfile: async (credentials) => {
+  updateParentProfile: async (
+    credentials: UpdateParentProfileCredentials
+  ): Promise<ParentProfile["parent"]> => {
     const response = await axiosInstance.put(
       endpoints.parent.profile,
       credentials
