@@ -1,3 +1,4 @@
+import { useRouter } from "expo-router";
 import LottieView from "lottie-react-native";
 import { useEffect, useState } from "react";
 import { Platform, ScrollView, TouchableOpacity, View } from "react-native";
@@ -17,7 +18,7 @@ type Mood = {
   value: string;
   color: string;
   lottieUrl: string;
-  emotion: string;
+  emotion: any;
 };
 
 const moods: Mood[] = [
@@ -56,6 +57,7 @@ const moods: Mood[] = [
 ];
 
 const CheckIn = () => {
+  const router = useRouter();
   const [moodIndex, setMoodIndex] = useState(0);
   const backgroundColor = useSharedValue(moods[0].color);
 
@@ -70,6 +72,10 @@ const CheckIn = () => {
       backgroundColor: backgroundColor.value,
     };
   });
+
+  const handleNext = () => {
+    router.push("/other-routes/mood-intensity");
+  };
 
   return (
     <Animated.View
@@ -87,8 +93,8 @@ const CheckIn = () => {
           <Image
             source={moods[moodIndex].emotion}
             style={{
-              height: 220,
-              width: 280,
+              height: 200,
+              width: 260,
               alignSelf: "center",
             }}
             contentFit="contain"
@@ -145,7 +151,10 @@ const CheckIn = () => {
           </View>
 
           <View className="px-[15]">
-            <TouchableOpacity className="h-[60] rounded-[50] bg-black items-center justify-center">
+            <TouchableOpacity
+              className="h-[60] rounded-[50] bg-black items-center justify-center"
+              onPress={handleNext}
+            >
               <Text
                 className="text-white text-lg"
                 family="inter"

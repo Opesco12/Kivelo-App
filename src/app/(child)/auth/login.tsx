@@ -85,7 +85,11 @@ const ChildLogin = () => {
         initialValues={initalValues}
         validationSchema={childLoginSchema}
         onSubmit={async (values, { setSubmitting }) =>
-          await handleLogin(values, setSubmitting)
+          //  handleLogin(values, setSubmitting)
+
+          router.push({
+            pathname: "/(child)/(tabs)",
+          })
         }
       >
         {({ handleChange, handleSubmit, isSubmitting }) => (

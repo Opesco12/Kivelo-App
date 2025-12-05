@@ -105,10 +105,7 @@ const Login = () => {
                 validationSchema={ParentLoginSchema}
                 initialValues={initialValues}
                 onSubmit={(values, { setSubmitting }) =>
-                  // handleLogin(values, setSubmitting)
-                  router.push({
-                    pathname: "/(parent)/(tabs)",
-                  })
+                  handleLogin(values, setSubmitting)
                 }
               >
                 {({ handleChange, values, handleSubmit, isSubmitting }) => (
