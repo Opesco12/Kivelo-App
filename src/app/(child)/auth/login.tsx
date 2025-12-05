@@ -1,22 +1,76 @@
+import { router } from "expo-router";
+import * as SecureStore from "expo-secure-store";
 import { Formik } from "formik";
 import { Pressable, View } from "react-native";
 
 import AuthScreen from "@/src/components/child/AuthScreen";
 import Button from "@/src/components/form/Button";
 import TextField from "@/src/components/form/child/TextField";
+import { Alert } from "@/src/components/ui/Alert";
 import Text from "@/src/components/ui/Text";
-import { router } from "expo-router";
+import { useAuth } from "@/src/context/auth-provider";
+import { useChildLogin } from "@/src/services/hooks/child/use-child-login";
+import { childLoginSchema } from "@/src/utils/schemas/auth";
+import { STORAGE_KEYS } from "@/src/utils/storage/keys";
 
 type FormValues = {
   email: string;
-  password: string;
+  code: string;
 };
 
 const ChildLogin = () => {
   const initalValues: FormValues = {
     email: "",
-    password: "",
+    code: "",
   };
+  const { saveUser } = useAuth();
+  const mutation = useChildLogin();
+
+  const handleLogin = (
+    values: FormValues,
+    setSubmitting: (isSubmitting: boolean) => void
+  ) => {
+    mutation.mutate(values, {
+      onSuccess: async ({ data, status }) => {
+        console.log(data);
+        Alert.success({
+          title: "Login Succesful",
+          subtitle: data?.message,
+          autoCloseAfter: 3000,
+        });
+        await SecureStore.setItemAsync(STORAGE_KEYS.role, "parent");
+        setSubmitting(false);
+        if (data?.user?.hasSetPassword) {
+          saveUser(data.accessToken ?? "", data?.user);
+          setTimeout(() => {
+            router.push({
+              pathname: "/(child)/(tabs)",
+              params: {
+                email: values?.email,
+              },
+            });
+          }, 1000);
+        } else {
+          setTimeout(() => {
+            router.push({
+              pathname: "/(child)/auth/create-new-password",
+            });
+          }, 1500);
+        }
+      },
+      onError: (error: any) => {
+        const msg = error.data?.message;
+        console.log(msg);
+        setSubmitting(false);
+        Alert.error({
+          title: "Login Failed",
+          subtitle: msg ?? "",
+          autoCloseAfter: 2000,
+        });
+      },
+    });
+  };
+
   return (
     <AuthScreen>
       <Text
@@ -29,8 +83,9 @@ const ChildLogin = () => {
 
       <Formik
         initialValues={initalValues}
-        onSubmit={(values) =>
-          console.log("form submitted with values: ", values)
+        validationSchema={childLoginSchema}
+        onSubmit={async (values, { setSubmitting }) =>
+          await handleLogin(values, setSubmitting)
         }
       >
         {({ handleChange, handleSubmit, isSubmitting }) => (
@@ -41,9 +96,9 @@ const ChildLogin = () => {
               onChangeText={handleChange("email")}
             />
             <TextField
-              name="password"
-              placeholder="Password"
-              onChangeText={handleChange("password")}
+              name="code"
+              placeholder="Password (or generated code)"
+              onChangeText={handleChange("code")}
               secureTextEntry
             />
             <View

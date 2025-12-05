@@ -85,3 +85,8 @@ export const ChildSetupSchema = Yup.object().shape({
     }),
   gender: Yup.string().required("Select gender"),
 });
+
+export const childLoginSchema = Yup.object().shape({
+  email: Yup.string().required("Email is required"),
+  code: Yup.string().required("Code is required"),
+});

@@ -1,4 +1,5 @@
 import { router } from "expo-router";
+import * as SecureStore from "expo-secure-store";
 import { StatusBar } from "expo-status-bar";
 import { Formik } from "formik";
 import {
@@ -19,6 +20,7 @@ import Text from "@/src/components/ui/Text";
 import { useAuth } from "@/src/context/auth-provider";
 import { useLogin } from "@/src/services/hooks/parent/use-login";
 import { ParentLoginSchema } from "@/src/utils/schemas/auth";
+import { STORAGE_KEYS } from "@/src/utils/storage/keys";
 
 type FormValues = {
   email: string;
@@ -40,13 +42,13 @@ const Login = () => {
     setSubmitting: (isSubmitting: boolean) => void
   ) => {
     mutation.mutate(values, {
-      onSuccess: ({ data, status }) => {
+      onSuccess: async ({ data, status }) => {
         console.log(data);
         Alert.success({
           title: "Login Succesful",
-          autoCloseAfter: 2000,
+          autoCloseAfter: 3000,
         });
-        console.log("status code: ", status);
+        await SecureStore.setItemAsync(STORAGE_KEYS.role, "parent");
         setSubmitting(false);
         saveUser(data.accessToken, data?.data?.user);
         setTimeout(() => {

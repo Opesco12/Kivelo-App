@@ -13,10 +13,11 @@ type ButtonProps = {
 const Button = ({ text, icon, onPress, disabled, isLoading }: ButtonProps) => {
   return (
     <TouchableOpacity
+      disabled={isLoading}
       activeOpacity={disabled ? 1 : 0.2}
       onPress={onPress}
       className={`${disabled ? "bg-buttonPrimary/30" : "bg-buttonPrimary"} justify-center items-center gap-1`}
-      style={{ height: 60, borderRadius: 100 }}
+      style={{ height: 60, borderRadius: 100, opacity: disabled ? 0.6 : 1 }}
     >
       {isLoading ? (
         <ActivityIndicator

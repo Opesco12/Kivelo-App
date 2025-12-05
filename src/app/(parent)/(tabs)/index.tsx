@@ -22,7 +22,7 @@ const ParentDashboard = () => {
   }
 
   useEffect(() => {
-    if (data?.totalChildren === 0) {
+    if (data?.totalChildren ?? 0 < 3) {
       Alert.error({
         title: "Would you like to set up your child's account?",
         lottieUrl:

@@ -104,10 +104,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         SecureStore.deleteItemAsync(STORAGE_KEYS.USER_DATA),
       ]);
 
+      const role = await SecureStore.getItemAsync(STORAGE_KEYS.role);
+
       setAccessToken(null);
       setUser(null);
 
-      router.replace("/(parent)/auth/login");
+      if (role) {
+        if (role === "parent") {
+          router.replace("/(parent)/auth/login");
+          return;
+        } else if (role === "child") {
+          router.replace("/(child)/auth/login");
+          return;
+        }
+      }
     } catch (error) {
       console.error("Error during logout:", error);
       throw error;

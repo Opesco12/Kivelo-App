@@ -12,6 +12,8 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
+import { useAuth } from "@/src/context/auth-provider";
+import { useLogout } from "@/src/services/hooks/parent/use-logout";
 
 const Settings = () => {
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
@@ -61,6 +63,22 @@ const Settings = () => {
       hasSwitch: false,
     },
   ];
+
+  const mutation = useLogout();
+  const { clearUser } = useAuth();
+
+  const handleLogout = () => {
+    mutation.mutate(undefined, {
+      onSuccess: ({ data, status }) => {
+        console.log(data);
+        clearUser();
+      },
+      onError: (error: any) => {
+        clearUser();
+      },
+    });
+  };
+
   return (
     <View className="flex-1 bg-[#B39DDB]">
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -127,7 +145,10 @@ const Settings = () => {
               })}
             </View>
 
-            <TouchableOpacity className="h-[60] rounded-[50] my-[20] bg-[#9333EA] items-center justify-center">
+            <TouchableOpacity
+              onPress={handleLogout}
+              className="h-[60] rounded-[50] my-[20] bg-[#9333EA] items-center justify-center"
+            >
               <Text
                 className="text-white text-lg"
                 font="poppins-medium"

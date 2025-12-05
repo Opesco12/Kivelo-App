@@ -1,9 +1,10 @@
 import { axiosInstance } from "./api";
 import { endpoints } from "./endpoints";
+import { ChildLogin, ChildLoginResponse } from "./types/Child";
 
 export const childApi = {
-  login: async (credentials) => {
-    const response = await axiosInstance.post(
+  login: async (credentials: ChildLogin) => {
+    const response = await axiosInstance.post<ChildLoginResponse>(
       endpoints.child.auth.login,
       credentials
     );

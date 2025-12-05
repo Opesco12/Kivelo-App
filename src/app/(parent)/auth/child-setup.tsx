@@ -71,6 +71,7 @@ const ChildSetup = () => {
     mutation.mutate(requestData, {
       onSuccess: (data) => {
         resetForm();
+        setDob(null);
         console.log(data);
         Alert.success({
           title: `Child set-up code \n \n \n ${data.code.slice(0, 3)}-${data.code.slice(3, 6)} `,

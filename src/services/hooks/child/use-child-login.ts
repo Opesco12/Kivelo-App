@@ -1,9 +1,9 @@
 import { useMutation } from "@tanstack/react-query";
 
-import { parentApi } from "../../parent";
+import { childApi } from "../../child";
 
-export const useLogin = () => {
+export const useChildLogin = () => {
   return useMutation({
-    mutationFn: parentApi.login,
+    mutationFn: childApi.login,
   });
 };

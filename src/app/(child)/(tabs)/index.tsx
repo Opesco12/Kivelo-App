@@ -23,7 +23,12 @@ import DailyTips from "@/src/components/child/dashboard/DailyTIps";
 import NotificationBadge from "@/src/components/ui/NotificationBadge";
 import Text from "@/src/components/ui/Text";
 
+import { useAuth } from "@/src/context/auth-provider";
+
 const ChildDashboard = () => {
+  const { user } = useAuth();
+
+  console.log("Child logged in: ", user);
   return (
     <View className="flex-1">
       <ScrollView

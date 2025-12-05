@@ -3,7 +3,7 @@ import { parentApi } from "../../parent";
 
 export const useParentDashboard = () => {
   return useQuery({
-    queryKey: ["parent", "dashboard"],
-    queryFn: parentApi.getDashboard,
+    queryKey: ["parent", "setting"],
+    queryFn: parentApi.getSettings,
   });
 };

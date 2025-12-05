@@ -1,7 +1,8 @@
 export type User = {
-  id: string;
-  email: string;
-  name: string;
-  role: "parent" | "child";
-  isVerified: boolean;
+  id?: string;
+  email?: string;
+  name?: string;
+  role?: "parent" | "child";
+  isVerified?: boolean;
+  hasSetPassword?: boolean;
 };

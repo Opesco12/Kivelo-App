@@ -1,9 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import { parentApi } from "../../parent";
 
-export const useParentDashboard = () => {
+export const useReports = () => {
   return useQuery({
-    queryKey: ["parent", "dashboard"],
-    queryFn: parentApi.getDashboard,
+    queryKey: ["parent", "report"],
+    queryFn: parentApi.getReports,
   });
 };
