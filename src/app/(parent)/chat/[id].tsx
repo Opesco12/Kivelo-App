@@ -4,6 +4,7 @@ import {
   Add,
   Heart,
   InfoCircle,
+  Link21,
   Send2,
   Shield,
   Star1,
@@ -13,6 +14,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
+import { router } from "expo-router";
 
 const ChatScreen = () => {
   return (
@@ -26,7 +28,10 @@ const ChatScreen = () => {
             <View className="flex-row justify-between">
               <BackButton />
 
-              <TouchableOpacity className="h-[45] w-[45] items-center justify-center rounded-[22.5] bg-white">
+              <TouchableOpacity
+                onPress={() => router.push("/chat/chat-info")}
+                className="h-[45] w-[45] items-center justify-center rounded-[22.5] bg-white"
+              >
                 <InfoCircle
                   size={25}
                   variant="Bold"
@@ -92,7 +97,7 @@ const ChatScreen = () => {
                 className="flex-row p-[15]  bg-white items-center gap-[10] rounded-[50]"
               >
                 <View className="h-[32] w-[32] items-center justify-center rounded-[16] bg-[#FFF9E6]">
-                  <Star1
+                  <Link21
                     size={20}
                     variant="Bold"
                     color="#FFD700"
