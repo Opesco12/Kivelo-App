@@ -3,6 +3,7 @@ import { Image, TextInput, TouchableOpacity, View } from "react-native";
 
 import Screen from "@/src/components/ui/Screen";
 import Text from "@/src/components/ui/Text";
+import { router } from "expo-router";
 
 const Messages = () => {
   return (
@@ -43,7 +44,10 @@ const Messages = () => {
       </Text>
 
       <View className="mt-[15] gap-[15]">
-        <View className="bg-white p-[15] rounded-[16] flex-row justify-between ">
+        <TouchableOpacity
+          onPress={() => router.push("/chat/1")}
+          className="bg-white p-[15] rounded-[16] flex-row justify-between "
+        >
           <View className="relative h-[60] w-[60] ">
             <Image
               source={{ uri: "https://picsum.photos/40" }}
@@ -76,9 +80,12 @@ const Messages = () => {
               <Text className="text-white text-sm">2</Text>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
 
-        <View className="bg-white p-[15] rounded-[16] flex-row justify-between ">
+        <TouchableOpacity
+          onPress={() => router.push("/chat/1")}
+          className="bg-white p-[15] rounded-[16] flex-row justify-between "
+        >
           <View className="relative h-[60] w-[60] ">
             <Image
               source={{ uri: "https://picsum.photos/40" }}
@@ -111,7 +118,7 @@ const Messages = () => {
               <Text className="text-white text-sm">2</Text>
             </View>
           </View>
-        </View>
+        </TouchableOpacity>
       </View>
 
       <View className="mt-[25]">
