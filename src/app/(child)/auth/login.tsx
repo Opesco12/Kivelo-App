@@ -84,13 +84,11 @@ const ChildLogin = () => {
       <Formik
         initialValues={initalValues}
         validationSchema={childLoginSchema}
-        onSubmit={
-          async (values, { setSubmitting }) =>
-            handleLogin(values, setSubmitting)
-
-          // router.push({
-          //   pathname: "/(child)/(tabs)",
-          // })
+        onSubmit={async (values, { setSubmitting }) =>
+          // handleLogin(values, setSubmitting)
+          router.push({
+            pathname: "/(child)/(tabs)",
+          })
         }
       >
         {({ handleChange, handleSubmit, isSubmitting }) => (
