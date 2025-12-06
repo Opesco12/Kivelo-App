@@ -76,10 +76,6 @@ const ChildWellness = () => {
                     style="w-[80]"
                   />
 
-                  {!isLoading && options.length === 0 && (
-                    <Text className="text-sm text-[#6B7280] ml-2">No children added</Text>
-                  )}
-
                   <View className="w-[36] h-[36] rounded-[8] bg-white items-center justify-center">
                     <Calendar
                       size={18}

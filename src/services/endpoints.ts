@@ -13,6 +13,9 @@ export const endpoints = {
     auth: {
       login: "auth/login",
       register: "auth/register-parent",
+      forgotPassword: "auth/forgot-password",
+      verifyResetToken: "auth/verify-reset-token",
+      resetPassword: "auth/reset-password",
       verifyEmail: "auth/verify-email",
       resendVerification: "auth/resend-verification",
       generateChildCode: "auth/generate-code",

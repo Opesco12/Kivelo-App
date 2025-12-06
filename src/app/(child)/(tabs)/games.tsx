@@ -8,10 +8,14 @@ import Avatar1 from "@/src/assets/images/svg/Avatar1";
 import FirstPlaceBadge from "@/src/assets/images/svg/FirstPlaceBadge";
 import NotificationBadge from "@/src/components/ui/NotificationBadge";
 import Text from "@/src/components/ui/Text";
+import { useAuth } from "@/src/context/auth-provider";
 
 const { height, width } = Dimensions.get("screen");
 
 const Games = () => {
+  const { user } = useAuth();
+  const firstName = user?.name ? user.name.split(" ")[0] : "";
+
   return (
     <View className="flex-1">
       <StatusBar style="dark" />
@@ -49,7 +53,7 @@ const Games = () => {
                   className="text-2xl"
                   font="poppins-bold"
                 >
-                  Hello, Favour
+                  {`Hello, ${firstName}`}
                 </Text>
                 <Text
                   className="text-[#6B7280]"

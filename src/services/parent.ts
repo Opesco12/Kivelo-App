@@ -1,17 +1,17 @@
 import { axiosInstance } from "./api";
 import { endpoints } from "./endpoints";
 import {
-  ParentLoginCredentials,
-  ParentLoginResponse,
-  ParentRegisterCredentials,
-  ParentRegisterResponse,
-  VerifyEmailCredentials,
-  VerifyEmailResponse,
+    ParentLoginCredentials,
+    ParentLoginResponse,
+    ParentRegisterCredentials,
+    ParentRegisterResponse,
+    VerifyEmailCredentials,
+    VerifyEmailResponse,
 } from "./types/auth";
 import {
-  GetChildrenResponse,
-  ParentProfile,
-  UpdateParentProfileCredentials,
+    GetChildrenResponse,
+    ParentProfile,
+    UpdateParentProfileCredentials,
 } from "./types/Parent";
 
 export const parentApi = {
@@ -61,6 +61,30 @@ export const parentApi = {
       credentials
     );
 
+    return response.data;
+  },
+
+  forgotPassword: async (credentials: { email: string }) => {
+    const response = await axiosInstance.post(
+      endpoints.parent.auth.forgotPassword,
+      credentials
+    );
+    return response.data;
+  },
+
+  verifyResetToken: async (credentials: { email: string; token: string }) => {
+    const response = await axiosInstance.post(
+      endpoints.parent.auth.verifyResetToken,
+      credentials
+    );
+    return response.data;
+  },
+
+  resetPassword: async (credentials: { email: string; token: string; password: string }) => {
+    const response = await axiosInstance.post(
+      endpoints.parent.auth.resetPassword,
+      credentials
+    );
     return response.data;
   },
 

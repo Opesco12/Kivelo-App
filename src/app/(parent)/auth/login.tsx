@@ -3,12 +3,12 @@ import * as SecureStore from "expo-secure-store";
 import { StatusBar } from "expo-status-bar";
 import { Formik } from "formik";
 import {
-  Image,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  TouchableOpacity,
-  View,
+    Image,
+    Pressable,
+    ScrollView,
+    StyleSheet,
+    TouchableOpacity,
+    View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -129,7 +129,7 @@ const Login = () => {
                     />
 
                     <View className="my-[10]">
-                      <Pressable>
+                      <Pressable onPress={() => router.push("/(parent)/auth/forgot-password")}>
                         <Text className="text-right">Forgot Password?</Text>
                       </Pressable>
                     </View>
@@ -168,9 +168,7 @@ const Login = () => {
               <View className="pb-[20] mt-[30]">
                 <View className=" flex-row gap-[10] items-end justify-center">
                   <Text>Don't Have An Account?</Text>
-                  <Pressable
-                    onPress={() => router.push("/(parent)/auth/login")}
-                  >
+                  <Pressable onPress={() => router.push("/(parent)/auth/signup")}>
                     <Text className="text-[#2563EB]">Sign up</Text>
                   </Pressable>
                 </View>
