@@ -1,17 +1,21 @@
 import BackButton from "@/src/components/ui/BackButton";
 import { Image } from "expo-image";
 import {
-  ArrowRight2,
-  Image as ImageIcon,
-  ShieldTick,
+    ArrowRight2,
+    Image as ImageIcon,
+    ShieldTick,
 } from "iconsax-react-nativejs";
 import { ScrollView, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import Text from "@/src/components/ui/Text";
+import { useAuth } from "@/src/context/auth-provider";
 import { ArrowRight } from "lucide-react-native";
 
 const ChatInfo = () => {
+  const { user } = useAuth();
+  const firstName = user?.name ? user.name.split(" ")[0] : "";
+
   return (
     <View className="flex-1 bg-[#E3F2FD]">
       <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
@@ -31,16 +35,13 @@ const ChatInfo = () => {
             </Text>
           </View>
 
-          <View className="items-center justify-center mt-[15]">
+            <View className="items-center justify-center mt-[15]">
             <Image
               source={{ uri: "https://picsum.photos/40" }}
               style={{ height: 60, width: 60, borderRadius: 30 }}
             />
-            <Text
-              className="text-2xl mt-[10]"
-              font="poppins-medium"
-            >
-              Bella
+            <Text className="text-2xl mt-[10]" font="poppins-medium">
+              {firstName}
             </Text>
             <Text className="text-[#5B5B7A]">Daughter, Age 10</Text>
             <View className="bg-[#F0FDF4] p-[10] rounded-[50] my-[10]">

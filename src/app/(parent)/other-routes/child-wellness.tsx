@@ -1,22 +1,24 @@
+import { useAuth } from "@/src/context/auth-provider";
+import { useChildrenList } from "@/src/services/hooks/parent/use-children-list";
 import Slider from "@react-native-community/slider";
 import { LinearGradient } from "expo-linear-gradient";
 import { ArrowLeft } from "iconsax-react-nativejs";
 import LottieView from "lottie-react-native";
 import {
-  Calendar,
-  CircleAlert,
-  Heart,
-  Lightbulb,
-  Mic,
-  Palette,
+    Calendar,
+    CircleAlert,
+    Heart,
+    Lightbulb,
+    Mic,
+    Palette,
 } from "lucide-react-native";
 import React, { useState } from "react";
 import {
-  Image,
-  Pressable,
-  ScrollView,
-  TouchableOpacity,
-  View,
+    Image,
+    Pressable,
+    ScrollView,
+    TouchableOpacity,
+    View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -28,10 +30,17 @@ const ChildWellness = () => {
   const [sliderValue, setSliderValue] = useState(0);
   const [value, setValue] = useState<string | number>("");
 
-  const options: SelectOption[] = [
-    { label: "Emma", value: "1" },
-    { label: "Shola", value: "2" },
-  ];
+  const { data, isLoading } = useChildrenList();
+  const childrenList = data?.children ?? [];
+
+  const options: SelectOption[] = childrenList.map((c) => ({
+    label: c.user?.name ?? "",
+    value: c._id,
+  }));
+  const placeholder = isLoading ? "Loading..." : options.length ? "" : "No children added";
+  const { user } = useAuth();
+  const firstName = user?.name ? user.name.split(" ")[0] : "";
+
   return (
     <View className="flex-1 bg-[#D1FAE5]">
       <ScrollView
@@ -53,11 +62,8 @@ const ChildWellness = () => {
               />
               <View className="flex-row items-center justify-between flex-1">
                 <View>
-                  <Text
-                    className="text-2xl"
-                    font="poppins-medium"
-                  >
-                    Hi, Bella!
+                  <Text className="text-2xl" font="poppins-medium">
+                    {`Hi, ${firstName}`}
                   </Text>
                 </View>
 
@@ -66,7 +72,7 @@ const ChildWellness = () => {
                     options={options}
                     value={value}
                     onValueChange={setValue}
-                    placeholder=""
+                    placeholder={placeholder}
                     style="w-[80]"
                   />
 
@@ -282,7 +288,10 @@ const ChildWellness = () => {
             </TouchableOpacity>
 
             <View className="flex-row justify-between mt-[5]">
-              <TouchableOpacity className="bg-[#F3F4F6] h-[48] w-[48%] items-center justify-center rounded-[8]  flex-row gap-[3]">
+              <TouchableOpacity
+                className="bg-[#F3F4F6] h-[48] w-[48%] items-center justify-center rounded-[8]  flex-row gap-[3]"
+                onPress={() => router.push("/auth/child-setup")}
+              >
                 <Image
                   source={require("@/src/assets/images/project-images/woman-child.png")}
                   style={{ height: 33, width: 40 }}

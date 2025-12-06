@@ -11,8 +11,12 @@ import Text from "@/src/components/ui/Text";
 
 import { Alert } from "@/src/components/ui/Alert";
 import {
-  useResendVerification,
-  useVerifyEmail,
+    useForgotPassword,
+    useVerifyResetToken,
+} from "@/src/services/hooks/parent/use-forgot-password";
+import {
+    useResendVerification,
+    useVerifyEmail,
 } from "@/src/services/hooks/parent/use-verify-email";
 import { VerifyEmailSchema } from "@/src/utils/schemas/auth";
 import { useState } from "react";
@@ -31,26 +35,34 @@ const VerifyAccount = () => {
     router.replace("/(parent)/auth/login");
   }
 
-  const mutation = useVerifyEmail();
-  const ResendCodeMutation = useResendVerification();
+  const isResetFlow = String(params?.mode) === "reset";
+
+  const mutation: any = isResetFlow ? useVerifyResetToken() : useVerifyEmail();
+  const resendVerificationMutation: any = useResendVerification();
+  const forgotMutation: any = useForgotPassword();
 
   const handleSubmit = (
     values: FormValues,
     { setSubmitting }: FormikHelpers<FormValues>
   ) => {
+    // For account verification useVerifyEmail -> navigates to app tabs
+    // For password reset verify useVerifyResetToken -> navigate to create-new-password
     mutation.mutate(
+      isResetFlow
+        ? { email: params?.email, token: values?.otp }
+        : { email: params?.email, verificationCode: values?.otp },
       {
-        email: params?.email,
-        verificationCode: values?.otp,
-      },
-      {
-        onSuccess: (data) => {
+        onSuccess: (data: any) => {
           Alert.success({
             title: "Verification Succesful",
             subtitle: data?.message,
           });
           setSubmitting(false);
-          router.replace("/(parent)/(tabs)");
+          if (isResetFlow) {
+            router.replace({ pathname: "/(parent)/auth/create-new-password", params: { email: params?.email, token: values?.otp } });
+          } else {
+            router.replace("/(parent)/(tabs)");
+          }
         },
         onError(error: any) {
           const msg = error?.data?.message;
@@ -67,27 +79,39 @@ const VerifyAccount = () => {
 
   const ResendVerification = () => {
     setIsResendingCode(true);
-    ResendCodeMutation.mutate(
+    const target = isResetFlow ? forgotMutation : resendVerificationMutation;
+
+    target.mutate(
+      { email: params?.email },
       {
-        email: params?.email,
-      },
-      {
-        onSuccess: (data) => {
-          Alert.success({
-            // title: "Verification Succesful",
-            subtitle: data?.message,
-          });
+        onSuccess: (data: any) => {
+          Alert.success({ subtitle: data?.message });
           setIsResendingCode(false);
           setHasResentCode(true);
         },
         onError(error: any) {
-          const msg = error?.data?.message;
+          const msg = error?.data?.message ?? error?.message;
           console.log(msg);
           setIsResendingCode(false);
-          Alert.error({
-            title: "Failed to resend code",
-            subtitle: msg ?? "",
-          });
+
+          // If the resendVerification failed because account is already verified, try forgot-password as fallback
+          if (!isResetFlow && String(msg).toLowerCase().includes("already verified")) {
+            forgotMutation.mutate(
+              { email: params?.email },
+              {
+                onSuccess: (d: any) => {
+                  Alert.success({ subtitle: d?.message });
+                  setHasResentCode(true);
+                },
+                onError: (e: any) => {
+                  Alert.error({ title: "Failed to resend code", subtitle: e?.data?.message ?? e?.message });
+                },
+              }
+            );
+            return;
+          }
+
+          Alert.error({ title: "Failed to resend code", subtitle: msg ?? "" });
         },
       }
     );
@@ -155,7 +179,7 @@ const VerifyAccount = () => {
 
               <GradientButton
                 isLoading={isSubmitting}
-                text="Send Code"
+                text="Verify Email"
                 onPress={handleSubmit}
               />
             </>

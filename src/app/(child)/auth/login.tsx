@@ -38,7 +38,7 @@ const ChildLogin = () => {
           subtitle: data?.message,
           autoCloseAfter: 3000,
         });
-        await SecureStore.setItemAsync(STORAGE_KEYS.role, "parent");
+        await SecureStore.setItemAsync(STORAGE_KEYS.role, "child");
         setSubmitting(false);
         if (data?.user?.hasSetPassword) {
           saveUser(data.accessToken ?? "", data?.user);
@@ -51,6 +51,9 @@ const ChildLogin = () => {
             });
           }, 1000);
         } else {
+          // Save access token and user even when child hasn't set a password yet
+          // so subsequent protected requests (like setting the password) include the token.
+          await saveUser(data.accessToken ?? "", data?.user);
           setTimeout(() => {
             router.push({
               pathname: "/(child)/auth/create-new-password",

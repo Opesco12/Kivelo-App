@@ -3,19 +3,19 @@ import { router } from "expo-router";
 import { Cup, Headphone, Message } from "iconsax-react-nativejs";
 import LottieView from "lottie-react-native";
 import {
-  BicepsFlexed,
-  ChartSpline,
-  CircleAlert,
-  Heart,
-  Mic,
-  Palette,
+    BicepsFlexed,
+    ChartSpline,
+    CircleAlert,
+    Heart,
+    Mic,
+    Palette,
 } from "lucide-react-native";
 import {
-  Platform,
-  Pressable,
-  ScrollView,
-  TouchableOpacity,
-  View,
+    Platform,
+    Pressable,
+    ScrollView,
+    TouchableOpacity,
+    View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -49,12 +49,12 @@ const ChildDashboard = () => {
               />
               <View className="flex-row items-center justify-between flex-1">
                 <View>
-                  <Text
-                    className="text-2xl"
-                    font="poppins-bold"
-                  >
-                    Hello, Favour
-                  </Text>
+                    <Text
+                      className="text-2xl"
+                      font="poppins-bold"
+                    >
+                      {`Hello, ${user?.name ? user.name.split(" ")[0] : ""}`}
+                    </Text>
                   <Text
                     className="text-[#6B7280]"
                     font="poppins-medium"
