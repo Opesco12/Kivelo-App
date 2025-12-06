@@ -14,12 +14,34 @@ export const childApi = {
     };
   },
 
+  setChildPassword: async (payload) => {
+    const response = await axiosInstance.post(
+      endpoints.child.auth.setChildpassword,
+      payload
+    );
+    return {
+      data: response.data,
+      status: response.status,
+    };
+  },
+
+  resetChildPassword: async (payload) => {
+    const response = await axiosInstance.post(
+      endpoints.child.auth.resetChildPassword,
+      payload
+    );
+    return {
+      data: response.data,
+      status: response.status,
+    };
+  },
+
   getProfile: async () => {
     const response = await axiosInstance.get(endpoints.child.profile);
     return response.data;
   },
   updateChildProfile: async (credentials) => {
-    const response = await axiosInstance.put(endpoints.child.profile);
+    const response = await axiosInstance.put(endpoints.child.profile, credentials);
     return response.data;
   },
   getDashboard: async () => {
@@ -38,15 +60,17 @@ export const childApi = {
     return response.data;
   },
   updateActivity: async (activity) => {
+    const { activityId, ...payload } = activity || {};
     const response = await axiosInstance.put(
-      `${endpoints.child.activities}/${activity.acitvityId}`,
-      activity
+      `${endpoints.child.activities}/${activityId}`,
+      payload
     );
     return response.data;
   },
   deleteActivity: async (activity) => {
+    const activityId = activity?.activityId ?? activity;
     const response = await axiosInstance.delete(
-      `${endpoints.child.activities}/${activity.acitvityId}`
+      `${endpoints.child.activities}/${activityId}`
     );
     return response.data;
   },
@@ -55,7 +79,10 @@ export const childApi = {
     return response.data;
   },
   updateChildPreference: async (preference) => {
-    const response = await axiosInstance.put(endpoints.child.childPreferences);
+    const response = await axiosInstance.put(
+      endpoints.child.childPreferences,
+      preference
+    );
     return response.data;
   },
 };

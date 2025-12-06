@@ -1,22 +1,26 @@
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import {
-  Add,
-  Heart,
-  InfoCircle,
-  Link21,
-  Send2,
-  Shield,
-  Star1,
+    Add,
+    Heart,
+    InfoCircle,
+    Link21,
+    Send2,
+    Shield,
+    Star1,
 } from "iconsax-react-nativejs";
 import { ScrollView, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import BackButton from "@/src/components/ui/BackButton";
 import Text from "@/src/components/ui/Text";
+import { useAuth } from "@/src/context/auth-provider";
 import { router } from "expo-router";
 
 const ChatScreen = () => {
+  const { user } = useAuth();
+  const firstName = user?.name ? user.name.split(" ")[0] : "";
+
   return (
     <View className="flex-1">
       <LinearGradient
@@ -45,11 +49,8 @@ const ChatScreen = () => {
                 source={{ uri: "https://picsum.photos/40" }}
                 style={{ height: 60, width: 60, borderRadius: 30 }}
               />
-              <Text
-                className="text-2xl mt-[10]"
-                font="poppins-medium"
-              >
-                Bella
+              <Text className="text-2xl mt-[10]" font="poppins-medium">
+                {firstName}
               </Text>
             </View>
 

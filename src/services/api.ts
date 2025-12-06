@@ -12,7 +12,12 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(async (config) => {
   const token = await SecureStore.getItemAsync(STORAGE_KEYS.ACCESS_TOKEN);
-  // console.log(token);
+  // Log whether token was found (do not print raw token in logs in production)
+  try {
+    console.log("axios interceptor - token present:", !!token);
+  } catch (e) {
+    // ignore logging errors
+  }
   if (token) config.headers.Authorization = `Bearer ${token}`;
   return config;
 });
